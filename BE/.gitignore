@@ -1,0 +1,11 @@
+# Env
+.env.development
+.env.production
+
+# Deps
+node_modules/
+package-lock.json
+
+#Logs
+.eslintcache
+*.log
