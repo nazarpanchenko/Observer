@@ -6,7 +6,7 @@ import morgan from 'morgan';
 
 import { API_PREFIX } from './constants';
 import { logger } from './utils';
-import { initDB } from './models';
+import { initDB } from './db';
 
 import { reportRouter } from './routes';
 

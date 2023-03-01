@@ -1,3 +1,4 @@
 import logger from './logger';
+import initEnv from './ini';
 
-export { logger };
+export { logger, initEnv };

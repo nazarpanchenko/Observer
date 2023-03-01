@@ -9,3 +9,6 @@ package-lock.json
 #Logs
 .eslintcache
 *.log
+
+#Db
+src/db/

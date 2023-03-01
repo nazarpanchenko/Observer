@@ -1,14 +1,5 @@
-import dotenv from 'dotenv';
-import path from 'path';
-
+import { initEnv } from './utils';
 import startServer from './server';
 
-const ENV_MODE =
-  process.env.NODE_ENV === 'local'
-    ? 'local'
-    : process.env.NODE_ENV === 'development'
-    ? 'development'
-    : 'production';
-
-dotenv.config({ path: path.resolve(__dirname, `./../.env.${ENV_MODE}`) });
+initEnv();
 startServer();

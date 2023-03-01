@@ -5,4 +5,4 @@ const TELESCOPE_TYPE = Object.freeze({
   LEVENHUK_SKYLINE_BASE_110S: 'Levenhuk SKYLINE Base 110S',
 });
 
-export { API_PREFIX, TELESCOPE_TYPE };
+module.exports = { API_PREFIX, TELESCOPE_TYPE };

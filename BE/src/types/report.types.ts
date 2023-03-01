@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 
-type ReportControler = {
+type ReportExpressControler = {
   list: (req: Request, res: Response) => void;
 };
 
-export { ReportControler };
+export { ReportExpressControler };
