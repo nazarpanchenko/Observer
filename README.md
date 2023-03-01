@@ -1,1 +1,1 @@
-Observer api for logging astronomical observations
+Observer api for generating reports for astronomical observations
