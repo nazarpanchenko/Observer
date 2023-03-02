@@ -1,0 +1,9 @@
+{
+  "db": {
+    "dialect": "mysql",
+    "max_connections_number": 50,
+    "connection_idle_time": 20000,
+    "reconnect_interval": 90000,
+    "malfunctioned_connection_checks": 10000
+  }
+}

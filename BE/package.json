@@ -5,7 +5,11 @@
   "private": true,
   "main": "index.ts",
   "scripts": {
-    "start:local": "cross-env NODE_ENV=local nodemon --watch './src/**/*.ts' --exec ts-node ./src/index.ts"
+    "start:local": "cross-env NODE_ENV=local nodemon --watch './src/**/*.ts' --exec ts-node ./src/index.ts",
+    "migrate:create": "sequelize db:migrate --config ./src/db/config/config.js --migrations-path ./src/db/migrations",
+    "migrate:reset": "sequelize db:migrate:undo",
+    "seed:create": "npx sequelize-cli seed:generate --name reports.seed",
+    "seed:run": "sequelize db:seed:all --config ./src/db/config/config.js --seeders-path ./src/db/seeders"
   },
   "author": "Nazar Panchenko",
   "license": "ISC",
@@ -14,6 +18,7 @@
     "cors": "^2.8.5",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
+    "express-validator": "^6.15.0",
     "mysql2": "^3.1.2",
     "sequelize": "^6.29.0"
   },

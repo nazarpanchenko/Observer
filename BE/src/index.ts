@@ -1,5 +1,10 @@
-import { initEnv } from './utils';
+import dotenv from 'dotenv';
+import path from 'path';
+
 import startServer from './server';
 
-initEnv();
+dotenv.config({
+  path: path.resolve(__dirname, `./../.env.${process.env.NODE_ENV}`),
+});
+
 startServer();

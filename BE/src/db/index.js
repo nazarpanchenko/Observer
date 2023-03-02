@@ -5,6 +5,8 @@ import path from 'path';
 import mysql from 'mysql2/promise';
 import Sequelize from 'sequelize';
 
+import conf from '../conf.json';
+
 const db = {};
 let sequelize;
 
@@ -12,9 +14,15 @@ export const initDB = async () => {
   const { DB_HOST, DB_PORT, DB_NAME, DB_USER, DB_PASS } = process.env;
 
   sequelize = new Sequelize(DB_NAME, DB_USER, DB_PASS, {
-    host: DB_HOST || '',
-    port: Number(DB_PORT) || 3306,
-    dialect: 'mysql',
+    host: DB_HOST,
+    port: Number(DB_PORT),
+    dialect: conf.db.dialect,
+    pool: {
+      max: conf.db.max_connections_number,
+      idle: conf.db.connection_idle_time,
+      acquire: conf.db.reconnect_interval,
+      evict: conf.db.malfunctioned_connection_checks,
+    },
   });
   db.sequelize = sequelize;
 

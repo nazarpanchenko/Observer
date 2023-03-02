@@ -1,18 +1,9 @@
-import { Sequelize, DataTypes } from 'sequelize';
+import { DataTypes } from 'sequelize';
 
 import { TELESCOPE_TYPE } from '../../constants';
-import { initEnv } from '../../utils';
+import { initDbModel } from '../../utils/ini';
 
-initEnv();
-const { DB_NAME, DB_HOST, DB_PORT, DB_USER, DB_PASS } = process.env;
-
-const sequelize = new Sequelize(DB_NAME || '', DB_USER || '', DB_PASS || '', {
-  host: DB_HOST || '',
-  port: Number(DB_PORT) || 3306,
-  dialect: 'mysql',
-});
-
-const Report = sequelize.define(
+const Report = initDbModel().define(
   'User',
   {
     id: {
@@ -29,7 +20,7 @@ const Report = sequelize.define(
       allowNull: false,
       validate: {
         isIn: {
-          args: [[TELESCOPE_TYPE]],
+          args: [Object.values(TELESCOPE_TYPE)],
           msg: `telescope field's value must be one of the following: ${Object.values(
             TELESCOPE_TYPE
           ).join(', ')}`,

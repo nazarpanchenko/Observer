@@ -1,6 +1,9 @@
 'use strict';
 
-const { TELESCOPE_TYPE } = require('../../constants');
+const TELESCOPE_TYPE = Object.freeze({
+  GSO_DOB_10: 'GSO DOB 10',
+  LEVENHUK_SKYLINE_BASE_110S: 'Levenhuk Skyline Base 110S',
+});
 
 module.exports = {
   async up(queryInterface) {
@@ -9,7 +12,7 @@ module.exports = {
       [
         {
           subject: 'Mars',
-          telescope: TELESCOPE_TYPE.DOB_10,
+          telescope: TELESCOPE_TYPE.GSO_DOB_10,
           eyepiece: '25mm Plossl',
           magnification: '50X',
           observationRealDurationMin: 60,
@@ -26,6 +29,16 @@ module.exports = {
           observationVirtualDurationMin: 90,
           observationStartDate: new Date('2022-02-28T21:00:00Z'),
           observationEndDate: new Date('2022-02-28T21:45:00Z'),
+        },
+        {
+          subject: 'Jupiter',
+          telescope: TELESCOPE_TYPE.GSO_DOB_10,
+          eyepiece: '5mm Arsenal 110 UW',
+          magnification: '250X',
+          observationRealDurationMin: 101,
+          observationVirtualDurationMin: 88,
+          observationStartDate: new Date('2022-02-23T20:33:00Z'),
+          observationEndDate: new Date('2022-02-23T22:20:00Z'),
         },
       ],
       {

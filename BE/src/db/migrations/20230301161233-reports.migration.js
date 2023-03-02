@@ -1,6 +1,9 @@
 'use strict';
 
-const { TELESCOPE_TYPE } = require('../../constants');
+const TELESCOPE_TYPE = Object.freeze({
+  GSO_DOB_10: 'GSO DOB 10',
+  LEVENHUK_SKYLINE_BASE_110S: 'Levenhuk Skyline Base 110S',
+});
 
 module.exports = {
   async up(queryInterface, Sequelize) {
@@ -19,7 +22,7 @@ module.exports = {
         allowNull: false,
         validate: {
           isIn: {
-            args: [[TELESCOPE_TYPE]],
+            args: [Object.values(TELESCOPE_TYPE)],
             msg: `telescope field's value must be one of the following: ${Object.values(
               TELESCOPE_TYPE
             ).join(', ')}`,
