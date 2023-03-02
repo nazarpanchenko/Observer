@@ -13,6 +13,14 @@ let sequelize;
 export const initDB = async () => {
   const { DB_HOST, DB_PORT, DB_NAME, DB_USER, DB_PASS } = process.env;
 
+  const connection = await mysql.createConnection({
+    host: DB_HOST,
+    user: DB_USER,
+    password: DB_PASS,
+  });
+  await connection.query(`CREATE DATABASE IF NOT EXISTS ${DB_NAME}`);
+  await connection.end();
+
   sequelize = new Sequelize(DB_NAME, DB_USER, DB_PASS, {
     host: DB_HOST,
     port: Number(DB_PORT),
@@ -25,14 +33,6 @@ export const initDB = async () => {
     },
   });
   db.sequelize = sequelize;
-
-  const connection = await mysql.createConnection({
-    host: DB_HOST,
-    user: DB_USER,
-    password: DB_PASS,
-    database: null,
-  });
-  await connection.query(`CREATE DATABASE IF NOT EXISTS ${DB_NAME}`);
 
   fs.readdirSync(__dirname)
     .filter((file) => {
