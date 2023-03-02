@@ -1,4 +1,4 @@
-import Report from '../db/models/Report';
+import { Report } from '../db/models';
 import {
   FetchedReports,
   GetReport,
