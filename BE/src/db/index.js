@@ -39,7 +39,8 @@ export const initDB = async () => {
       return (
         file.indexOf('.') !== 0 &&
         file !== path.basename(file) &&
-        file.slice(-3) === '.ts'
+        file.slice(-3) === '.ts' &&
+        file.slice(0) !== 'index.ts'
       );
     })
     .forEach((file) => {
