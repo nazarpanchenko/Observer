@@ -2,12 +2,7 @@ import express from 'express';
 
 import { reportControler } from '../controllers';
 import { handleBadRequest } from '../middlewares';
-import {
-  getReportValidator,
-  createReportValidator,
-  updateReportValidator,
-  deleteReportValidator,
-} from '../validators/report.validator';
+import { reportValidator } from '../validators';
 
 const reportRouter = express.Router();
 
@@ -15,28 +10,28 @@ reportRouter.get('/reports', reportControler.list);
 
 reportRouter.get(
   '/reports/:id',
-  getReportValidator,
+  reportValidator.getOne,
   handleBadRequest(),
   reportControler.getOne
 );
 
 reportRouter.post(
   '/reports',
-  createReportValidator,
+  reportValidator.create,
   handleBadRequest(),
   reportControler.create
 );
 
 reportRouter.put(
   '/reports/:id',
-  updateReportValidator,
+  reportValidator.update,
   handleBadRequest(),
   reportControler.update
 );
 
 reportRouter.delete(
   '/reports/:id',
-  deleteReportValidator,
+  reportValidator.delete,
   handleBadRequest(),
   reportControler.delete
 );

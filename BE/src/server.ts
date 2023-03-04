@@ -5,8 +5,8 @@ import morgan from 'morgan';
 
 import { API_PREFIX } from './constants';
 import { logger } from './utils';
-import { initDB } from './db';
-
+import { createDb } from './db';
+import * as dbTypes from './types/db.types';
 import { reportRouter } from './routes';
 
 const app = express();
@@ -28,13 +28,19 @@ process.on('uncaughtException', (err) => {
   process.exit(1);
 });
 
-const startServer = () => {
+process.on('unhandledRejection', (err) => {
+  logger.error(`unhandledRejection: ${err}'`);
+  process.exit(1);
+});
+
+const startServer = (dbConf: dbTypes.DbConf) => {
   const PORT = process.env.PORT || 9000;
 
   try {
     app.listen(PORT, async () => {
       logger.info(`Server is listening on the port ${PORT}`);
-      await initDB();
+      await createDb(dbConf);
+      logger.info(`Database has been successfully created`);
     });
   } catch (err: any) {
     throw new Error(err);

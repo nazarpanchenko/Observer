@@ -1,6 +1,6 @@
 'use strict';
 
-const TELESCOPE_TYPE = Object.freeze({
+const TELESCOPE_MODELS = Object.freeze({
   GSO_DOB_10: 'GSO DOB 10',
   LEVENHUK_SKYLINE_BASE_110S: 'Levenhuk Skyline Base 110S',
 });
@@ -22,9 +22,9 @@ module.exports = {
         allowNull: false,
         validate: {
           isIn: {
-            args: [Object.values(TELESCOPE_TYPE)],
+            args: [Object.values(TELESCOPE_MODELS)],
             msg: `telescope field's value must be one of the following: ${Object.values(
-              TELESCOPE_TYPE
+              TELESCOPE_MODELS
             ).join(', ')}`,
           },
         },

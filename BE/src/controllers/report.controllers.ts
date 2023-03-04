@@ -1,11 +1,10 @@
 import { Request, Response } from 'express';
 
-import { ReportRouteControler } from '../types/report.types';
 import { logger } from '../utils';
 
 import { reportProvider } from '../services';
 
-const reportControler: ReportRouteControler = {
+const reportControler = {
   list: async (req: Request, res: Response) => {
     try {
       const { data, count } = await reportProvider.getReports();

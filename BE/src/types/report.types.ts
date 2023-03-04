@@ -1,23 +1,14 @@
-import { Request, Response, NextFunction } from 'express';
 import { Model } from 'sequelize';
 
-enum TelescopeTypes {
+enum TelescopeModels {
   'GSO DOB 10',
   'Levenhuk Skyline Base 110S',
 }
 
-type ReportRouteControler = {
-  list: (req: Request, res: Response, next?: NextFunction) => void;
-  getOne: (req: Request, res: Response, next?: NextFunction) => void;
-  create: (req: Request, res: Response, next?: NextFunction) => void;
-  update: (req: Request, res: Response, next?: NextFunction) => void;
-  delete: (req: Request, res: Response, next?: NextFunction) => void;
-};
-
-type ReportModel = {
+type ReportData = {
   id?: number;
   subject: string;
-  telescope: TelescopeTypes;
+  telescope: TelescopeModels;
   eyepiece: string;
   filter?: string;
   magnification: string;
@@ -29,19 +20,11 @@ type ReportModel = {
   updatedAt?: Date;
 };
 
-type FetchedReports = {
-  data: Model[];
+type ReportModel = Model<ReportData>;
+
+type ReportsList = {
+  data: Model<ReportModel>[];
   count: number;
 };
 
-type GetReport = Model | null;
-
-type CreateReport = Model<any, any>;
-
-export {
-  ReportRouteControler,
-  ReportModel,
-  FetchedReports,
-  GetReport,
-  CreateReport,
-};
+export { ReportData, ReportModel, ReportsList };

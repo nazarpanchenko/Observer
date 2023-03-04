@@ -1,10 +1,10 @@
-import dotenv from 'dotenv';
-import path from 'path';
-
 import startServer from './server';
 
-dotenv.config({
-  path: path.resolve(__dirname, `./../.env.${process.env.NODE_ENV}`),
-});
+const { DB_PORT, DB_HOST = '', DB_USER = '', DB_PASS = '' } = process.env;
 
-startServer();
+startServer({
+  host: DB_HOST,
+  port: Number(DB_PORT),
+  user: DB_USER,
+  password: DB_PASS,
+});

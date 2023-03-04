@@ -3,24 +3,25 @@
   "version": "1.0.0",
   "description": "Observer api for logging astronomical observations",
   "private": true,
-  "main": "index.ts",
+  "main": "src/index.ts",
   "scripts": {
-    "start:local": "cross-env NODE_ENV=local nodemon --watch './src/**/*.ts' --exec ts-node ./src/index.ts",
-    "migrate:create": "sequelize db:migrate --config ./src/db/config/config.js --migrations-path ./src/db/migrations",
+    "start:local": "cross-env NODE_ENV=local nodemon --watch 'src/**/*.*' --exec ts-node -r dotenv/config src/index.ts dotenv_config_path=.env.local",
+    "migrate:create": "sequelize db:migrate --config src/db/conf.json --migrations-path src/db/migrations",
     "migrate:reset": "sequelize db:migrate:undo",
-    "seed:create": "npx sequelize-cli seed:generate --name reports.seed",
-    "seed:run": "sequelize db:seed:all --config ./src/db/config/config.js --seeders-path ./src/db/seeders"
+    "seed": "sequelize db:seed:all --config src/db/conf.json --seeders-path src/db/seeders"
   },
   "author": "Nazar Panchenko",
   "license": "ISC",
   "dependencies": {
+    "@types/sequelize": "^4.28.14",
     "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
     "express-validator": "^6.15.0",
     "mysql2": "^3.1.2",
-    "sequelize": "^6.29.0"
+    "sequelize-typescript": "^2.1.5",
+    "typescript": "^4.9.5"
   },
   "devDependencies": {
     "@types/cookie-parser": "^1.4.3",
@@ -38,7 +39,6 @@
     "prettier": "^2.8.4",
     "sequelize-cli": "^6.6.0",
     "ts-node": "^10.9.1",
-    "typescript": "^4.9.5",
     "winston": "^3.8.2"
   }
 }

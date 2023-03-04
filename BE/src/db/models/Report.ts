@@ -1,38 +1,38 @@
-import { DataTypes } from 'sequelize';
+import { Sequelize, DataType } from 'sequelize-typescript';
 
-import { TELESCOPE_TYPE } from '../../constants';
-import { initDbModel } from '../../utils/ini';
+import { TELESCOPE_MODELS } from '../../constants';
+import sequelize from '..';
 
-const Report = initDbModel().define(
-  'User',
+const Report = (sequelize as Sequelize).define(
+  'Report',
   {
     id: {
-      type: DataTypes.INTEGER,
+      type: DataType.INTEGER,
       autoIncrement: true,
       primaryKey: true,
     },
     subject: {
-      type: DataTypes.STRING(30),
+      type: DataType.STRING(30),
       allowNull: false,
     },
     telescope: {
-      type: DataTypes.STRING(40),
+      type: DataType.STRING(40),
       allowNull: false,
       validate: {
         isIn: {
-          args: [Object.values(TELESCOPE_TYPE)],
+          args: [Object.values(TELESCOPE_MODELS)],
           msg: `telescope field's value must be one of the following: ${Object.values(
-            TELESCOPE_TYPE
+            TELESCOPE_MODELS
           ).join(', ')}`,
         },
       },
     },
     eyepiece: {
-      type: DataTypes.STRING(60),
+      type: DataType.STRING(60),
       allowNull: false,
     },
     magnification: {
-      type: DataTypes.STRING(5),
+      type: DataType.STRING(5),
       allowNull: false,
       validate: {
         containsX: () =>
@@ -40,29 +40,28 @@ const Report = initDbModel().define(
       },
     },
     filter: {
-      type: DataTypes.STRING(60),
+      type: DataType.STRING(60),
       defaultValue: '',
     },
     observationRealDurationMin: {
-      type: DataTypes.INTEGER,
+      type: DataType.INTEGER,
       allowNull: false,
     },
     observationVirtualDurationMin: {
-      type: DataTypes.INTEGER,
+      type: DataType.INTEGER,
       allowNull: false,
     },
     observationStartDate: {
-      type: DataTypes.DATE,
+      type: DataType.DATE,
       allowNull: false,
     },
     observationEndDate: {
-      type: DataTypes.DATE,
+      type: DataType.DATE,
       allowNull: false,
     },
   },
   {
     tableName: 'reports',
-    timestamps: true,
   }
 );
 
