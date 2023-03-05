@@ -44,6 +44,7 @@ jspm_packages/
 
 # Dependency files
 package-lock.json
+conf.json
 src/db/conf.json
 
 # Snowpack dependency directory (https://snowpack.dev/)
