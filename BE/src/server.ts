@@ -3,11 +3,11 @@ import cookieParser from 'cookie-parser';
 import cors from 'cors';
 import morgan from 'morgan';
 
-import { API_PREFIX } from './constants';
-import { logger } from './utils';
-import { createDb } from './db';
-import * as dbTypes from './types/db.types';
 import { reportRouter } from './routes';
+import { createDb } from './db';
+import { logger } from './utils';
+import * as dbTypes from './types/db.types';
+import { API_PREFIX } from './constants';
 
 const app = express();
 

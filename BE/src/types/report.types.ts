@@ -5,9 +5,15 @@ enum TelescopeModels {
   'Levenhuk Skyline Base 110S',
 }
 
+enum TelescopeTypes {
+  'Reflector',
+  'Levenhuk Skyline Base 110S',
+}
+
 type ReportData = {
   subject: string;
-  telescope: TelescopeModels;
+  telescopeModel: TelescopeModels;
+  telescopeType: TelescopeTypes;
   eyepiece: string;
   filter?: string;
   magnification: string;
@@ -32,4 +38,11 @@ type ReportsList = {
   count: number;
 };
 
-export { ReportData, ReportModel, ModifyReportData, ReportsList };
+export {
+  TelescopeModels,
+  TelescopeTypes,
+  ReportData,
+  ReportModel,
+  ModifyReportData,
+  ReportsList,
+};
