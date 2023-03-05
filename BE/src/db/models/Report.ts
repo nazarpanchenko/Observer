@@ -1,9 +1,10 @@
 import { Sequelize, DataType } from 'sequelize-typescript';
 
-import * as enums from '../../constants';
+import * as validator from '../../constants';
 import sequelize from '..';
+import * as reportTypes from '../../types/report.types';
 
-const Report = (sequelize as Sequelize).define(
+const Model = (sequelize as Sequelize).define(
   'Report',
   {
     id: {
@@ -15,26 +16,26 @@ const Report = (sequelize as Sequelize).define(
       type: DataType.STRING(30),
       allowNull: false,
     },
-    telescopeType: {
+    telescopeModel: {
       type: DataType.STRING(30),
       allowNull: false,
       validate: {
         isIn: {
-          args: [Object.values(enums.TELESCOPE_MODELS)],
+          args: [Object.values(validator.TELESCOPE_MODELS)],
           msg: `telescopeModel field's value must be one of the following: ${Object.values(
-            enums.TELESCOPE_MODELS
+            validator.TELESCOPE_MODELS
           ).join(', ')}`,
         },
       },
     },
-    telescopeModel: {
+    telescopeType: {
       type: DataType.STRING(20),
       allowNull: false,
       validate: {
         isIn: {
-          args: [Object.values(enums.TELESCOPE_TYPES)],
+          args: [Object.values(validator.TELESCOPE_TYPES)],
           msg: `telescopeType field's value must be one of the following: ${Object.values(
-            enums.TELESCOPE_TYPES
+            validator.TELESCOPE_TYPES
           ).join(', ')}`,
         },
       },
@@ -76,5 +77,32 @@ const Report = (sequelize as Sequelize).define(
     tableName: 'reports',
   }
 );
+
+class Report extends Model {
+  static async getReports() {
+    return await Promise.all([Report.findAll(), Report.count()]);
+  }
+
+  static async getOne(id: number) {
+    return await Report.findOne({ where: { id } });
+  }
+
+  static async save(data: reportTypes.ReportData) {
+    return await Report.create(data);
+  }
+
+  static async modify(id: number, data: reportTypes.ModifyReportData) {
+    return await Report.update(
+      { ...data },
+      {
+        where: { id },
+      }
+    );
+  }
+
+  static async delete(id: number) {
+    return await Report.destroy({ where: { id } });
+  }
+}
 
 export default Report;

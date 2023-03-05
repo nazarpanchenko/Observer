@@ -6,7 +6,6 @@ enum TelescopeModels {
 }
 
 type ReportData = {
-  id?: number;
   subject: string;
   telescope: TelescopeModels;
   eyepiece: string;
@@ -22,9 +21,15 @@ type ReportData = {
 
 type ReportModel = Model<ReportData>;
 
+type ModifyReportData = {
+  eyepiece: string;
+  magnification: string;
+  filter: string;
+};
+
 type ReportsList = {
   data: Model<ReportModel>[];
   count: number;
 };
 
-export { ReportData, ReportModel, ReportsList };
+export { ReportData, ReportModel, ModifyReportData, ReportsList };

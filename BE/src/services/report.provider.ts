@@ -3,39 +3,31 @@ import * as reportTypes from '../types/report.types';
 
 class ReportProvider {
   async getReports(): Promise<reportTypes.ReportsList> {
-    const [data, count] = await Promise.all([Report.findAll(), Report.count()]);
+    const [data, count] = await Report.getReports();
     return {
       data,
       count,
     };
   }
 
-  async getOne(reportId: number): Promise<reportTypes.ReportModel | null> {
-    const report = await Report.findOne({ where: { id: reportId } });
+  async getOne(id: number): Promise<reportTypes.ReportModel | null> {
+    const report = await Report.getOne(id);
     return report;
   }
 
   async create(
     reportData: reportTypes.ReportData
   ): Promise<reportTypes.ReportModel> {
-    const newReport = await Report.create(reportData);
+    const newReport = await Report.save(reportData);
     return newReport;
   }
 
-  async update(
-    reportId: number,
-    updateData: reportTypes.ReportModel
-  ): Promise<void> {
-    await Report.update(
-      { ...updateData },
-      {
-        where: { id: reportId },
-      }
-    );
+  async update(id: number, data: reportTypes.ModifyReportData): Promise<void> {
+    await Report.modify(id, data);
   }
 
-  async delete(reportId: number): Promise<void> {
-    await Report.destroy({ where: { id: reportId } });
+  async delete(id: number): Promise<void> {
+    await Report.delete(id);
   }
 }
 
