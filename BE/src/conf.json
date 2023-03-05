@@ -1,6 +1,6 @@
 {
   "db": {
-    "dialect": "mysql",
+    "dialect": "mysq",
     "max_connections_number": 5,
     "connection_idle_time": 120000,
     "reconnect_interval": 4000,
