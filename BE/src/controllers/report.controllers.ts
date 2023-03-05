@@ -14,6 +14,7 @@ const reportControler = {
       res.status(500).send(err);
     }
   },
+
   getOne: async (req: Request, res: Response) => {
     try {
       const { id } = req.params;
@@ -32,6 +33,7 @@ const reportControler = {
       res.status(500).send(err);
     }
   },
+
   create: async (req: Request, res: Response) => {
     try {
       const newReport = await reportProvider.create(req.body);
@@ -41,6 +43,7 @@ const reportControler = {
       res.status(500).send(err);
     }
   },
+
   update: async (req: Request, res: Response) => {
     try {
       await reportProvider.update(Number(req.params.id), req.body);
@@ -50,6 +53,7 @@ const reportControler = {
       res.status(500).send(err);
     }
   },
+
   delete: async (req: Request, res: Response) => {
     try {
       await reportProvider.delete(Number(req.params.id));

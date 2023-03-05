@@ -4,6 +4,7 @@ import fs from 'fs';
 import path from 'path';
 import mysql from 'mysql2/promise';
 import Sequelize from 'sequelize';
+
 import conf from '../conf.json';
 
 const { DB_HOST, DB_PORT, DB_NAME, DB_USER, DB_PASS } = process.env;
@@ -11,7 +12,7 @@ const { DB_HOST, DB_PORT, DB_NAME, DB_USER, DB_PASS } = process.env;
 const sequelize = new Sequelize(DB_NAME, DB_USER, DB_PASS, {
   host: DB_HOST,
   port: Number(DB_PORT),
-  dialect: 'mysql',
+  dialect: conf.db.dialect,
   pool: {
     max: conf.db.max_connections_number,
     idle: conf.db.connection_idle_time,
@@ -34,7 +35,6 @@ fs.readdirSync(__dirname)
     );
   })
   .forEach((file) => {
-    // eslint-disable-next-line @typescript-eslint/no-var-requires
     const model = require(path.join(__dirname, file))(
       sequelize,
       Sequelize.DataTypes

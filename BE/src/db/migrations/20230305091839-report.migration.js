@@ -1,5 +1,11 @@
 'use strict';
 
+const TELESCOPE_TYPES = Object.freeze({
+  REFLECTOR: 'Reflector',
+  REFRACTOR: 'Refractor',
+  CATADIOPTRIC: 'Catadioptric',
+});
+
 const TELESCOPE_MODELS = Object.freeze({
   GSO_DOB_10: 'GSO DOB 10',
   LEVENHUK_SKYLINE_BASE_110S: 'Levenhuk Skyline Base 110S',
@@ -17,14 +23,26 @@ module.exports = {
         type: Sequelize.STRING(40),
         allowNull: false,
       },
-      telescope: {
-        type: Sequelize.STRING,
+      telescopeModel: {
+        type: Sequelize.STRING(30),
         allowNull: false,
         validate: {
           isIn: {
             args: [Object.values(TELESCOPE_MODELS)],
-            msg: `telescope field's value must be one of the following: ${Object.values(
+            msg: `telescopeModel field's value must be one of the following: ${Object.values(
               TELESCOPE_MODELS
+            ).join(', ')}`,
+          },
+        },
+      },
+      telescopeType: {
+        type: Sequelize.STRING(20),
+        allowNull: false,
+        validate: {
+          isIn: {
+            args: [Object.values(TELESCOPE_TYPES)],
+            msg: `telescopeType field's value must be one of the following: ${Object.values(
+              TELESCOPE_TYPES
             ).join(', ')}`,
           },
         },
@@ -34,7 +52,7 @@ module.exports = {
         allowNull: false,
       },
       filter: {
-        type: Sequelize.STRING,
+        type: Sequelize.STRING(60),
         defaultValue: '',
       },
       magnification: {

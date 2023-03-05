@@ -1,6 +1,6 @@
 import { Sequelize, DataType } from 'sequelize-typescript';
 
-import { TELESCOPE_MODELS } from '../../constants';
+import * as enums from '../../constants';
 import sequelize from '..';
 
 const Report = (sequelize as Sequelize).define(
@@ -15,14 +15,26 @@ const Report = (sequelize as Sequelize).define(
       type: DataType.STRING(30),
       allowNull: false,
     },
-    telescope: {
-      type: DataType.STRING(40),
+    telescopeType: {
+      type: DataType.STRING(30),
       allowNull: false,
       validate: {
         isIn: {
-          args: [Object.values(TELESCOPE_MODELS)],
-          msg: `telescope field's value must be one of the following: ${Object.values(
-            TELESCOPE_MODELS
+          args: [Object.values(enums.TELESCOPE_MODELS)],
+          msg: `telescopeModel field's value must be one of the following: ${Object.values(
+            enums.TELESCOPE_MODELS
+          ).join(', ')}`,
+        },
+      },
+    },
+    telescopeModel: {
+      type: DataType.STRING(20),
+      allowNull: false,
+      validate: {
+        isIn: {
+          args: [Object.values(enums.TELESCOPE_TYPES)],
+          msg: `telescopeType field's value must be one of the following: ${Object.values(
+            enums.TELESCOPE_TYPES
           ).join(', ')}`,
         },
       },

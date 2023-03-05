@@ -4,9 +4,17 @@ const errMsg = 'field is required';
 
 const reportValidator = {
   getOne: [param('id').isInt()],
+
   create: [
     body('subject').isString().notEmpty().withMessage(`subject ${errMsg}`),
-    body('telescope').isString().notEmpty().withMessage(`telescope ${errMsg}`),
+    body('telescopeModel')
+      .isString()
+      .notEmpty()
+      .withMessage(`telescopeModel ${errMsg}`),
+    body('telescopeType')
+      .isString()
+      .notEmpty()
+      .withMessage(`telescopeType ${errMsg}`),
     body('eyepiece').isString().notEmpty().withMessage(`eyepiece ${errMsg}`),
     body('filter').isString().optional(),
     body('magnification')
@@ -21,12 +29,14 @@ const reportValidator = {
     body('observationStartDate').isISO8601(),
     body('observationEndDate').isISO8601(),
   ],
+
   update: [
     param('id').isInt(),
     body('eyepiece').isString().notEmpty(),
     body('filter').isString().optional(),
     body('magnification').isString().contains('X'),
   ],
+
   delete: [param('id').isInt()],
 };
 

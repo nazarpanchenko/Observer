@@ -1,5 +1,11 @@
 'use strict';
 
+const TELESCOPE_TYPES = Object.freeze({
+  REFLECTOR: 'Reflector',
+  REFRACTOR: 'Refractor',
+  CATADIOPTRIC: 'Catadioptric',
+});
+
 const TELESCOPE_MODELS = Object.freeze({
   GSO_DOB_10: 'GSO DOB 10',
   LEVENHUK_SKYLINE_BASE_110S: 'Levenhuk Skyline Base 110S',
@@ -12,7 +18,8 @@ module.exports = {
       [
         {
           subject: 'Mars',
-          telescope: TELESCOPE_MODELS.GSO_DOB_10,
+          telescopeModel: TELESCOPE_MODELS.GSO_DOB_10,
+          telescopeType: TELESCOPE_TYPES.REFLECTOR,
           eyepiece: '25mm Plossl',
           magnification: '50X',
           observationRealDurationMin: 60,
@@ -22,7 +29,8 @@ module.exports = {
         },
         {
           subject: 'Orion Nebula',
-          telescope: TELESCOPE_MODELS.LEVENHUK_SKYLINE_BASE_110S,
+          telescopeModel: TELESCOPE_MODELS.LEVENHUK_SKYLINE_BASE_110S,
+          telescopeType: TELESCOPE_TYPES.REFLECTOR,
           eyepiece: '20mm Kellner',
           magnification: '28X',
           observationRealDurationMin: 45,
@@ -32,7 +40,8 @@ module.exports = {
         },
         {
           subject: 'Jupiter',
-          telescope: TELESCOPE_MODELS.GSO_DOB_10,
+          telescopeModel: TELESCOPE_MODELS.GSO_DOB_10,
+          telescopeType: TELESCOPE_TYPES.REFLECTOR,
           eyepiece: '5mm Arsenal 110 UW',
           magnification: '250X',
           observationRealDurationMin: 101,
