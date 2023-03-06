@@ -1,22 +1,25 @@
 {
-  "root": true,
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    },
     "ecmaVersion": "latest",
-    "sourceType": "module"
+    "sourceType": "script"
   },
   "env": {
+    "browser": true,
     "es2021": true,
-    "node": true
+    "jest": true
   },
-  "plugins": ["@typescript-eslint"],
+  "plugins": ["react", "@typescript-eslint"],
   "extends": [
     "eslint:recommended",
+    "plugin:react/recommended",
     "prettier/recommended",
     "plugin:@typescript-eslint/recommended"
   ],
   "rules": {
-    "no-console": "warn",
     "no-multiple-empty-lines": "warn",
     "no-restricted-syntax": [
       "warn",
@@ -25,5 +28,10 @@
         "message": "for loops are not allowed"
       }
     ]
+  },
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
   }
 }

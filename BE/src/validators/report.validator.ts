@@ -1,6 +1,6 @@
 import { param, body } from 'express-validator';
 
-import * as validator from '../constants';
+import * as validator from '../consts';
 
 const errMsg = 'field is required';
 
@@ -8,7 +8,10 @@ const reportValidator = {
   getOne: [param('id').isInt()],
 
   create: [
-    body('subject').isString().notEmpty().withMessage(`subject ${errMsg}`),
+    body('subject')
+      .isString()
+      .notEmpty()
+      .withMessage(`subject ${errMsg}`),
     body('telescopeModel')
       .isString()
       .notEmpty()
@@ -19,7 +22,10 @@ const reportValidator = {
       .notEmpty()
       .isIn(Object.values(validator.TELESCOPE_TYPES))
       .withMessage(`telescopeType ${errMsg}`),
-    body('eyepiece').isString().notEmpty().withMessage(`eyepiece ${errMsg}`),
+    body('eyepiece')
+      .isString()
+      .notEmpty()
+      .withMessage(`eyepiece ${errMsg}`),
     body('filter').isString().optional(),
     body('magnification')
       .isString()

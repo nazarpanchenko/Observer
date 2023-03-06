@@ -1,0 +1,3 @@
+interface ISession {}
+
+export { ISession };

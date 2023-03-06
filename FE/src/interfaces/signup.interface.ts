@@ -1,0 +1,3 @@
+interface ISignup {}
+
+export { ISignup };

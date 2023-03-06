@@ -2,8 +2,8 @@
 
 import { Model } from 'sequelize';
 
-import * as types from '../../types/report.types';
-import * as validator from '../../constants';
+import * as types from '../../types';
+import * as validator from '../../consts';
 
 interface ReportAttributes {
   id?: number;
