@@ -16,6 +16,14 @@
     "node": true
   },
   "rules": {
-    "no-console": "error"
+    "no-console": "warn",
+    "no-multiple-empty-lines": "warn",
+    "no-restricted-syntax": [
+      "warn",
+      {
+        "selector": "ForStatement",
+        "message": "for loops are not allowed"
+      }
+    ]
   }
 }

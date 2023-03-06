@@ -36,8 +36,8 @@ const sequelize = new Sequelize(
 
 fs.readdirSync(path.join(__dirname, 'models')).forEach(
   async (file: string) => {
-    const importedModel = await import(`${__dirname}/models/${file}`);
-    const model = importedModel.default(sequelize, DataTypes);
+    const _sequelize = await import(`${__dirname}/models/${file}`);
+    const model = _sequelize.default(sequelize, DataTypes);
     db[model.name] = model;
   }
 );
@@ -51,7 +51,7 @@ Object.keys(db).forEach(modelName => {
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
-export const createDb = async (dbConf: DbConf) => {
+export const connectToDB = async (dbConf: DbConf) => {
   const connection = await mysql.createConnection(dbConf);
   await connection.query(`CREATE DATABASE IF NOT EXISTS ${DB_NAME}`);
   await connection.end();
