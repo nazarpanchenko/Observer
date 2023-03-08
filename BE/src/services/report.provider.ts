@@ -1,8 +1,8 @@
 import db from '../db';
-import * as types from '../types/report.types';
+import { reportTypes } from '../types';
 
 class ReportProvider {
-  async getReports(): Promise<types.ReportsList> {
+  async getReports(): Promise<reportTypes.ReportsList> {
     const [data, count] = await db.Report.getReports();
     return {
       data,
@@ -10,21 +10,21 @@ class ReportProvider {
     };
   }
 
-  async getOne(id: number): Promise<types.ReportModel | null> {
+  async getOne(id: number): Promise<reportTypes.ReportModel | null> {
     const report = await db.Report.getOne(id);
     return report;
   }
 
   async create(
-    reportData: types.ReportData
-  ): Promise<types.ReportModel> {
+    reportData: reportTypes.ReportData
+  ): Promise<reportTypes.ReportModel> {
     const newReport = await db.Report.save(reportData);
     return newReport;
   }
 
   async update(
     id: number,
-    data: types.ModifyReportData
+    data: reportTypes.ModifyReportData
   ): Promise<void> {
     await db.Report.modify(id, data);
   }

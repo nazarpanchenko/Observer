@@ -2,14 +2,14 @@
 
 import { Model } from 'sequelize';
 
-import * as types from '../../types';
+import { reportTypes } from '../../types';
 import * as validator from '../../consts';
 
 interface ReportAttributes {
   id?: number;
   subject: string;
-  telescopeModel: types.TelescopeModels;
-  telescopeType: types.TelescopeTypes;
+  telescopeModel: reportTypes.TelescopeModels;
+  telescopeType: reportTypes.TelescopeTypes;
   eyepiece: string;
   filter?: string;
   magnification: string;
@@ -26,8 +26,8 @@ const reportModel = (sequelize: any, DataTypes: any) => {
   {
     id?: number;
     subject!: string;
-    telescopeModel!: types.TelescopeModels;
-    telescopeType!: types.TelescopeTypes;
+    telescopeModel!: reportTypes.TelescopeModels;
+    telescopeType!: reportTypes.TelescopeTypes;
     eyepiece!: string;
     filter?: string;
     magnification!: string;
@@ -53,11 +53,11 @@ const reportModel = (sequelize: any, DataTypes: any) => {
       return await Report.findOne({ where: { id } });
     }
 
-    static async save(data: types.ReportData) {
+    static async save(data: reportTypes.ReportData) {
       return await Report.create(data);
     }
 
-    static async modify(id: number, data: types.ModifyReportData) {
+    static async modify(id: number, data: reportTypes.ModifyReportData) {
       return await Report.update(
         { ...data },
         {

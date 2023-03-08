@@ -6,7 +6,7 @@ import morgan from 'morgan';
 import { reportRouter } from './routes';
 import { connectToDB } from './db';
 import { logger } from './utils';
-import * as types from './types';
+import { dbTypes } from './types';
 import { API_PREFIX } from './consts';
 
 const app = express();
@@ -35,7 +35,7 @@ process.on('unhandledRejection', err => {
   process.exit(1);
 });
 
-const startServer = (dbConf: types.DbConf) => {
+const startServer = (dbConf: dbTypes.DbConf) => {
   const PORT = process.env.PORT || 9000;
 
   try {

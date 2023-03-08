@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkobserver=self.webpackChunkobserver||[]).push([[357],{1343:(e,n,r)=>{r.r(n),r.d(n,{default:()=>t});var s=r(9526);const t=function(e){return s.createElement("h1",null,"Sign In")}}}]);

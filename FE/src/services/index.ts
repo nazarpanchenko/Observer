@@ -1,3 +1,4 @@
-import { signin } from './auth.service';
+import * as authService from './auth.service';
+import * as reportService from './report.service';
 
-export { signin };
+export { authService, reportService };

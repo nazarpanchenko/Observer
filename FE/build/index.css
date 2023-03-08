@@ -1,0 +1,4 @@
+*{box-sizing:border-box;margin:0;padding:0}.app-container{display:flex}.app-content{padding:20px}h1{text-transform:uppercase;letter-spacing:3px}h1,h2,h3,h4,h5,h6{margin-bottom:30px;text-align:center}
+
+.navbar{width:200px;min-height:100vh;margin-right:30px;padding:30px 20px;background-color:#667fec}.navbar .navbar-link{display:block}.navbar .navbar-link:not(:last-child){margin-bottom:30px}.navbar .navbar-link a{display:block;color:#fff;font-family:Arial, Helvetica, sans-serif;font-size:1.25rem;font-weight:900;text-decoration:none;transition:.3s ease-in-out}.navbar .navbar-link a:hover{color:#e6e6e6}
+

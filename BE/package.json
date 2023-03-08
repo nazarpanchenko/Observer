@@ -1,7 +1,7 @@
 {
   "name": "observer",
   "version": "1.0.0",
-  "description": "Observer api for logging astronomical observations",
+  "description": "This project allows users to log their astronomical observation sessions and store results in a form of graph and table data",
   "private": true,
   "main": "src/index.ts",
   "scripts": {
