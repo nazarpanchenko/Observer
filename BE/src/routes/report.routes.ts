@@ -6,7 +6,12 @@ import { reportValidator } from '../validators';
 
 const reportRouter = express.Router();
 
-reportRouter.get('/reports', reportControler.list);
+reportRouter.get(
+  '/reports',
+  reportValidator.list,
+  handleBadRequest(),
+  reportControler.list
+);
 
 reportRouter.get(
   '/reports/:id',

@@ -1,3 +1,0 @@
-interface IReport {}
-
-export { IReport };

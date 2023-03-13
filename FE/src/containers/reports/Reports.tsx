@@ -1,72 +1,100 @@
-import React, { useState, useEffect } from 'react';
+import React, { ReactElement } from 'react';
+import { useLoaderData } from 'react-router-dom';
+import {
+  Grid,
+  styled,
+  Typography,
+  Table,
+  TableBody,
+  TableCell,
+  tableCellClasses,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Paper,
+} from '@mui/material';
 
 import { reportTypes } from '../../types';
-import { reportService } from '../../services';
 import './index.scss';
 
-const Reports = () => {
-  const [reports, setReports] = useState<reportTypes.ReportsList>({
-    data: [],
-    count: 0,
-  });
+const StyledTableCell = styled(TableCell)(({ theme }) => ({
+  [`&.${tableCellClasses.head}`]: {
+    backgroundColor: theme.palette.common.black,
+    color: theme.palette.common.white,
+  },
+  [`&.${tableCellClasses.body}`]: {
+    fontSize: '1rem',
+    fontWeight: 500,
+  },
+}));
 
-  const getReports = async () => {
-    const data = await reportService.getReports();       
-    setReports(data);
-  };
+const StyledTableRow = styled(TableRow)(({ theme }) => ({
+  '&:nth-of-type(odd)': {
+    backgroundColor: theme.palette.action.hover,
+  },
+  '&:last-child td, &:last-child th': {
+    border: 0,
+  },
+}));
 
-  useEffect(() => {
-    getReports();
-  }, []);
+const Reports: React.FC = (): ReactElement => {
+  const reports = useLoaderData() as reportTypes.ReportsList;
 
   return (
-    <>
-      {!reports.data.length && <h4>Fetching Data...</h4>}
+    <Grid container justifyContent="center" alignItems="center">
+      <Grid item xs={12}>
+        <Typography variant="h4" sx={{ mb: 4 }} align="center">
+          Reports
+        </Typography>
+      </Grid>
 
-      {reports.data.length && (
-        <div className="reports">
-          <h1>Reports</h1>
+      <Grid item xs={10}></Grid>
+      <TableContainer component={Paper}>
+        <Table size="small" aria-label="reports table">
+          <TableHead>
+            <TableRow>
+              <StyledTableCell align="center">ID</StyledTableCell>
+              <StyledTableCell align="center">Subject</StyledTableCell>
+              <StyledTableCell align="center">Magnification</StyledTableCell>
+              <StyledTableCell align="center">Observation Real Duration</StyledTableCell>
+              <StyledTableCell align="center">
+                Observation Virtual Duration
+              </StyledTableCell>
+              <StyledTableCell align="center">
+                Observation Start Date (min)
+              </StyledTableCell>
+              <StyledTableCell align="center">Observation End Date (min)</StyledTableCell>
+            </TableRow>
+          </TableHead>
 
-          <table className="reports-table">
-            <thead>
-              <tr>
-                <th>ID</th>
-                <th>Telescope Model</th>
-                <th>Subject</th>
-                <th>Telescope Type</th>
-                <th>Eyepiece</th>
-                <th>Magnificaition</th>
-                <th>Filter</th>
-                <th>Observation Real Duration (Mins)</th>
-                <th>Observation Virtual Duration (Mins)</th>
-                <th>Observation Start Date</th>
-                <th>Observation End Date</th>
-              </tr>
-            </thead>
-
-            <tbody>
-              {reports.data.map(report => (
-                <tr key={report.id}>
-                  <td>
-                    <strong>{report.id}</strong>
-                  </td>
-                  <td>{report.subject}</td>
-                  <td>{report.telescopeModel}</td>
-                  <td>{report.telescopeType}</td>
-                  <td>{report.eyepiece}</td>
-                  <td>{report.magnification}</td>
-                  <td>{report?.filter}</td>
-                  <td>{report.observationRealDurationMin}</td>
-                  <td>{report.observationVirtualDurationMin}</td>
-                  <td>{report.observationStartDate}</td>
-                  <td>{report.observationEndDate}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      )}
-    </>
+          <TableBody>
+            {reports.data.map(report => (
+              <StyledTableRow key={report.id}>
+                <StyledTableCell component="th" scope="row" align="center">
+                  {report.id}
+                </StyledTableCell>
+                <StyledTableCell align="center">{report.subject}</StyledTableCell>
+                <StyledTableCell component="th" scope="row" align="center">
+                  {report.magnification}
+                </StyledTableCell>
+                <StyledTableCell component="th" scope="row" align="center">
+                  {report.observationRealDurationMin}
+                </StyledTableCell>
+                <StyledTableCell component="th" scope="row" align="center">
+                  {report.observationVirtualDurationMin}
+                </StyledTableCell>
+                <StyledTableCell component="th" scope="row" align="center">
+                  {`${report.observationStartDate}`}
+                </StyledTableCell>
+                <StyledTableCell component="th" scope="row" align="center">
+                  {`${report.observationEndDate}`}
+                </StyledTableCell>
+              </StyledTableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
+    </Grid>
   );
 };
 

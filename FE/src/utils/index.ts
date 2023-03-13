@@ -1,4 +1,4 @@
-import lazyLoadRoute from './lazyLoadRoute';
-import * as axios from '../utils/axiosConf';
+import { lazyLoadRoute } from './helpers';
+import {  _axios } from './http.conf.';
 
-export { lazyLoadRoute, axios };
+export { lazyLoadRoute, _axios };

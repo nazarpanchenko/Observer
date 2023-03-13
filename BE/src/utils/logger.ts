@@ -5,10 +5,6 @@ const logger: winston.Logger = createLogger({
   format: format.json(),
   transports: [
     new transports.Console({
-      level: 'info',
-      format: format.simple(),
-    }),
-    new transports.Console({
       level: 'error',
       format: format.combine(format.colorize(), format.simple()),
     }),

@@ -1,9 +1,8 @@
-import * as React from 'react';
+import React, { ReactElement } from 'react';
 
-import { IEquipment } from '../../interfaces/equipment.interface';
 import './index.scss';
 
-const Equipment: React.FC<IEquipment> = props => {
+const Equipment: React.FC = (): ReactElement => {
   return <h1>Equipment</h1>;
 };
 

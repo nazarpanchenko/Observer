@@ -1,9 +1,8 @@
-import * as React from 'react';
+import React, { ReactElement } from 'react';
 
-import { ISession } from '../../interfaces';
 import './index.scss';
 
-const Sessions: React.FC<ISession> = props => {
+const Sessions: React.FC = (): ReactElement => {
   return <h1>Sessions</h1>;
 };
 

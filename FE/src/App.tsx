@@ -1,44 +1,25 @@
 import React from 'react';
-import {
-  createHashRouter,
-  RouterProvider,
-} from 'react-router-dom';
+import { Outlet } from 'react-router-dom';
+import CssBaseline from '@mui/material/CssBaseline';
+import { createTheme, Box, ThemeProvider } from '@mui/material';
 
-import { lazyLoadRoute } from './utils';
-import { AppLayout } from './components';
+import { theme } from './consts';
+import { Navigation } from './components';
+
+// const _theme = createTheme(theme);
 
 const App = () => {
-  const router = createHashRouter([
-    {
-      path: '/',
-      element: <AppLayout />,
-      errorElement: <h1>Something Went Wrong</h1>,
-      children: [
-        {
-          path: '/signup',
-          element: lazyLoadRoute('Signup'),
-        },
-        {
-          path: '/signin',
-          element: lazyLoadRoute('Signin'),
-        },
-        {
-          path: '/reports',
-          element: lazyLoadRoute('Reports'),
-        },
-        {
-          path: '/sessions',
-          element: lazyLoadRoute('Sessions'),
-        },
-        {
-          path: '/equipment',
-          element: lazyLoadRoute('Equipment'),
-        },
-      ],
-    },
-  ]);
-
-  return <RouterProvider router={router} />;
+  return (
+    <>
+      <CssBaseline />
+      {/* <ThemeProvider theme={_theme}> */}
+        <Navigation />
+        <Box sx={{ p: 4 }}>
+          <Outlet />
+        </Box>
+      {/* </ThemeProvider> */}
+    </>
+  );
 };
 
 export default App;

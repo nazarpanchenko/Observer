@@ -1,17 +1,17 @@
-import { axios } from '../utils';
-import { BASE_URI } from '../consts';
-
+import { _axios } from '../utils';
 import { reportTypes } from '../types';
-import { AxiosResponse } from 'axios';
 
-const _axios = axios.default;
-
-const getReports = async () => {
-  const res: AxiosResponse<any, any> = await _axios.get(
-    `${BASE_URI}/reports`
-  );
-  const data: reportTypes.ReportsList = res.data;
-  return data;
+const getReports = async (
+  query: reportTypes.ReportPaginationConfig = { params: {} }
+): Promise<reportTypes.ReportsList | undefined> => {
+  try {
+    const data: reportTypes.ReportsList = await _axios.get('/reports', {
+      params: { ...query.params },
+    });
+    return data;
+  } catch (err) {
+    console.log(`getReports error: ${err}`);
+  }
 };
 
 export { getReports };

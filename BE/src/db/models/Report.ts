@@ -2,34 +2,19 @@
 
 import { Model } from 'sequelize';
 
-import { reportTypes } from '../../types';
-import * as validator from '../../consts';
+import { telescopeEnums } from '../../enums';
+import { globalTypes, reportTypes } from '../../types';
+import { PAGINATION_CONFIG } from '../../consts';
+import { containsChar } from '../../utils';
 
-interface ReportAttributes {
-  id?: number;
-  subject: string;
-  telescopeModel: reportTypes.TelescopeModels;
-  telescopeType: reportTypes.TelescopeTypes;
-  eyepiece: string;
-  filter?: string;
-  magnification: string;
-  observationRealDurationMin: number;
-  observationVirtualDurationMin: number;
-  observationStartDate: Date;
-  observationEndDate: Date;
-}
+interface ReportAttributes extends reportTypes.ReportData {}
 
 const reportModel = (sequelize: any, DataTypes: any) => {
-  class Report
-    extends Model<ReportAttributes>
-    implements ReportAttributes
-  {
+  class Report extends Model<ReportAttributes> implements ReportAttributes {
     id?: number;
+    sessionId!: number;
     subject!: string;
-    telescopeModel!: reportTypes.TelescopeModels;
-    telescopeType!: reportTypes.TelescopeTypes;
-    eyepiece!: string;
-    filter?: string;
+    telescopeType!: telescopeEnums.TelescopeTypes;
     magnification!: string;
     observationRealDurationMin!: number;
     observationVirtualDurationMin!: number;
@@ -42,84 +27,100 @@ const reportModel = (sequelize: any, DataTypes: any) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models: any) {
-      // define association here
+      this.belongsTo(models.Session);
+      this.hasMany(models.Subject, {
+        foreignKey: 'reportId',
+      });
+      this.hasMany(models.Telescope, {
+        foreignKey: 'reportId',
+      });
+      this.hasMany(models.Eyepiece, {
+        foreignKey: 'reportId',
+      });
+      this.hasMany(models.BarlowLens, {
+        foreignKey: 'reportId',
+      });
+      this.hasMany(models.Filter, {
+        foreignKey: 'reportId',
+      });
     }
 
-    static async getReports() {
-      return await Promise.all([Report.findAll(), Report.count()]);
+    static async getReports(query: globalTypes.PaginationConfig) {
+      const {
+        page = PAGINATION_CONFIG.DEFAULT_OFFSET,
+        limit = PAGINATION_CONFIG.LIMIT.avg,
+      } = query;
+
+      const [data, count] = await Promise.all([
+        Report.findAll({
+          offset: page,
+          order: [['id', 'DESC']],
+          limit,
+        }),
+        Report.count(),
+      ]);
+      return { data, count };
     }
 
     static async getOne(id: number) {
-      return await Report.findOne({ where: { id } });
+      const data = await Report.findOne({ where: { id } });
+      return data;
     }
 
     static async save(data: reportTypes.ReportData) {
-      return await Report.create(data);
+      const _data = await Report.create(data);
+      return _data;
     }
 
     static async modify(id: number, data: reportTypes.ModifyReportData) {
-      return await Report.update(
+      const updatedData = await Report.update(
         { ...data },
         {
           where: { id },
         }
       );
+      return updatedData;
     }
 
     static async delete(id: number) {
-      return await Report.destroy({ where: { id } });
+      const deletedData = await Report.destroy({ where: { id } });
+      return deletedData;
     }
   }
 
   Report.init(
     {
       id: {
-        type: DataTypes.INTEGER,
-        autoIncrement: true,
         primaryKey: true,
+        autoIncrement: true,
+        type: DataTypes.INTEGER,
+      },
+      sessionId: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
       },
       subject: {
-        type: DataTypes.STRING(30),
+        type: DataTypes.STRING(50),
         allowNull: false,
-      },
-      telescopeModel: {
-        type: DataTypes.STRING(30),
-        allowNull: false,
-        validate: {
-          isIn: {
-            args: [Object.values(validator.TELESCOPE_MODELS)],
-            msg: `telescopeModel field's value must be one of the following: ${Object.values(
-              validator.TELESCOPE_MODELS
-            ).join(', ')}`,
-          },
-        },
       },
       telescopeType: {
-        type: DataTypes.STRING(20),
+        type: DataTypes.STRING,
         allowNull: false,
         validate: {
           isIn: {
-            args: [Object.values(validator.TELESCOPE_TYPES)],
+            args: [Object.values(telescopeEnums.TelescopeTypes)],
             msg: `telescopeType field's value must be one of the following: ${Object.values(
-              validator.TELESCOPE_TYPES
+              telescopeEnums.TelescopeTypes
             ).join(', ')}`,
           },
         },
-      },
-      eyepiece: {
-        type: DataTypes.STRING(60),
-        allowNull: false,
       },
       magnification: {
         type: DataTypes.STRING(5),
         allowNull: false,
         validate: {
-          containsX: () =>
-            `magnification field's value must include the character "X"`,
+          containsChar: containsChar('magnification', 'X'),
         },
-      },
-      filter: {
-        type: DataTypes.STRING(60),
       },
       observationRealDurationMin: {
         type: DataTypes.INTEGER,

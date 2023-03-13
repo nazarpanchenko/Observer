@@ -1,4 +1,5 @@
-import AppLayout from './appLayout/AppLayout';
-import Navbar from './navbar/Navbar';
+import Loader from './loader/Loader';
+import ErrorPage from './errorPage/ErrorPage';
+import Navigation from './navigation/Navigation';
 
-export { AppLayout, Navbar };
+export { Loader, ErrorPage, Navigation };

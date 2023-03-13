@@ -1,15 +1,18 @@
+type ReportPaginationConfig = {
+  params: {
+    page?: number;
+    limit?: number;
+  }
+}
+
 type ReportData = {
   id: number;
   subject: string;
-  telescopeModel: string;
-  telescopeType: string;
-  eyepiece: string;
   magnification: string;
-  filter?: string;
   observationRealDurationMin: number;
   observationVirtualDurationMin: number;
-  observationStartDate: string;
-  observationEndDate: string;
+  observationStartDate: Date;
+  observationEndDate: Date;
 };
 
 type ReportsList = {
@@ -17,4 +20,4 @@ type ReportsList = {
   count: number;
 };
 
-export { ReportData, ReportsList };
+export { ReportPaginationConfig, ReportData, ReportsList };

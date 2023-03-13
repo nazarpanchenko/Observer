@@ -13,8 +13,15 @@ module.exports = (env, argv) => {
     entry: path.join(__dirname, 'src', 'index.tsx'),
     output: {
       path: path.join(__dirname, 'build'),
+      publicPath: '/',
       filename: 'index.js',
       clean: true,
+    },
+    devServer: {
+      static: path.join(__dirname, 'src'),
+      port: 3000,
+      open: true,
+      historyApiFallback: true,
     },
     devtool: isProduction ? false : 'eval-cheap-module-source-map',
     module: {
@@ -32,22 +39,10 @@ module.exports = (env, argv) => {
         {
           test: /\.(scss|css)$/,
           use: [
-            isProduction
-              ? MiniCssExtractPlugin.loader
-              : 'style-loader',
+            isProduction ? MiniCssExtractPlugin.loader : 'style-loader',
             'css-loader',
             'sass-loader',
           ],
-        },
-        {
-          test: /\.(woff|woff2|eot|ttf|otf)$/i,
-          type: 'asset/resource',
-          generator: {
-            filename: '[hash].[ext]',
-            options: {
-              encoding: 'binary',
-            },
-          },
         },
         {
           test: /\.(jpe?g|png|gif|svg)$/i,
@@ -76,28 +71,11 @@ module.exports = (env, argv) => {
             from: 'src/assets/img/**/*.{jpeg,jpg,png,gif,svg}',
             to: '/img',
           },
-          // {
-          //   from: 'src/assets/fonts/*.{woff2,woff,eot,ttf,otf}',
-          //   to: '/fonts',
-          // },
         ],
       }),
     ],
     resolve: {
-      extensions: [
-        '.js',
-        '.ts',
-        '.tsx',
-        '.json',
-        '.wasm',
-        '.mjs',
-        '.cjs',
-      ],
-    },
-    devServer: {
-      static: path.join(__dirname, 'src'),
-      port: 3000,
-      open: true,
+      extensions: ['.js', '.ts', '.tsx', '.json', '.wasm', '.mjs', '.cjs'],
     },
     optimization: {
       minimizer: [
@@ -126,8 +104,7 @@ module.exports = (env, argv) => {
                               params: {
                                 attributes: [
                                   {
-                                    xmlns:
-                                      'http://www.w3.org/2000/svg',
+                                    xmlns: 'http://www.w3.org/2000/svg',
                                   },
                                 ],
                               },

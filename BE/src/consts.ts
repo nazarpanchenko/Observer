@@ -1,14 +1,13 @@
-const API_PREFIX = '/api/v1';
+export const API_PREFIX = '/api/v1';
 
-const TELESCOPE_TYPES = Object.freeze({
-  REFLECTOR: 'Reflector',
-  REFRACTOR: 'Refractor',
-  CATADIOPTRIC: 'Catadioptric',
+export const API_URI =
+  `${process.env.API_BASE_URI}/${API_PREFIX}` || `http://localhost:9000/${API_PREFIX}`;
+
+export const PAGINATION_CONFIG = Object.freeze({
+  DEFAULT_OFFSET: 0,
+  LIMIT: {
+    min: 3,
+    avg: 4,
+    max: 5,
+  },
 });
-
-const TELESCOPE_MODELS = Object.freeze({
-  GSO_DOB_10: 'GSO DOB 10',
-  LEVENHUK_SKYLINE_BASE_110S: 'Levenhuk Skyline Base 110S',
-});
-
-export { API_PREFIX, TELESCOPE_TYPES, TELESCOPE_MODELS };

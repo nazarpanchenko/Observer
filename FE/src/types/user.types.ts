@@ -1,17 +1,21 @@
 type UserData = {
   id?: number;
   username: string;
-  password: string;
   email: string;
-  country: string;
-  streetAddress: string;
-  postalCode: number;
-  phoneNumber?: string;
+  password: string;
 };
 
 type UserCredentials = {
-  username: string;
+  email: string;
   password: string;
 };
 
-export { UserData, UserCredentials };
+type RegisteredUser = {
+  id: number;
+  username: string;
+  password: string;
+  accessToken: string;
+  refreshToken: string;
+};
+
+export { UserData, UserCredentials, RegisteredUser };
