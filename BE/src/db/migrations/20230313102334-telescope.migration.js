@@ -15,6 +15,11 @@ module.exports = {
         reportId: {
           type: Sequelize.INTEGER,
           allowNull: false,
+          references: {
+            model: 'Report',
+            key: 'id',
+          },
+          onDelete: 'CASCADE',
         },
         telescopeType: {
           type: Sequelize.STRING,

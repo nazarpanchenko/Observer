@@ -18,6 +18,11 @@ module.exports = {
         sessionId: {
           type: Sequelize.INTEGER,
           allowNull: false,
+          references: {
+            model: 'Session',
+            key: 'id',
+          },
+          onDelete: 'CASCADE',
         },
         subject: {
           type: Sequelize.STRING(50),

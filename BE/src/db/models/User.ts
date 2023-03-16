@@ -2,14 +2,15 @@
 
 import { Model } from 'sequelize';
 
-import { userTypes } from '../../types';
+import { userTypes } from '../../shared/types';
 
 interface UserAttributes extends userTypes.UserModel {}
 
 const userModel = (sequelize: any, DataTypes: any) => {
   class User extends Model<UserAttributes> implements UserAttributes {
     id!: number;
-    username!: string;
+    firstName!: string;
+    lastName!: string;
     email!: string;
     password!: string;
     isVerified?: 1 | 0;
@@ -21,13 +22,25 @@ const userModel = (sequelize: any, DataTypes: any) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models: any) {
-      models.User.hasMany(models.Session);
-      models.User.hasMany(models.UserToken);
+      this.hasMany(models.UserToken, {
+        foreignKey: {
+          field: 'userId',
+          allowNull: false,
+        },
+        onDelete: 'CASCADE'
+      });
+      this.hasMany(models.Session, {
+        foreignKey: {
+          field: 'sessionId',
+          allowNull: false,
+        },
+        onDelete: 'CASCADE'
+      });
     }
 
-    static async getUser(email: string) {
+    static async getUser(field: string, value: string) {
       const userData = await User.findOne({
-        where: { email },
+        where: { [field]: value },
         attributes: ['id', 'email'],
       });
       return userData;
@@ -57,21 +70,24 @@ const userModel = (sequelize: any, DataTypes: any) => {
         allowNull: false,
         unique: true,
       },
-      username: {
+      firstName: {
+        type: DataTypes.STRING(20),
+        allowNull: false,
+      },
+      lastName: {
         type: DataTypes.STRING(30),
         allowNull: false,
-        unique: true,
       },
       password: {
-        type: DataTypes.STRING(100),
+        type: DataTypes.STRING,
         allowNull: false,
       },
       isVerified: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.INTEGER(1),
         defaultValue: 0,
       },
       verificationLink: {
-        type: DataTypes.STRING,
+        type: DataTypes.TEXT,
         defaultValue: '',
       },
     },

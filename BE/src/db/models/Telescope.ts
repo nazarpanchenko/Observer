@@ -2,15 +2,14 @@
 
 import { Model } from 'sequelize';
 
-import { telescopeEnums } from '../../enums';
-import { telescopeTypes } from '../../types';
+import { telescopeEnums } from '../../shared/enums';
+import { telescopeTypes } from '../../shared/types';
 
 interface TelescopeAttributes extends telescopeTypes.TelescopeData {}
 
 const telescopeModel = (sequelize: any, DataTypes: any) => {
   class Telescope extends Model<TelescopeAttributes> implements TelescopeAttributes {
     id?: number;
-    reportId!: number;
     telescopeType!: telescopeEnums.TelescopeTypes;
     telescopeModel!: string;
     telescopeDiameterMm!: number;
@@ -21,7 +20,13 @@ const telescopeModel = (sequelize: any, DataTypes: any) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models: any) {
-      models.Telescope.belongsTo(models.Report);
+      this.belongsTo(models.Report, {
+        foreignKey: {
+          field: 'reportId',
+          allowNull: false,
+        },
+        onDelete: 'CASCADE',
+      });
     }
   }
 
@@ -31,10 +36,6 @@ const telescopeModel = (sequelize: any, DataTypes: any) => {
         primaryKey: true,
         autoIncrement: true,
         type: DataTypes.INTEGER,
-      },
-      reportId: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
       },
       telescopeType: {
         type: DataTypes.STRING,

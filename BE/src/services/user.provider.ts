@@ -2,7 +2,7 @@ import bcrypt from 'bcrypt';
 import { v4 as uuidv4 } from 'uuid';
 
 import conf from '../conf.json';
-import { userTypes, userTokenTypes } from '../types';
+import { userTypes, userTokenTypes } from '../shared/types';
 import db from '../db';
 import { mailProvider, userTokenProvider } from '../services';
 import { UserDTO } from '../dto';
@@ -23,7 +23,8 @@ class UserProvider {
     });
     const userDTO = new UserDTO({
       id: storedUser.id,
-      username: storedUser.username,
+      firstName: storedUser.firstName,
+      lastName: storedUser.lastName,
       isVerified: storedUser.isVerified || 0,
       ...tokens,
     });

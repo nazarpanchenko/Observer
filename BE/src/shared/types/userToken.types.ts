@@ -1,6 +1,6 @@
 type UserToken = {
   id?: number;
-  userId: number;
+  userId?: number;
   refreshToken: string;
 };
 

@@ -4,10 +4,12 @@ import { sessionEnums } from '../enums';
 
 type SessionData = {
   id?: number;
-  category: sessionEnums.SessionTypes;
-  userId: number;
-  username: string;
+  category: sessionEnums.SessionCategories;
   reportsCount: number;
+  sessionRealDurationMin: number;
+  sessionVirtualDurationMin: number;
+  sessionStartDate: Date;
+  sessionEndDate: Date;
 };
 
 type SessionModel = Model<SessionData>;

@@ -10,10 +10,13 @@ module.exports = {
           autoIncrement: true,
           type: Sequelize.INTEGER,
         },
-        username: {
-          type: Sequelize.STRING(30),
+        firstName: {
+          type: Sequelize.STRING(20),
           allowNull: false,
-          unique: true,
+        },
+        lastName: {
+          type: Sequelize.STRING(20),
+          allowNull: false,
         },
         email: {
           type: Sequelize.STRING(50),
@@ -21,15 +24,15 @@ module.exports = {
           unique: true,
         },
         password: {
-          type: Sequelize.STRING(100),
+          type: Sequelize.STRING,
           allowNull: false,
         },
         isVerified: {
-          type: Sequelize.INTEGER,
+          type: Sequelize.INTEGER(1),
           defaultValue: 0,
         },
         verificationLink: {
-          type: Sequelize.STRING,
+          type: Sequelize.TEXT,
           defaultValue: '',
         },
       },

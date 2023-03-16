@@ -1,15 +1,17 @@
-import { userTypes } from '../types';
+import { userTypes } from '../shared/types';
 
 class UserDTO {
   id!: number;
-  username!: string;
+  firstName!: string;
+  lastName!: string;
   isVerified!: 1 | 0;
   accessToken!: string;
   refreshToken!: string;
 
   constructor(userModel: userTypes.UserDTO) {
     this.id = userModel.id;
-    this.username = userModel.username;
+    this.firstName = userModel.firstName;
+    this.lastName = userModel.lastName;
     this.isVerified = userModel.isVerified;
     this.accessToken = userModel.accessToken;
     this.refreshToken = userModel.refreshToken;

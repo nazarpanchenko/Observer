@@ -3,7 +3,6 @@ import { telescopeEnums } from '../enums';
 
 type ReportData = {
   id?: number;
-  sessionId: number;
   telescopeType: telescopeEnums.TelescopeTypes;
   subject: string;
   magnification: string;

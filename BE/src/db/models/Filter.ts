@@ -2,16 +2,14 @@
 
 import { Model } from 'sequelize';
 
-import { filterEnums } from '../../enums';
-import { filterTypes } from '../../types';
+import { filterEnums } from '../../shared/enums';
+import { filterTypes } from '../../shared/types';
 
 interface FilterAttributes extends filterTypes.FilterData {}
 
 const filterModel = (sequelize: any, DataTypes: any) => {
   class Filter extends Model<FilterAttributes> implements FilterAttributes {
     id?: number;
-    reportId!: number;
-    eyepieceId!: number;
     filter?: string;
     filterType?: filterEnums.FilterTypes;
 
@@ -21,8 +19,12 @@ const filterModel = (sequelize: any, DataTypes: any) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models: any) {
-      models.BarlowLens.belongsTo(models.Report, {
-        foreignKey: 'reportId',
+      this.belongsTo(models.Report, {
+        foreignKey: {
+          field: 'reportId',
+          allowNull: false,
+        },
+        onDelete: 'CASCADE'
       });
     }
   }
@@ -33,10 +35,6 @@ const filterModel = (sequelize: any, DataTypes: any) => {
         primaryKey: true,
         autoIncrement: true,
         type: DataTypes.INTEGER,
-      },
-      reportId: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
       },
       filterType: {
         type: DataTypes.STRING,

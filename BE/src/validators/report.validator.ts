@@ -1,6 +1,11 @@
 import { param, query, body } from 'express-validator';
 
-import { telescopeEnums, eyepieceEnums, barlowLensEnums, filterEnums } from '../enums';
+import {
+  telescopeEnums,
+  eyepieceEnums,
+  barlowLensEnums,
+  filterEnums,
+} from '../shared/enums';
 import { PAGINATION_CONFIG } from '../consts';
 import { getErrMsg } from '../utils/helpers';
 

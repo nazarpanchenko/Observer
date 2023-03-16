@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 
 import conf from '../conf.json';
-import { userTypes } from '../types';
+import { userTypes } from '../shared/types';
 import db from '../db';
 import { logger } from '../utils';
 import { userProvider } from '../services';
@@ -11,7 +11,7 @@ const userControler = {
     const email = req.body.email;
 
     try {
-      const storedUser: userTypes.UserModel | null = await db.User.getUser(email);
+      const storedUser: userTypes.UserModel | null = await db.User.getUser('email', email);
       if (storedUser) {
         throw new Error(`User with email ${email} already exists`);
       }

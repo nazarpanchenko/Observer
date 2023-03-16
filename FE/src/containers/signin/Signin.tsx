@@ -10,12 +10,12 @@ import {
 } from '@mui/material';
 
 import { authService } from '../../services';
-import { userTypes } from '../../types';
+import { userTypes } from '../../shared/types';
 import './index.scss';
 
 const Signin: React.FC = (): ReactElement => {
   const [formData, setFormData] = useState<userTypes.UserCredentials>({
-    username: '',
+    email: '',
     password: '',
   });
 
@@ -33,22 +33,22 @@ const Signin: React.FC = (): ReactElement => {
   };
 
   return (
-    <Grid container flexDirection="column" justifyContent="center" alignItems="center">
-      <Grid item xs={8}>
+    <>
+      <Grid item xs={12}>
         <Typography variant="h4" sx={{ mb: 4 }}>
           Enter Your Workspace
         </Typography>
       </Grid>
 
-      <Grid item xs={8}>
+      <Grid item xs={6}>
         <form className="signin-form" onSubmit={handleSignin}>
           <FormControl fullWidth sx={{ mb: 2 }} required onChange={handleInputChange}>
             <InputLabel htmlFor="email">Email</InputLabel>
             <Input id="email" type="email" />
           </FormControl>
           <FormControl fullWidth sx={{ mb: 4 }} required onChange={handleInputChange}>
-            <InputLabel htmlFor="email">Email address</InputLabel>
-            <Input id="email" type="password" />
+            <InputLabel htmlFor="password">Password</InputLabel>
+            <Input id="password" type="password" />
           </FormControl>
 
           <Button type="submit" variant="contained" sx={{ mb: 2 }}>
@@ -58,7 +58,7 @@ const Signin: React.FC = (): ReactElement => {
 
         <Link to="/forgot-password">Forgot password?</Link>
       </Grid>
-    </Grid>
+    </>
   );
 };
 

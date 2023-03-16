@@ -3,7 +3,7 @@ import AES from 'crypto-js/aes';
 
 import conf from '../conf.json';
 import db from '../db';
-import { userTypes, userTokenTypes } from '../types';
+import { userTypes, userTokenTypes } from '../shared/types';
 
 class UserTokenProvider {
   generateToken(payload: userTypes.UserModel): userTokenTypes.JwtToken {
@@ -28,13 +28,13 @@ class UserTokenProvider {
     );
     if (storedToken) {
       const updatedToken: userTokenTypes.UserToken = await db.UserToken.updatedToken(
+        userId,
         refreshToken
       );
       return updatedToken;
     }
 
     const createdToken: userTokenTypes.UserToken = await db.UserToken.saveToken(
-      userId,
       refreshToken
     );
     return createdToken;

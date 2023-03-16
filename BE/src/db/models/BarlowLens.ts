@@ -2,16 +2,14 @@
 
 import { Model } from 'sequelize';
 
-import { barlowLensEnums } from '../../enums';
-import { barlowLensTypes } from '../../types';
+import { barlowLensEnums } from '../../shared/enums';
+import { barlowLensTypes } from '../../shared/types';
 
 interface BarlowLensAttributes extends barlowLensTypes.BarlowLensData {}
 
 const barlowLensModel = (sequelize: any, DataTypes: any) => {
   class BarlowLens extends Model<BarlowLensAttributes> implements BarlowLensAttributes {
     id?: number;
-    reportId!: number;
-    eyepieceId!: number;
     barlowLensManufacturer?: string;
     barlowLensSchema?: barlowLensTypes.BarlowLensSchema;
 
@@ -20,9 +18,13 @@ const barlowLensModel = (sequelize: any, DataTypes: any) => {
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
-    static associate(models: any) {
+    static associate(models: any) {            
       this.belongsTo(models.Report, {
-        foreignKey: 'reportId',
+        foreignKey: {
+          field: 'reportId',
+          allowNull: false,
+        },
+        onDelete: 'CASCADE',
       });
     }
   }
@@ -33,10 +35,6 @@ const barlowLensModel = (sequelize: any, DataTypes: any) => {
         primaryKey: true,
         autoIncrement: true,
         type: DataTypes.INTEGER,
-      },
-      reportId: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
       },
       barlowLensSchema: {
         type: DataTypes.STRING,

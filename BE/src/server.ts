@@ -4,9 +4,9 @@ import cors from 'cors';
 import morgan from 'morgan';
 
 import * as routers from './routes';
-import { connectToDB } from './db';
+import db, { createDB } from './db';
 import { logger } from './utils';
-import { dbTypes } from './types';
+import { dbTypes } from './shared/types';
 import { API_PREFIX } from './consts';
 
 const app = express();
@@ -41,7 +41,8 @@ const startServer = (dbConf: dbTypes.DbConf) => {
   try {
     app.listen(PORT, async () => {
       logger.info(`Server is listening on the port ${PORT}`);
-      await connectToDB(dbConf);
+      await createDB(dbConf);
+      await db.sequelize.sync();
       logger.info(`Database has been successfully created`);
     });
   } catch (err: any) {

@@ -18,6 +18,11 @@ module.exports = {
         reportId: {
           type: Sequelize.INTEGER,
           allowNull: false,
+          references: {
+            model: 'Report',
+            key: 'id',
+          },
+          onDelete: 'CASCADE',
         },
         eyepieceManufacturer: {
           type: Sequelize.STRING(50),

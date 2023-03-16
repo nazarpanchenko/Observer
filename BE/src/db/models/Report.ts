@@ -2,8 +2,8 @@
 
 import { Model } from 'sequelize';
 
-import { telescopeEnums } from '../../enums';
-import { globalTypes, reportTypes } from '../../types';
+import { telescopeEnums } from '../../shared/enums';
+import { globalTypes, reportTypes } from '../../shared/types';
 import { PAGINATION_CONFIG } from '../../consts';
 import { containsChar } from '../../utils';
 
@@ -12,7 +12,6 @@ interface ReportAttributes extends reportTypes.ReportData {}
 const reportModel = (sequelize: any, DataTypes: any) => {
   class Report extends Model<ReportAttributes> implements ReportAttributes {
     id?: number;
-    sessionId!: number;
     subject!: string;
     telescopeType!: telescopeEnums.TelescopeTypes;
     magnification!: string;
@@ -27,21 +26,47 @@ const reportModel = (sequelize: any, DataTypes: any) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models: any) {
-      this.belongsTo(models.Session);
+      this.belongsTo(models.Session, {
+        foreignKey: {
+          field: 'sessionId',
+          allowNull: false,
+        },
+        onDelete: 'CASCADE',
+      });
       this.hasMany(models.Subject, {
-        foreignKey: 'reportId',
+        foreignKey: {
+          field: 'reportId',
+          allowNull: false,
+        },
+        onDelete: 'CASCADE',
       });
       this.hasMany(models.Telescope, {
-        foreignKey: 'reportId',
+        foreignKey: {
+          field: 'reportId',
+          allowNull: false,
+        },
+        onDelete: 'CASCADE',
       });
       this.hasMany(models.Eyepiece, {
-        foreignKey: 'reportId',
+        foreignKey: {
+          field: 'reportId',
+          allowNull: false,
+        },
+        onDelete: 'CASCADE',
       });
       this.hasMany(models.BarlowLens, {
-        foreignKey: 'reportId',
+        foreignKey: {
+          field: 'reportId',
+          allowNull: false,
+        },
+        onDelete: 'CASCADE',
       });
       this.hasMany(models.Filter, {
-        foreignKey: 'reportId',
+        foreignKey: {
+          field: 'reportId',
+          allowNull: false,
+        },
+        onDelete: 'CASCADE',
       });
     }
 
@@ -52,28 +77,28 @@ const reportModel = (sequelize: any, DataTypes: any) => {
       } = query;
 
       const [data, count] = await Promise.all([
-        Report.findAll({
+        this.findAll({
           offset: page,
           order: [['id', 'DESC']],
           limit,
         }),
-        Report.count(),
+        this.count(),
       ]);
       return { data, count };
     }
 
     static async getOne(id: number) {
-      const data = await Report.findOne({ where: { id } });
+      const data = await this.findOne({ where: { id } });
       return data;
     }
 
     static async save(data: reportTypes.ReportData) {
-      const _data = await Report.create(data);
+      const _data = await this.create(data);
       return _data;
     }
 
     static async modify(id: number, data: reportTypes.ModifyReportData) {
-      const updatedData = await Report.update(
+      const updatedData = await this.update(
         { ...data },
         {
           where: { id },
@@ -83,7 +108,7 @@ const reportModel = (sequelize: any, DataTypes: any) => {
     }
 
     static async delete(id: number) {
-      const deletedData = await Report.destroy({ where: { id } });
+      const deletedData = await this.destroy({ where: { id } });
       return deletedData;
     }
   }
@@ -94,10 +119,6 @@ const reportModel = (sequelize: any, DataTypes: any) => {
         primaryKey: true,
         autoIncrement: true,
         type: DataTypes.INTEGER,
-      },
-      sessionId: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
       },
       subject: {
         type: DataTypes.STRING(50),

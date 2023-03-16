@@ -2,15 +2,14 @@
 
 import { Model } from 'sequelize';
 
-import { subjectEnums } from '../../enums';
-import { subjectTypes } from '../../types';
+import { subjectEnums } from '../../shared/enums';
+import { subjectTypes } from '../../shared/types';
 
 interface SubjectAttributes extends subjectTypes.SubjectData {}
 
 const subjectModel = (sequelize: any, DataTypes: any) => {
   class Subject extends Model<SubjectAttributes> implements SubjectAttributes {
     id?: number;
-    reportId!: number;
     category!: subjectEnums.SubjectTypes;
 
     /**
@@ -20,7 +19,11 @@ const subjectModel = (sequelize: any, DataTypes: any) => {
      */
     static associate(models: any) {
       this.belongsTo(models.Report, {
-        foreignKey: 'reportId',
+        foreignKey: {
+          field: 'reportId',
+          allowNull: false,
+        },
+        onDelete: 'CASCADE'
       });
     }
   }
@@ -31,10 +34,6 @@ const subjectModel = (sequelize: any, DataTypes: any) => {
         primaryKey: true,
         autoIncrement: true,
         type: DataTypes.INTEGER,
-      },
-      reportId: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
       },
       category: {
         type: DataTypes.STRING,

@@ -2,7 +2,8 @@ import { userTokenTypes } from '.';
 
 type UserModel = {
   id: number;
-  username: string;
+  firstName: string;
+  lastName: string;
   email: string;
   password: string;
   isVerified?: 1 | 0;
@@ -11,7 +12,8 @@ type UserModel = {
 
 type CreateUser = {
   id: number;
-  username: string;
+  firstName: string;
+  lastName: string;
   email: string;
   password: string;
   verificationLink: string;
@@ -19,7 +21,8 @@ type CreateUser = {
 
 type UserDTO = userTokenTypes.JwtToken & {
   id: number;
-  username: string;
+  firstName: string;
+  lastName: string;
   isVerified: 1 | 0;
 };
 

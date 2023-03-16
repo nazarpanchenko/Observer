@@ -17,18 +17,22 @@ const ForgotPassword: React.FC = (): ReactElement => {
   };
 
   return (
-    <Grid container flexDirection="column" justifyContent="center" alignItems="center">
-      <Typography variant="h4">Password Recovery</Typography>
+    <>
+      <Grid item xs={12}>
+        <Typography variant="h4">Password Recovery</Typography>
+      </Grid>
 
-      <form className="password-recovery-form" onSubmit={handlePasswordRecovery}>
-        <FormControl fullWidth sx={{ mb: 2 }} required onChange={handleInputChange}>
-          <InputLabel htmlFor="email">Email</InputLabel>
-          <Input id="email" type="email" />
-        </FormControl>
+      <Grid item xs={6}>
+        <form className="password-recovery-form" onSubmit={handlePasswordRecovery}>
+          <FormControl fullWidth sx={{ mb: 2 }} required onChange={handleInputChange}>
+            <InputLabel htmlFor="email">Email</InputLabel>
+            <Input id="email" type="email" />
+          </FormControl>
 
-        <Button type="submit">Reset Password</Button>
-      </form>
-    </Grid>
+          <Button type="submit">Reset Password</Button>
+        </form>
+      </Grid>
+    </>
   );
 };
 

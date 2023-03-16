@@ -1,9 +1,12 @@
 import winston, { createLogger, format, transports } from 'winston';
 
 const logger: winston.Logger = createLogger({
-  level: 'info',
   format: format.json(),
   transports: [
+    new transports.Console({
+      level: 'info',
+      format: format.combine(format.colorize(), format.simple()),
+    }),
     new transports.Console({
       level: 'error',
       format: format.combine(format.colorize(), format.simple()),

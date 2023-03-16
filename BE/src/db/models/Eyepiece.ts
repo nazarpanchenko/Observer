@@ -2,8 +2,8 @@
 
 import { Model } from 'sequelize';
 
-import { eyepieceEnums } from '../../enums';
-import { eyepieceTypes } from '../../types';
+import { eyepieceEnums } from '../../shared/enums';
+import { eyepieceTypes } from '../../shared/types';
 import { containsChar } from '../../utils';
 
 interface EyepieceAttributes extends eyepieceTypes.EyepieceData {}
@@ -11,8 +11,6 @@ interface EyepieceAttributes extends eyepieceTypes.EyepieceData {}
 const eyepieceModel = (sequelize: any, DataTypes: any) => {
   class Eyepiece extends Model<EyepieceAttributes> implements EyepieceAttributes {
     id?: number;
-    reportId!: number;
-    telescopeId!: number;
     eyepieceManufacturer!: string;
     eyepieceModel!: string;
     eyepieceSizeSchema!: eyepieceEnums.EyepieceDiameters;
@@ -28,7 +26,11 @@ const eyepieceModel = (sequelize: any, DataTypes: any) => {
      */
     static associate(models: any) {
       this.belongsTo(models.Report, {
-        foreignKey: 'reportId',
+        foreignKey: {
+          field: 'reportId',
+          allowNull: false,
+        },
+        onDelete: 'CASCADE',
       });
     }
   }
@@ -39,10 +41,6 @@ const eyepieceModel = (sequelize: any, DataTypes: any) => {
         primaryKey: true,
         autoIncrement: true,
         type: DataTypes.INTEGER,
-      },
-      reportId: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
       },
       eyepieceManufacturer: {
         type: DataTypes.STRING(50),

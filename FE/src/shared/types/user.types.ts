@@ -1,6 +1,7 @@
 type UserData = {
   id?: number;
-  username: string;
+  firstName: string;
+  lastName: string;
   email: string;
   password: string;
 };
@@ -12,7 +13,8 @@ type UserCredentials = {
 
 type RegisteredUser = {
   id: number;
-  username: string;
+  firstName: string;
+  lastName: string;
   password: string;
   accessToken: string;
   refreshToken: string;

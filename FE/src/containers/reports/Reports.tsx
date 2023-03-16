@@ -14,7 +14,7 @@ import {
   Paper,
 } from '@mui/material';
 
-import { reportTypes } from '../../types';
+import { reportTypes } from '../../shared/types';
 import './index.scss';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -41,14 +41,14 @@ const Reports: React.FC = (): ReactElement => {
   const reports = useLoaderData() as reportTypes.ReportsList;
 
   return (
-    <Grid container justifyContent="center" alignItems="center">
+    <>
       <Grid item xs={12}>
         <Typography variant="h4" sx={{ mb: 4 }} align="center">
           Reports
         </Typography>
       </Grid>
 
-      <Grid item xs={10}></Grid>
+      <Grid item xs={6}></Grid>
       <TableContainer component={Paper}>
         <Table size="small" aria-label="reports table">
           <TableHead>
@@ -68,7 +68,7 @@ const Reports: React.FC = (): ReactElement => {
           </TableHead>
 
           <TableBody>
-            {reports.data.map(report => (
+            {reports.data.map((report: reportTypes.ReportData) => (
               <StyledTableRow key={report.id}>
                 <StyledTableCell component="th" scope="row" align="center">
                   {report.id}
@@ -94,7 +94,7 @@ const Reports: React.FC = (): ReactElement => {
           </TableBody>
         </Table>
       </TableContainer>
-    </Grid>
+    </>
   );
 };
 

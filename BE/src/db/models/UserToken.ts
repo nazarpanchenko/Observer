@@ -2,14 +2,14 @@
 
 import { Model } from 'sequelize';
 
-import { userTokenTypes } from '../../types';
+import { userTokenTypes } from '../../shared/types';
 
 interface UserTokenAttributes extends userTokenTypes.UserToken {}
 
 const userTokenModel = (sequelize: any, DataTypes: any) => {
   class UserToken extends Model<UserTokenAttributes> implements UserTokenAttributes {
     id?: number;
-    userId!: number;
+    userId?: number;
     refreshToken!: string;
 
     /**
@@ -18,8 +18,11 @@ const userTokenModel = (sequelize: any, DataTypes: any) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models: any) {
-      models.UserToken.belongsTo(models.User, {
-        foreignKey: 'userId',
+      this.belongsTo(models.User, {
+        foreignKey: {
+          field: 'userId',
+          allowNull: false,
+        },
         onDelete: 'CASCADE'
       });
     }
@@ -40,11 +43,11 @@ const userTokenModel = (sequelize: any, DataTypes: any) => {
       return createdToken;
     }
 
-    static async updateToken(refreshToken: string) {
+    static async updateToken(userId: number, refreshToken: string) {
       const updatedToken = await UserToken.update(
         { refreshToken },
         {
-          where: { refreshToken },
+          where: { userId },
         }
       );
       return updatedToken;
@@ -57,10 +60,6 @@ const userTokenModel = (sequelize: any, DataTypes: any) => {
         primaryKey: true,
         autoIncrement: true,
         type: DataTypes.INTEGER,
-      },
-      userId: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
       },
       refreshToken: {
         type: DataTypes.TEXT,

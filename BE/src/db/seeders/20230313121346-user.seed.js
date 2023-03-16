@@ -4,18 +4,28 @@ module.exports = {
   async up(queryInterface) {
     await queryInterface.bulkInsert('users', [
       {
-        username: 'test',
-        email: 'test@gmail.com',
+        fistName: 'Toma',
+        lastName: 'Kachinsky',
+        email: 'toma.kashinsky93@gmail.com',
         password: 'Abcde$12345',
-        createdAt: new Date('2022-12-15T05:00:00Z'),
-        updatedAt: new Date('2022-12-15T05:00:00Z'),
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString(),
       },
       {
-        username: 'test2',
-        email: 'test2@gmail.com',
-        password: 'Abcde$12345',
-        createdAt: new Date('2022-12-15T05:00:00Z'),
-        updatedAt: new Date('2022-12-15T05:00:00Z'),
+        fistName: 'Luke',
+        lastName: 'Johnson',
+        email: 'teo.r3@hotmail.com',
+        password: 'Ade_12345cD',
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString(),
+      },
+      {
+        fistName: 'Marek',
+        lastName: 'Blashchinsky',
+        email: 'speedy-5D.test@gmail.com',
+        password: 'A8_345dBe1q',
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString(),
       },
     ]);
   },

@@ -1,5 +1,5 @@
 import db from '../db';
-import { globalTypes, reportTypes } from '../types';
+import { globalTypes, reportTypes } from '../shared/types';
 
 class ReportProvider {
   async getReports(

@@ -2,7 +2,6 @@ import { eyepieceEnums } from '../enums';
 
 type EyepieceData = {
   id?: number;
-  reportId: number;
   eyepieceManufacturer: string;
   eyepieceSizeSchema: eyepieceEnums.EyepieceDiameters;
   eyepieceModel: string;

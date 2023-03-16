@@ -1,10 +1,3 @@
-type ReportPaginationConfig = {
-  params: {
-    page?: number;
-    limit?: number;
-  }
-}
-
 type ReportData = {
   id: number;
   subject: string;
@@ -20,4 +13,4 @@ type ReportsList = {
   count: number;
 };
 
-export { ReportPaginationConfig, ReportData, ReportsList };
+export { ReportData, ReportsList };

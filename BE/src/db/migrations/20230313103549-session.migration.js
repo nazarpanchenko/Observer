@@ -12,6 +12,15 @@ module.exports = {
           autoIncrement: true,
           type: Sequelize.INTEGER,
         },
+        userId: {
+          type: Sequelize.INTEGER,
+          allowNull: false,
+          references: {
+            model: 'User',
+            key: 'id',
+          },
+          onDelete: 'CASCADE',
+        },
         category: {
           type: Sequelize.STRING,
           allowNull: false,
@@ -24,16 +33,24 @@ module.exports = {
             },
           },
         },
-        userId: {
-          type: Sequelize.INTEGER,
-          allowNull: false,
-        },
-        username: {
-          type: Sequelize.STRING(50),
-          allowNull: false,
-        },
         reportsCount: {
           type: Sequelize.INTEGER,
+          allowNull: false,
+        },
+        sessionRealDurationMin: {
+          type: Sequelize.INTEGER,
+          allowNull: false,
+        },
+        sessionVirtualDurationMin: {
+          type: Sequelize.INTEGER,
+          allowNull: false,
+        },
+        sessionStartDate: {
+          type: Sequelize.DATE,
+          allowNull: false,
+        },
+        sessionEndDate: {
+          type: Sequelize.DATE,
           allowNull: false,
         },
       },
