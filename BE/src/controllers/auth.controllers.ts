@@ -4,7 +4,7 @@ import conf from '../conf.json';
 import { userTypes } from '../shared/types';
 import db from '../db';
 import { logger } from '../utils';
-import { userProvider } from '../services';
+import { authProvider } from '../services';
 
 const userControler = {
   signup: async (req: Request, res: Response) => {
@@ -16,7 +16,7 @@ const userControler = {
         throw new Error(`User with email ${email} already exists`);
       }
 
-      const userData = await userProvider.signup(req.body);
+      const userData = await authProvider.signup(req.body);
       res.cookie('refreshToken', userData.refreshToken, conf.cookies);
       res.send(userData);
     } catch (err: any) {
@@ -30,6 +30,8 @@ const userControler = {
   logout: async (req: Request, res: Response) => {},
 
   verifyUser: async (req: Request, res: Response) => {},
+
+  resetPassword: async (req: Request, res: Response) => {},
 };
 
 export default userControler;

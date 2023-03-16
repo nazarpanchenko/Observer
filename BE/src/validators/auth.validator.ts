@@ -1,6 +1,6 @@
 import { param, query, body } from 'express-validator';
 
-const userValidator = {
+const authValidator = {
   signup: [
     body('email').isEmail().isLength({ max: 50 }),
     body('firstName').isString().isLength({ min: 2, max: 20 }),
@@ -14,7 +14,7 @@ const userValidator = {
 
   verifyUser: [],
 
-  forgotPassword: [],
+  resetPassword: [],
 };
 
-export default userValidator;
+export default authValidator;

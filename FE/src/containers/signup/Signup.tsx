@@ -52,7 +52,14 @@ const Signup: React.FC = (): ReactElement => {
 
   return (
     <>
-      {isAuthorized && (
+      {isAuthorized ? (
+        <Typography variant="h6">
+          <Link to="/auth/signin">
+            Email with verification link has been sent to your email. Please, complete the
+            registration process by clicking on that link.
+          </Link>
+        </Typography>
+      ) : (
         <>
           <Grid item xs={12}>
             <Typography variant="h4" sx={{ mb: 4 }}>

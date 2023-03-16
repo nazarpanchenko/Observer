@@ -4,10 +4,10 @@ import { v4 as uuidv4 } from 'uuid';
 import conf from '../conf.json';
 import { userTypes, userTokenTypes } from '../shared/types';
 import db from '../db';
-import { mailProvider, userTokenProvider } from '../services';
+import { mailProvider, userTokenProvider } from '.';
 import { UserDTO } from '../dto';
 
-class UserProvider {
+class AuthProvider {
   async signup(params: userTypes.UserModel): Promise<userTypes.UserDTO> {
     const passwordHash = await bcrypt.hash(params.password, conf.jwt.salt_rounds);
     const verificationLink = uuidv4();
@@ -38,7 +38,9 @@ class UserProvider {
   async logout() {}
 
   async verifyUser() {}
+
+  async resetPassword() {}
 }
 
-const userProvider = new UserProvider();
-export default userProvider;
+const authProvider = new AuthProvider();
+export default authProvider;
