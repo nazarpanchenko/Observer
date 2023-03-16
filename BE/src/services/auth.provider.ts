@@ -8,20 +8,19 @@ import { mailProvider, userTokenProvider } from '.';
 import { UserDTO } from '../dto';
 
 class AuthProvider {
-  async signup(params: userTypes.UserModel): Promise<userTypes.UserDTO> {
+  async signup(params: userTypes.UserData): Promise<userTypes.UserDTO> {
     const passwordHash = await bcrypt.hash(params.password, conf.jwt.salt_rounds);
     const verificationLink = uuidv4();
 
-    const storedUser: userTypes.UserModel = await db.User.signup({
+    const storedUser: userTypes.UserData = await db.User.signup({
       ...params,
       password: passwordHash,
     });
-    await mailProvider.sendVerification(params.email, verificationLink);
-
     const tokens: userTokenTypes.JwtToken = userTokenProvider.generateToken({
       ...storedUser,
     });
-    const userDTO = new UserDTO({
+
+    const userDTO: userTypes.UserDTO = new UserDTO({
       id: storedUser.id,
       firstName: storedUser.firstName,
       lastName: storedUser.lastName,
@@ -30,16 +29,26 @@ class AuthProvider {
     });
 
     await userTokenProvider.create(userDTO.id, tokens.refreshToken);
+    await mailProvider.sendVerification(params.email, verificationLink);
+
     return userDTO;
   }
 
-  async signin() {}
+  async signin() {
+    return {};
+  }
 
-  async logout() {}
+  async logout() {
+    return {};
+  }
 
-  async verifyUser() {}
+  async verifyUser() {
+    return {};
+  }
 
-  async resetPassword() {}
+  async resetPassword() {
+    return {};
+  }
 }
 
 const authProvider = new AuthProvider();

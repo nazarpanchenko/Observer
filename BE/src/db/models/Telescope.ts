@@ -5,7 +5,7 @@ import { Model } from 'sequelize';
 import { telescopeEnums } from '../../shared/enums';
 import { telescopeTypes } from '../../shared/types';
 
-interface TelescopeAttributes extends telescopeTypes.TelescopeData {}
+type TelescopeAttributes = telescopeTypes.TelescopeData;
 
 const telescopeModel = (sequelize: any, DataTypes: any) => {
   class Telescope extends Model<TelescopeAttributes> implements TelescopeAttributes {

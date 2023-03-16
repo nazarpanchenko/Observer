@@ -1,6 +1,0 @@
-.error-page-wrapper{display:flex;width:100vw;height:110vh;justify-content:center;align-items:center}
-
-.navbar{position:fixed;top:0;left:0;bottom:0;width:200px;padding:30px 20px;background-color:#667fec;font-family:Arial, Helvetica, sans-serif;font-size:1.25rem;font-weight:900;color:#fff}.navbar .navbar-link,.navbar #logout-btn{cursor:pointer;transition:0.3s ease-in-out}.navbar .navbar-link:hover,.navbar #logout-btn:hover{color:#e6e6e6}.navbar .navbar-link{display:block;margin-bottom:30px}.navbar .navbar-link a{display:block;color:inherit;text-decoration:none;transition:0.3s ease-in-out}.navbar .navbar-link a:hover{color:#e6e6e6}.navbar #logout-btn:hover{color:#e6e6e6}
-
-*{box-sizing:border-box;margin:0;padding:0}.app-content{max-width:1280px;min-height:100vh;margin:0 auto;padding:20px}h1{text-transform:uppercase;letter-spacing:3px}h1,h2,h3,h4,h5,h6{margin-bottom:30px;text-align:center}
-

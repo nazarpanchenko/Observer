@@ -3,4 +3,8 @@ type PaginationConfig = {
   limit?: number;
 };
 
-export { PaginationConfig };
+type SequelizeDeleteResponse = {
+  deletedRowsCount: number;
+};
+
+export { PaginationConfig, SequelizeDeleteResponse };

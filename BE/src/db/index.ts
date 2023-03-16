@@ -38,6 +38,7 @@ const sequelize = new Sequelize(DB_NAME, DB_USER, DB_PASS, {
 fs.readdirSync(path.join(__dirname, 'models'))
   .filter((modelName: string) => modelName.slice(-3) === '.ts')
   .forEach((modelName: string) => {
+    // eslint-disable-next-line @typescript-eslint/no-var-requires
     const _sequelize = require(`${__dirname}/models/${modelName}`);
     const model = _sequelize.default(sequelize, DataTypes);
     const _modelName = modelName.slice(0, modelName.length - 3);

@@ -1,50 +1,48 @@
 'use strict';
 
-const { filterTypes } = require('../consts');
+import { filterTypes } from '../consts';
 
-module.exports = {
-  async up(queryInterface, Sequelize) {
-    await queryInterface.createTable(
-      'filters',
-      {
-        id: {
-          primaryKey: true,
-          autoIncrement: true,
-          type: Sequelize.INTEGER,
-        },
-        reportId: {
-          type: Sequelize.INTEGER,
-          allowNull: false,
-          references: {
-            model: 'Report',
-            key: 'id',
-          },
-          onDelete: 'CASCADE',
-        },
-        filterType: {
-          type: Sequelize.STRING,
-          validate: {
-            isIn: {
-              args: [Object.values(filterTypes)],
-              msg: `filterType field's value must be one of the following: ${Object.values(
-                filterTypes
-              ).join(', ')}`,
-            },
-          },
-          defaultValue: '',
-        },
-        filter: {
-          type: Sequelize.STRING(50),
-          defaultValue: '',
-        },
+export async function up(queryInterface, Sequelize) {
+  await queryInterface.createTable(
+    'filters',
+    {
+      id: {
+        primaryKey: true,
+        autoIncrement: true,
+        type: Sequelize.INTEGER,
       },
-      {
-        timestamps: true,
-      }
-    );
-  },
+      reportId: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: {
+          model: 'Report',
+          key: 'id',
+        },
+        onDelete: 'CASCADE',
+      },
+      filterType: {
+        type: Sequelize.STRING,
+        validate: {
+          isIn: {
+            args: [Object.values(filterTypes)],
+            msg: `filterType field's value must be one of the following: ${Object.values(
+              filterTypes
+            ).join(', ')}`,
+          },
+        },
+        defaultValue: '',
+      },
+      filter: {
+        type: Sequelize.STRING(50),
+        defaultValue: '',
+      },
+    },
+    {
+      timestamps: true,
+    }
+  );
+}
 
-  async down(queryInterface) {
-    await queryInterface.dropTable('filters', { cascade: true });
-  },
-};
+export async function down(queryInterface) {
+  await queryInterface.dropTable('filters', { cascade: true });
+}

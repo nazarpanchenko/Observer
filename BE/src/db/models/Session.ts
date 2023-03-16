@@ -7,7 +7,7 @@ import { globalTypes, sessionTypes } from '../../shared/types';
 import { PAGINATION_CONFIG } from '../../consts';
 import db from '..';
 
-interface SessionAttributes extends sessionTypes.SessionData {}
+type SessionAttributes = sessionTypes.SessionData;
 
 const sessionModel = (sequelize: any, DataTypes: any) => {
   class Session extends Model<SessionAttributes> implements SessionAttributes {
@@ -57,20 +57,23 @@ const sessionModel = (sequelize: any, DataTypes: any) => {
       ]);
     }
 
-    static async getOne(id: number) {
-      const data = await this.findOne({ where: { id } });
+    static async getOne(id: number): Promise<sessionTypes.SessionData | null> {
+      const data: sessionTypes.SessionData | null = await this.findOne({ where: { id } });
       return data;
     }
 
-    static async save(data: sessionTypes.SessionData) {
-      const reportsCount = await db.Report.count();
-      const _data = await this.create({ ...data, reportsCount });
+    static async save(data: sessionTypes.SessionData): Promise<sessionTypes.SessionData> {
+      const reportsCount: number = await db.Report.count();
+      const _data: sessionTypes.SessionData = await this.create({
+        ...data,
+        reportsCount,
+      });
       return _data;
     }
 
-    static async delete(id: number) {
-      const deletedData = await this.destroy({ where: { id } });
-      return deletedData;
+    static async delete(id: number): Promise<globalTypes.SequelizeDeleteResponse> {
+      const deletedRowsCount: number = await this.destroy({ where: { id } });
+      return { deletedRowsCount };
     }
   }
 

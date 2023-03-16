@@ -5,7 +5,7 @@ import { Model } from 'sequelize';
 import { barlowLensEnums } from '../../shared/enums';
 import { barlowLensTypes } from '../../shared/types';
 
-interface BarlowLensAttributes extends barlowLensTypes.BarlowLensData {}
+type BarlowLensAttributes = barlowLensTypes.BarlowLensData;
 
 const barlowLensModel = (sequelize: any, DataTypes: any) => {
   class BarlowLens extends Model<BarlowLensAttributes> implements BarlowLensAttributes {
@@ -18,7 +18,7 @@ const barlowLensModel = (sequelize: any, DataTypes: any) => {
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
-    static associate(models: any) {            
+    static associate(models: any) {
       this.belongsTo(models.Report, {
         foreignKey: {
           field: 'reportId',

@@ -7,5 +7,5 @@ export enum EyepieceSchemas {
 
 export enum EyepieceDiameters {
   "1.25'",
-  "2'"
+  "2'",
 }

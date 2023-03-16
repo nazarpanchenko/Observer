@@ -4,9 +4,11 @@ type UserToken = {
   refreshToken: string;
 };
 
+type UserTokenTuple = [affectedCount: number, affectedRows: UserToken[]];
+
 type JwtToken = {
   accessToken: string;
   refreshToken: string;
 };
 
-export { UserToken, JwtToken };
+export { UserToken, UserTokenTuple, JwtToken };

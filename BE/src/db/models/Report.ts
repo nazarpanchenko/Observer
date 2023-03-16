@@ -7,7 +7,7 @@ import { globalTypes, reportTypes } from '../../shared/types';
 import { PAGINATION_CONFIG } from '../../consts';
 import { containsChar } from '../../utils';
 
-interface ReportAttributes extends reportTypes.ReportData {}
+type ReportAttributes = reportTypes.ReportData;
 
 const reportModel = (sequelize: any, DataTypes: any) => {
   class Report extends Model<ReportAttributes> implements ReportAttributes {
@@ -70,13 +70,15 @@ const reportModel = (sequelize: any, DataTypes: any) => {
       });
     }
 
-    static async getReports(query: globalTypes.PaginationConfig) {
+    static async getReports(
+      query: globalTypes.PaginationConfig
+    ): Promise<reportTypes.ReportsList> {
       const {
         page = PAGINATION_CONFIG.DEFAULT_OFFSET,
         limit = PAGINATION_CONFIG.LIMIT.avg,
       } = query;
 
-      const [data, count] = await Promise.all([
+      const [data, count]: reportTypes.ReportsListTuple = await Promise.all([
         this.findAll({
           offset: page,
           order: [['id', 'DESC']],
@@ -87,29 +89,36 @@ const reportModel = (sequelize: any, DataTypes: any) => {
       return { data, count };
     }
 
-    static async getOne(id: number) {
+    static async getOne(id: number): Promise<reportTypes.ReportData | null> {
       const data = await this.findOne({ where: { id } });
       return data;
     }
 
-    static async save(data: reportTypes.ReportData) {
+    static async save(data: reportTypes.ReportData): Promise<reportTypes.ReportData> {
       const _data = await this.create(data);
       return _data;
     }
 
-    static async modify(id: number, data: reportTypes.ModifyReportData) {
-      const updatedData = await this.update(
-        { ...data },
-        {
-          where: { id },
-        }
-      );
-      return updatedData;
+    static async modify(
+      id: number,
+      data: reportTypes.ModifyReportParams
+    ): Promise<reportTypes.ModifiedReportData> {
+      const [affectedCount, affectedRows]: reportTypes.SequelizeUpdateReportResponse =
+        await this.update(
+          { ...data },
+          {
+            where: { id },
+            returning: true,
+          }
+        );
+      return { updatedRowsCount: affectedCount, updatedRecord: { ...affectedRows[0] } };
     }
 
-    static async delete(id: number) {
-      const deletedData = await this.destroy({ where: { id } });
-      return deletedData;
+    static async delete(id: number): Promise<globalTypes.SequelizeDeleteResponse> {
+      const deletedRowsCount: number = await this.destroy({
+        where: { id },
+      });
+      return { deletedRowsCount };
     }
   }
 

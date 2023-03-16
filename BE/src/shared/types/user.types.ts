@@ -1,6 +1,6 @@
 import { userTokenTypes } from '.';
 
-type UserModel = {
+type UserData = {
   id: number;
   firstName: string;
   lastName: string;
@@ -26,4 +26,4 @@ type UserDTO = userTokenTypes.JwtToken & {
   isVerified: 1 | 0;
 };
 
-export { UserModel, CreateUser, UserDTO };
+export { UserData, CreateUser, UserDTO };

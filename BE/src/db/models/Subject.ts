@@ -5,7 +5,7 @@ import { Model } from 'sequelize';
 import { subjectEnums } from '../../shared/enums';
 import { subjectTypes } from '../../shared/types';
 
-interface SubjectAttributes extends subjectTypes.SubjectData {}
+type SubjectAttributes = subjectTypes.SubjectData;
 
 const subjectModel = (sequelize: any, DataTypes: any) => {
   class Subject extends Model<SubjectAttributes> implements SubjectAttributes {
@@ -23,7 +23,7 @@ const subjectModel = (sequelize: any, DataTypes: any) => {
           field: 'reportId',
           allowNull: false,
         },
-        onDelete: 'CASCADE'
+        onDelete: 'CASCADE',
       });
     }
   }

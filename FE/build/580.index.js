@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkobserver=self.webpackChunkobserver||[]).push([[580],{8580:(e,s,r)=>{r.r(s),r.d(s,{default:()=>t});var n=r(9526);const t=function(e){return n.createElement("h1",null,"Sessions")}}}]);

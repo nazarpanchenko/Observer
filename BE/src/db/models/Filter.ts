@@ -5,7 +5,7 @@ import { Model } from 'sequelize';
 import { filterEnums } from '../../shared/enums';
 import { filterTypes } from '../../shared/types';
 
-interface FilterAttributes extends filterTypes.FilterData {}
+type FilterAttributes = filterTypes.FilterData
 
 const filterModel = (sequelize: any, DataTypes: any) => {
   class Filter extends Model<FilterAttributes> implements FilterAttributes {
@@ -24,7 +24,7 @@ const filterModel = (sequelize: any, DataTypes: any) => {
           field: 'reportId',
           allowNull: false,
         },
-        onDelete: 'CASCADE'
+        onDelete: 'CASCADE',
       });
     }
   }

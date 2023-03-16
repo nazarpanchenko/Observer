@@ -7,16 +7,16 @@ import { logger } from '../utils';
 import { authProvider } from '../services';
 
 const userControler = {
-  signup: async (req: Request, res: Response) => {
+  signup: async (req: Request, res: Response): Promise<void> => {
     const email = req.body.email;
 
     try {
-      const storedUser: userTypes.UserModel | null = await db.User.getUser('email', email);
+      const storedUser: userTypes.UserData | null = await db.User.getUser('email', email);
       if (storedUser) {
         throw new Error(`User with email ${email} already exists`);
       }
 
-      const userData = await authProvider.signup(req.body);
+      const userData: userTypes.UserDTO = await authProvider.signup(req.body);
       res.cookie('refreshToken', userData.refreshToken, conf.cookies);
       res.send(userData);
     } catch (err: any) {
@@ -25,13 +25,21 @@ const userControler = {
     }
   },
 
-  signin: async (req: Request, res: Response) => {},
+  signin: async (req: Request, res: Response): Promise<void> => {
+    res.send({});
+  },
 
-  logout: async (req: Request, res: Response) => {},
+  logout: async (req: Request, res: Response): Promise<void> => {
+    res.send({});
+  },
 
-  verifyUser: async (req: Request, res: Response) => {},
+  verifyUser: async (req: Request, res: Response): Promise<void> => {
+    res.send({});
+  },
 
-  resetPassword: async (req: Request, res: Response) => {},
+  resetPassword: async (req: Request, res: Response): Promise<void> => {
+    res.send({});
+  },
 };
 
 export default userControler;

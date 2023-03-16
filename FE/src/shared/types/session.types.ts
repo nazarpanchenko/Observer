@@ -1,4 +1,3 @@
-
 import { sessionEnums } from '../enums/index';
 
 type SessionData = {
@@ -12,6 +11,4 @@ type SessionData = {
   sessionEndDate: Date;
 };
 
-export {
-  SessionData,
-};
+export { SessionData };

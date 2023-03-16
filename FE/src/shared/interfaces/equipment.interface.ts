@@ -1,3 +1,0 @@
-interface IEquipment {}
-
-export { IEquipment };

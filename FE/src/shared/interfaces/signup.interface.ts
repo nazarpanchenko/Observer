@@ -1,3 +1,0 @@
-interface ISignup {}
-
-export { ISignup };

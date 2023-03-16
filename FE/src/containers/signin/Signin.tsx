@@ -1,13 +1,6 @@
 import React, { ReactElement, useState } from 'react';
 import { Link } from 'react-router-dom';
-import {
-  Grid,
-  Typography,
-  FormControl,
-  InputLabel,
-  Input,
-  Button,
-} from '@mui/material';
+import { Grid, Typography, FormControl, InputLabel, Input, Button } from '@mui/material';
 
 import { authService } from '../../services';
 import { userTypes } from '../../shared/types';

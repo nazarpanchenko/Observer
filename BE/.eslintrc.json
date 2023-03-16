@@ -12,9 +12,10 @@
   "plugins": ["@typescript-eslint"],
   "extends": [
     "eslint:recommended",
-    "prettier/recommended",
+    "prettier/prettier",
     "plugin:@typescript-eslint/recommended"
   ],
+  "ignorePatterns": ["/build"],
   "rules": {
     "no-console": "warn",
     "no-multiple-empty-lines": "warn",

@@ -1,36 +1,34 @@
 'use strict';
 
-module.exports = {
-  async up(queryInterface, Sequelize) {
-    await queryInterface.createTable(
-      'user_tokens',
-      {
-        id: {
-          primaryKey: true,
-          autoIncrement: true,
-          type: Sequelize.INTEGER,
-        },
-        userId: {
-          type: Sequelize.INTEGER,
-          allowNull: false,
-          references: {
-            model: 'User',
-            key: 'id',
-          },
-          onDelete: 'CASCADE',
-        },
-        refreshToken: {
-          type: Sequelize.TEXT,
-          allowNull: false,
-        },
+export async function up(queryInterface, Sequelize) {
+  await queryInterface.createTable(
+    'user_tokens',
+    {
+      id: {
+        primaryKey: true,
+        autoIncrement: true,
+        type: Sequelize.INTEGER,
       },
-      {
-        timestamps: true,
-      }
-    );
-  },
+      userId: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: {
+          model: 'User',
+          key: 'id',
+        },
+        onDelete: 'CASCADE',
+      },
+      refreshToken: {
+        type: Sequelize.TEXT,
+        allowNull: false,
+      },
+    },
+    {
+      timestamps: true,
+    }
+  );
+}
 
-  async down(queryInterface) {
-    await queryInterface.dropTable('user_tokens', null);
-  },
-};
+export async function down(queryInterface) {
+  await queryInterface.dropTable('user_tokens', null);
+}

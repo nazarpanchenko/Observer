@@ -6,7 +6,7 @@ import { eyepieceEnums } from '../../shared/enums';
 import { eyepieceTypes } from '../../shared/types';
 import { containsChar } from '../../utils';
 
-interface EyepieceAttributes extends eyepieceTypes.EyepieceData {}
+type EyepieceAttributes = eyepieceTypes.EyepieceData;
 
 const eyepieceModel = (sequelize: any, DataTypes: any) => {
   class Eyepiece extends Model<EyepieceAttributes> implements EyepieceAttributes {

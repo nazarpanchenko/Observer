@@ -4,7 +4,7 @@ import { Model } from 'sequelize';
 
 import { userTypes } from '../../shared/types';
 
-interface UserAttributes extends userTypes.UserModel {}
+type UserAttributes = userTypes.UserData;
 
 const userModel = (sequelize: any, DataTypes: any) => {
   class User extends Model<UserAttributes> implements UserAttributes {
@@ -27,35 +27,44 @@ const userModel = (sequelize: any, DataTypes: any) => {
           field: 'userId',
           allowNull: false,
         },
-        onDelete: 'CASCADE'
+        onDelete: 'CASCADE',
       });
       this.hasMany(models.Session, {
         foreignKey: {
           field: 'sessionId',
           allowNull: false,
         },
-        onDelete: 'CASCADE'
+        onDelete: 'CASCADE',
       });
     }
 
-    static async getUser(field: string, value: string) {
-      const userData = await User.findOne({
+    static async getUser(
+      field: string,
+      value: string
+    ): Promise<userTypes.UserData | null> {
+      const userData: userTypes.UserData | null = await User.findOne({
         where: { [field]: value },
         attributes: ['id', 'email'],
       });
       return userData;
     }
 
-    static async signup(params: userTypes.CreateUser) {
-      const userData = await User.create(params);
+    static async signup(params: userTypes.CreateUser): Promise<userTypes.UserData> {
+      const userData: userTypes.UserData = await User.create(params);
       return userData;
     }
 
-    static async signin() {}
+    static async signin() {
+      return {};
+    }
 
-    static async logout() {}
+    static async logout() {
+      return {};
+    }
 
-    static async verifyUser() {}
+    static async verifyUser() {
+      return {};
+    }
   }
 
   User.init(

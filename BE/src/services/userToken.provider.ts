@@ -22,7 +22,7 @@ class UserTokenProvider {
     };
   }
 
-  async create(userId: number, refreshToken: string) {
+  async create(userId: number, refreshToken: string): Promise<userTokenTypes.UserToken> {
     const storedToken: userTokenTypes.UserToken | null = await db.UserToken.getToken(
       userId
     );

@@ -1,4 +1,3 @@
-import { Model } from 'sequelize';
 import { telescopeEnums } from '../enums';
 
 type ReportData = {
@@ -12,22 +11,30 @@ type ReportData = {
   observationEndDate: Date;
 };
 
-type ReportModel = Model<ReportData>;
+type ReportsList = {
+  data: ReportData[];
+  count: number;
+};
 
-type ModifyReportData = {
+type ReportsListTuple = [ReportData[], number];
+
+type ModifyReportParams = {
   eyepiece: string;
   magnification: string;
   filter: string;
 };
 
-type ReportsList = {
-  data: Model<ReportModel>[];
-  count: number;
-};
+type SequelizeUpdateReportResponse = [affectedCount: number, affectedRows: ReportData[]];
 
+type ModifiedReportData = {
+  updatedRowsCount: number;
+  updatedRecord: ReportData;
+};
 export {
   ReportData,
-  ReportModel,
-  ModifyReportData,
   ReportsList,
+  ReportsListTuple,
+  ModifyReportParams,
+  SequelizeUpdateReportResponse,
+  ModifiedReportData,
 };

@@ -19,8 +19,4 @@ type SessionsList = {
   count: number;
 };
 
-export {
-  SessionData,
-  SessionModel,
-  SessionsList,
-};
+export { SessionData, SessionModel, SessionsList };

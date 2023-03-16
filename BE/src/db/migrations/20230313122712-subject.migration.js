@@ -1,46 +1,44 @@
 'use strict';
 
-const { subjectTypes } = require('../consts');
+import { subjectTypes } from '../consts';
 
-module.exports = {
-  async up(queryInterface, Sequelize) {
-    await queryInterface.createTable(
-      'subjects',
-      {
-        id: {
-          primaryKey: true,
-          autoIncrement: true,
-          type: Sequelize.INTEGER,
+export async function up(queryInterface, Sequelize) {
+  await queryInterface.createTable(
+    'subjects',
+    {
+      id: {
+        primaryKey: true,
+        autoIncrement: true,
+        type: Sequelize.INTEGER,
+      },
+      reportId: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: {
+          model: 'Report',
+          key: 'id',
         },
-        reportId: {
-          type: Sequelize.INTEGER,
-          allowNull: false,
-          references: {
-            model: 'Report',
-            key: 'id',
-          },
-          onDelete: 'CASCADE',
-        },
-        category: {
-          type: Sequelize.STRING,
-          allowNull: false,
-          validate: {
-            isIn: {
-              args: [subjectTypes],
-              msg: `category field's value must be one of the following: ${Object.values(
-                subjectTypes
-              ).join(', ')}`,
-            },
+        onDelete: 'CASCADE',
+      },
+      category: {
+        type: Sequelize.STRING,
+        allowNull: false,
+        validate: {
+          isIn: {
+            args: [subjectTypes],
+            msg: `category field's value must be one of the following: ${Object.values(
+              subjectTypes
+            ).join(', ')}`,
           },
         },
       },
-      {
-        timestamps: true,
-      }
-    );
-  },
+    },
+    {
+      timestamps: true,
+    }
+  );
+}
 
-  async down(queryInterface) {
-    await queryInterface.dropTable('subjects', { cascade: true });
-  },
-};
+export async function down(queryInterface) {
+  await queryInterface.dropTable('subjects', { cascade: true });
+}

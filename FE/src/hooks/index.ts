@@ -1,3 +1,3 @@
-import useLoader from "./useLoader";
+import useLoader from './useLoader';
 
 export { useLoader };

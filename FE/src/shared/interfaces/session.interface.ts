@@ -1,3 +1,0 @@
-interface ISession {}
-
-export { ISession };
