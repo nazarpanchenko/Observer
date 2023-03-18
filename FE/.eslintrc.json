@@ -19,7 +19,7 @@
     "prettier/prettier",
     "plugin:@typescript-eslint/recommended"
   ],
-  "ignorePatterns": ["build", "webpack.config.js"],
+  "ignorePatterns": ["build", "*.config.js"],
   "rules": {
     "no-multiple-empty-lines": "warn",
     "no-restricted-syntax": [

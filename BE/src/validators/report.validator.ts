@@ -1,10 +1,11 @@
 import { param, query, body } from 'express-validator';
 
 import {
-  telescopeEnums,
-  eyepieceEnums,
-  barlowLensEnums,
-  filterEnums,
+  TelescopeTypes,
+  EyepieceSchemas,
+  EyepieceDiameters,
+  BarlowLensSchemas,
+  FilterTypes,
 } from '../shared/enums';
 import { PAGINATION_CONFIG } from '../consts';
 import { getErrMsg } from '../utils/helpers';
@@ -22,10 +23,10 @@ const reportValidator = {
   create: [
     body('subject').isString().trim().notEmpty(),
     body('telescopeModel').isString().trim().notEmpty(),
-    body('telescopeType').isIn(Object.values(telescopeEnums.TelescopeTypes)),
+    body('telescopeType').isIn(Object.values(TelescopeTypes)),
     body('telescopeDiameter').isInt().isLength({ min: 2 }),
     body('eyepieceManufacturer').isString().trim().notEmpty(),
-    body('eyepieceOpticalSchema').isIn(Object.values(eyepieceEnums.EyepieceSchemas)),
+    body('eyepieceOpticalSchema').isIn(Object.values(EyepieceSchemas)),
 
     body('eyepieceModel').isString().trim().notEmpty(),
     body('eyepieceFocus')
@@ -44,7 +45,7 @@ const reportValidator = {
       .isLength({ min: 4, max: 5 })
       .contains("'")
       .withMessage(getErrMsg('eyepieceFocus', "'")),
-    body('eyepieceSizeSchema').isIn(Object.values(eyepieceEnums.EyepieceDiameters)),
+    body('eyepieceSizeSchema').isIn(Object.values(EyepieceDiameters)),
 
     body('eyepiecePupilScrew')
       .isString()
@@ -54,9 +55,9 @@ const reportValidator = {
     body('barlowLensManufacturer').isString().trim().notEmpty().optional(),
 
     body('barlowLensSchema')
-      .isIn(Object.values(barlowLensEnums.BarlowLensSchemas))
+      .isIn(Object.values(BarlowLensSchemas))
       .optional(),
-    body('filterType').isString().isIn(Object.values(filterEnums.FilterTypes)).optional(),
+    body('filterType').isString().isIn(Object.values(FilterTypes)).optional(),
 
     body('filter').isString().optional(),
     body('observationRealDurationMin').isInt(),

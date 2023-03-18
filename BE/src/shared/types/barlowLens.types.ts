@@ -6,4 +6,4 @@ type BarlowLensData = {
   barlowLensSchema?: BarlowLensSchema;
 };
 
-export { BarlowLensData, BarlowLensSchema };
+export { BarlowLensSchema, BarlowLensData };

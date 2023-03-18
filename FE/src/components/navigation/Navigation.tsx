@@ -40,7 +40,7 @@ const navList: NavList = [
 ];
 
 const Navigation: React.FC = (): ReactElement => {
-  // const theme = useTheme();
+  const theme = useTheme();
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
   const toggleDrawer =
@@ -76,14 +76,14 @@ const Navigation: React.FC = (): ReactElement => {
       </Grid>
 
       <Drawer anchor="left" open={isOpen} onClose={toggleDrawer(false)}>
-        {/* <Box
+        <Box
           sx={{
             width: 250,
             flexGrow: 1,
             p: 2,
-            backgroundColor: theme.bg.danger,
+            backgroundColor: theme.bg.info,
             color: theme.text.color.danger,
-          }}> */}
+          }}>
         <Box
           sx={{
             width: 250,

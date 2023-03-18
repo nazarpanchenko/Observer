@@ -2,18 +2,26 @@
 
 import { Model } from 'sequelize';
 
-import { telescopeEnums } from '../../shared/enums';
-import { globalTypes, reportTypes } from '../../shared/types';
+import { TelescopeTypes } from '../../shared/enums';
+import {
+  PaginationConfig,
+  ReportData,
+  ReportsList,
+  ReportsListTuple,
+  ModifyReportParams,
+  ModifiedReportData,
+  SequelizeUpdateReportResponse,
+  SequelizeDeleteResponse,
+} from '../../shared/types';
+
 import { PAGINATION_CONFIG } from '../../consts';
 import { containsChar } from '../../utils';
 
-type ReportAttributes = reportTypes.ReportData;
-
 const reportModel = (sequelize: any, DataTypes: any) => {
-  class Report extends Model<ReportAttributes> implements ReportAttributes {
+  class Report extends Model<ReportData> implements ReportData {
     id?: number;
     subject!: string;
-    telescopeType!: telescopeEnums.TelescopeTypes;
+    telescopeType!: TelescopeTypes;
     magnification!: string;
     observationRealDurationMin!: number;
     observationVirtualDurationMin!: number;
@@ -33,7 +41,7 @@ const reportModel = (sequelize: any, DataTypes: any) => {
         },
         onDelete: 'CASCADE',
       });
-      this.hasMany(models.Subject, {
+      this.hasOne(models.Subject, {
         foreignKey: {
           field: 'reportId',
           allowNull: false,
@@ -70,15 +78,13 @@ const reportModel = (sequelize: any, DataTypes: any) => {
       });
     }
 
-    static async getReports(
-      query: globalTypes.PaginationConfig
-    ): Promise<reportTypes.ReportsList> {
+    static async getReports(query: PaginationConfig): Promise<ReportsList> {
       const {
         page = PAGINATION_CONFIG.DEFAULT_OFFSET,
         limit = PAGINATION_CONFIG.LIMIT.avg,
       } = query;
 
-      const [data, count]: reportTypes.ReportsListTuple = await Promise.all([
+      const [data, count]: ReportsListTuple = await Promise.all([
         this.findAll({
           offset: page,
           order: [['id', 'DESC']],
@@ -89,21 +95,21 @@ const reportModel = (sequelize: any, DataTypes: any) => {
       return { data, count };
     }
 
-    static async getOne(id: number): Promise<reportTypes.ReportData | null> {
+    static async getOne(id: number): Promise<ReportData | null> {
       const data = await this.findOne({ where: { id } });
       return data;
     }
 
-    static async save(data: reportTypes.ReportData): Promise<reportTypes.ReportData> {
+    static async save(data: ReportData): Promise<ReportData> {
       const _data = await this.create(data);
       return _data;
     }
 
     static async modify(
       id: number,
-      data: reportTypes.ModifyReportParams
-    ): Promise<reportTypes.ModifiedReportData> {
-      const [affectedCount, affectedRows]: reportTypes.SequelizeUpdateReportResponse =
+      data: ModifyReportParams
+    ): Promise<ModifiedReportData> {
+      const [affectedCount, affectedRows]: SequelizeUpdateReportResponse =
         await this.update(
           { ...data },
           {
@@ -114,7 +120,7 @@ const reportModel = (sequelize: any, DataTypes: any) => {
       return { updatedRowsCount: affectedCount, updatedRecord: { ...affectedRows[0] } };
     }
 
-    static async delete(id: number): Promise<globalTypes.SequelizeDeleteResponse> {
+    static async delete(id: number): Promise<SequelizeDeleteResponse> {
       const deletedRowsCount: number = await this.destroy({
         where: { id },
       });
@@ -127,7 +133,7 @@ const reportModel = (sequelize: any, DataTypes: any) => {
       id: {
         primaryKey: true,
         autoIncrement: true,
-        type: DataTypes.INTEGER,
+        type: DataTypes.BIGINT(11),
       },
       subject: {
         type: DataTypes.STRING(50),
@@ -138,9 +144,9 @@ const reportModel = (sequelize: any, DataTypes: any) => {
         allowNull: false,
         validate: {
           isIn: {
-            args: [Object.values(telescopeEnums.TelescopeTypes)],
+            args: [Object.values(TelescopeTypes)],
             msg: `telescopeType field's value must be one of the following: ${Object.values(
-              telescopeEnums.TelescopeTypes
+              TelescopeTypes
             ).join(', ')}`,
           },
         },

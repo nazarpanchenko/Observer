@@ -3,11 +3,11 @@ import { Link } from 'react-router-dom';
 import { Grid, Typography, FormControl, InputLabel, Input, Button } from '@mui/material';
 
 import { authService } from '../../services';
-import { userTypes } from '../../shared/types';
+import { UserCredentials } from '../../shared/types';
 import './index.scss';
 
 const Signin: React.FC = (): ReactElement => {
-  const [formData, setFormData] = useState<userTypes.UserCredentials>({
+  const [formData, setFormData] = useState<UserCredentials>({
     email: '',
     password: '',
   });

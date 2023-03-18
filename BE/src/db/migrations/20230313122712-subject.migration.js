@@ -9,10 +9,10 @@ export async function up(queryInterface, Sequelize) {
       id: {
         primaryKey: true,
         autoIncrement: true,
-        type: Sequelize.INTEGER,
+        type: Sequelize.BIGINT(11),
       },
       reportId: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.BIGINT(11),
         allowNull: false,
         references: {
           model: 'Report',
@@ -31,6 +31,34 @@ export async function up(queryInterface, Sequelize) {
             ).join(', ')}`,
           },
         },
+      },
+      magnitude: {
+        type: Sequelize.FLOAT(3, 2),
+        allowNull: false,
+      },
+      apparentSize: {
+        type: Sequelize.FLOAT(3, 2),
+        defaultValue: 0.0,
+      },
+      semiMajorAxis: {
+        type: Sequelize.FLOAT(3, 2),
+        defaultValue: 0.0,
+      },
+      axialTilt: {
+        type: Sequelize.FLOAT(3, 2),
+        defaultValue: 0.0,
+      },
+      ecccentricity: {
+        type: Sequelize.FLOAT(3, 2),
+        defaultValue: 0.0,
+      },
+      inclination: {
+        type: Sequelize.FLOAT(3, 2),
+        defaultValue: 0.0,
+      },
+      rotation: {
+        type: Sequelize.FLOAT(3, 2),
+        defaultValue: 0.0,
       },
     },
     {

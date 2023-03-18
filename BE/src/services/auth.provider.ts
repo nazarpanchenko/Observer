@@ -2,25 +2,25 @@ import bcrypt from 'bcrypt';
 import { v4 as uuidv4 } from 'uuid';
 
 import conf from '../conf.json';
-import { userTypes, userTokenTypes } from '../shared/types';
+import { UserDtoData, UserData, JwtToken } from '../shared/types';
 import db from '../db';
 import { mailProvider, userTokenProvider } from '.';
 import { UserDTO } from '../dto';
 
 class AuthProvider {
-  async signup(params: userTypes.UserData): Promise<userTypes.UserDTO> {
+  async signup(params: UserData): Promise<UserDtoData> {
     const passwordHash = await bcrypt.hash(params.password, conf.jwt.salt_rounds);
     const verificationLink = uuidv4();
 
-    const storedUser: userTypes.UserData = await db.User.signup({
+    const storedUser: UserData = await db.User.signup({
       ...params,
       password: passwordHash,
     });
-    const tokens: userTokenTypes.JwtToken = userTokenProvider.generateToken({
+    const tokens: JwtToken = userTokenProvider.generateToken({
       ...storedUser,
     });
 
-    const userDTO: userTypes.UserDTO = new UserDTO({
+    const userDTO: UserDTO = new UserDTO({
       id: storedUser.id,
       firstName: storedUser.firstName,
       lastName: storedUser.lastName,

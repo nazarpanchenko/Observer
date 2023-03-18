@@ -1,6 +1,14 @@
-import * as globalTypes from './global.types';
-import * as userTypes from './user.types';
-import * as sessionTypes from './global.types';
-import * as reportTypes from './report.types';
+import { PaginationConfig } from './global.types';
+import { UserData, UserCredentials, RegisteredUser } from './user.types';
+import { SessionData } from './session.types';
+import { ReportData, ReportsList } from './report.types';
 
-export { globalTypes, userTypes, sessionTypes, reportTypes };
+export {
+  PaginationConfig,
+  UserData,
+  UserCredentials,
+  RegisteredUser,
+  SessionData,
+  ReportData,
+  ReportsList,
+};

@@ -2,15 +2,13 @@
 
 import { Model } from 'sequelize';
 
-import { telescopeEnums } from '../../shared/enums';
-import { telescopeTypes } from '../../shared/types';
-
-type TelescopeAttributes = telescopeTypes.TelescopeData;
+import { TelescopeTypes } from '../../shared/enums';
+import { TelescopeData } from '../../shared/types';
 
 const telescopeModel = (sequelize: any, DataTypes: any) => {
-  class Telescope extends Model<TelescopeAttributes> implements TelescopeAttributes {
+  class Telescope extends Model<TelescopeData> implements TelescopeData {
     id?: number;
-    telescopeType!: telescopeEnums.TelescopeTypes;
+    telescopeType!: TelescopeTypes;
     telescopeModel!: string;
     telescopeDiameterMm!: number;
 
@@ -35,16 +33,16 @@ const telescopeModel = (sequelize: any, DataTypes: any) => {
       id: {
         primaryKey: true,
         autoIncrement: true,
-        type: DataTypes.INTEGER,
+        type: DataTypes.BIGINT(11),
       },
       telescopeType: {
         type: DataTypes.STRING,
         allowNull: false,
         validate: {
           isIn: {
-            args: [Object.values(telescopeEnums.TelescopeTypes)],
+            args: [Object.values(TelescopeTypes)],
             msg: `telescopeType field's value must be one of the following: ${Object.values(
-              telescopeEnums.TelescopeTypes
+              TelescopeTypes
             ).join(', ')}`,
           },
         },

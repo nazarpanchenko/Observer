@@ -1,44 +1,44 @@
 import express from 'express';
 
-import { authControler } from '../controllers';
+import { authController } from '../controllers';
 import { handleBadRequest } from '../middlewares';
 import { authValidator } from '../validators';
 
-const userRouter = express.Router();
+const authRouter = express.Router();
 
-userRouter.post(
+authRouter.post(
   '/signup',
   authValidator.signup,
   handleBadRequest(),
-  authControler.signup
+  authController.signup
 );
 
-userRouter.post(
+authRouter.post(
   '/signin',
   authValidator.signin,
   handleBadRequest(),
-  authControler.signin
+  authController.signin
 );
 
-userRouter.post(
+authRouter.post(
   '/logout',
   authValidator.logout,
   handleBadRequest(),
-  authControler.logout
+  authController.logout
 );
 
-userRouter.post(
+authRouter.post(
   '/verify-user/:link',
   authValidator.verifyUser,
   handleBadRequest(),
-  authControler.verifyUser
+  authController.verifyUser
 );
 
-userRouter.post(
+authRouter.post(
   '/reset-password',
   authValidator.resetPassword,
   handleBadRequest(),
-  authControler.resetPassword
+  authController.resetPassword
 );
 
-export default userRouter;
+export default authRouter;

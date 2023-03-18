@@ -7,7 +7,7 @@ export async function up(queryInterface, Sequelize) {
       id: {
         primaryKey: true,
         autoIncrement: true,
-        type: Sequelize.INTEGER,
+        type: Sequelize.BIGINT(11),
       },
       firstName: {
         type: Sequelize.STRING(20),

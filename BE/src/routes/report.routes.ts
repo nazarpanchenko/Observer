@@ -1,6 +1,6 @@
 import express from 'express';
 
-import { reportControler } from '../controllers';
+import { reportController } from '../controllers';
 import { handleBadRequest } from '../middlewares';
 import { reportValidator } from '../validators';
 
@@ -10,35 +10,35 @@ reportRouter.get(
   '/reports',
   reportValidator.list,
   handleBadRequest(),
-  reportControler.list
+  reportController.list
 );
 
 reportRouter.get(
   '/reports/:id',
   reportValidator.getOne,
   handleBadRequest(),
-  reportControler.getOne
+  reportController.getOne
 );
 
 reportRouter.post(
   '/reports',
   reportValidator.create,
   handleBadRequest(),
-  reportControler.create
+  reportController.create
 );
 
 reportRouter.put(
   '/reports/:id',
   reportValidator.update,
   handleBadRequest(),
-  reportControler.update
+  reportController.update
 );
 
 reportRouter.delete(
   '/reports/:id',
   reportValidator.delete,
   handleBadRequest(),
-  reportControler.delete
+  reportController.delete
 );
 
 export default reportRouter;

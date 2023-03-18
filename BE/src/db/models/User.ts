@@ -2,12 +2,11 @@
 
 import { Model } from 'sequelize';
 
-import { userTypes } from '../../shared/types';
-
-type UserAttributes = userTypes.UserData;
+import db from '..';
+import { UserData, CreateUser } from '../../shared/types';
 
 const userModel = (sequelize: any, DataTypes: any) => {
-  class User extends Model<UserAttributes> implements UserAttributes {
+  class User extends Model<UserData> implements UserData {
     id!: number;
     firstName!: string;
     lastName!: string;
@@ -38,19 +37,17 @@ const userModel = (sequelize: any, DataTypes: any) => {
       });
     }
 
-    static async getUser(
-      field: string,
-      value: string
-    ): Promise<userTypes.UserData | null> {
-      const userData: userTypes.UserData | null = await User.findOne({
-        where: { [field]: value },
-        attributes: ['id', 'email'],
+    static async getUser(query: object): Promise<UserData | null> {
+      const userData: UserData | null = await User.findOne({
+        where: { ...query },
+        attributes: ['id'],
+        include: db.Session,
       });
       return userData;
     }
 
-    static async signup(params: userTypes.CreateUser): Promise<userTypes.UserData> {
-      const userData: userTypes.UserData = await User.create(params);
+    static async signup(params: CreateUser): Promise<UserData> {
+      const userData: UserData = await User.create(params);
       return userData;
     }
 
@@ -72,7 +69,7 @@ const userModel = (sequelize: any, DataTypes: any) => {
       id: {
         primaryKey: true,
         autoIncrement: true,
-        type: DataTypes.INTEGER,
+        type: DataTypes.BIGINT(11),
       },
       email: {
         type: DataTypes.STRING(50),

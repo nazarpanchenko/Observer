@@ -4,9 +4,10 @@ import cors from 'cors';
 import morgan from 'morgan';
 
 import * as routers from './routes';
+import { logError } from './middlewares'
 import db, { createDB } from './db';
 import { logger } from './utils';
-import { dbTypes } from './shared/types';
+import { DbConf } from './shared/types';
 import { API_PREFIX } from './consts';
 
 const app = express();
@@ -17,12 +18,14 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(morgan(process.env.NODE_ENV !== 'production' ? 'dev' : 'combined'));
 
-app.use(API_PREFIX, routers.reportRouter);
-app.use(`${API_PREFIX}/auth`, routers.userRouter);
+app.use(`${API_PREFIX}/auth`, routers.authRouter);
 app.use(`${API_PREFIX}/token`, routers.userTokenRouter);
+app.use(API_PREFIX, routers.reportRouter);
 
-app.get('/health', (req: Request, res: Response) => {
-  res.status(200).send('Application server is operational');
+app.use(logError);
+
+app.get('/health', (req: Request, res: Response): void => {
+  res.send('Application server is operational');
 });
 
 process.on('uncaughtException', err => {
@@ -35,7 +38,7 @@ process.on('unhandledRejection', err => {
   process.exit(1);
 });
 
-const startServer = (dbConf: dbTypes.DbConf) => {
+const startServer = (dbConf: DbConf): void => {
   const PORT = process.env.PORT || 9000;
 
   try {

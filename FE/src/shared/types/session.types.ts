@@ -1,8 +1,8 @@
-import { sessionEnums } from '../enums/index';
+import { SessionCategories } from '../enums/index';
 
 type SessionData = {
   id?: number;
-  category: sessionEnums.SessionCategories;
+  category: SessionCategories;
   userId: number;
   reportsCount: number;
   sessionRealDurationMin: number;

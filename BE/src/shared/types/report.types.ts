@@ -1,8 +1,8 @@
-import { telescopeEnums } from '../enums';
+import { TelescopeTypes } from '../enums';
 
 type ReportData = {
   id?: number;
-  telescopeType: telescopeEnums.TelescopeTypes;
+  telescopeType: TelescopeTypes;
   subject: string;
   magnification: string;
   observationRealDurationMin: number;
@@ -30,6 +30,7 @@ type ModifiedReportData = {
   updatedRowsCount: number;
   updatedRecord: ReportData;
 };
+
 export {
   ReportData,
   ReportsList,

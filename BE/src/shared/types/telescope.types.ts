@@ -1,8 +1,8 @@
-import { telescopeEnums } from '../enums';
+import { TelescopeTypes } from '../enums';
 
 type TelescopeData = {
   id?: number;
-  telescopeType: telescopeEnums.TelescopeTypes;
+  telescopeType: TelescopeTypes;
   telescopeModel: string;
   telescopeDiameterMm: number;
 };

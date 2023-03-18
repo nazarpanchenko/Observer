@@ -105,7 +105,7 @@ export async function up(queryInterface) {
       {
         sessionId: 8,
         subject: 'M44',
-        telescopeType: telescopeTypes.CASSEGRAIN,
+        telescopeType: telescopeTypes.REFLECTOR,
         magnification: '41X',
         observationRealDurationMin: 31,
         observationVirtualDurationMin: 31,
@@ -141,7 +141,7 @@ export async function up(queryInterface) {
       {
         sessionId: 9,
         subject: 'M44',
-        telescopeType: telescopeTypes.REFLECTOR,
+        telescopeType: telescopeTypes.CASSEGRAIN,
         magnification: '41X',
         observationRealDurationMin: 45,
         observationVirtualDurationMin: 43,
@@ -176,7 +176,7 @@ export async function up(queryInterface) {
       },
       {
         sessionId: 9,
-        subject: 'NGC 469',
+        subject: 'NGC 457',
         telescopeType: telescopeTypes.REFLECTOR,
         magnification: '41X',
         observationRealDurationMin: 13,
@@ -237,7 +237,7 @@ export async function up(queryInterface) {
       {
         sessionId: 9,
         subject: 'Caldwell 14',
-        telescopeType: telescopeTypes.REFLECTOR,
+        telescopeType: telescopeTypes.CASSEGRAIN,
         magnification: '41X',
         observationRealDurationMin: 28,
         observationVirtualDurationMin: 28,

@@ -12,10 +12,10 @@ export async function up(queryInterface, Sequelize) {
       id: {
         primaryKey: true,
         autoIncrement: true,
-        type: Sequelize.INTEGER,
+        type: Sequelize.BIGINT(11),
       },
       sessionId: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.BIGINT(11),
         allowNull: false,
         references: {
           model: 'Session',

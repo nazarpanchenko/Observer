@@ -3,10 +3,10 @@ import AES from 'crypto-js/aes';
 
 import conf from '../conf.json';
 import db from '../db';
-import { userTypes, userTokenTypes } from '../shared/types';
+import { UserData, JwtToken, UserTokenData } from '../shared/types';
 
 class UserTokenProvider {
-  generateToken(payload: userTypes.UserModel): userTokenTypes.JwtToken {
+  generateToken(payload: UserData): JwtToken {
     const { JWT_ACCESS_SECRET = '', JWT_REFRESH_SECRET = '' } = process.env;
 
     const accessSecret = AES.encrypt(JWT_ACCESS_SECRET, String(payload.id)).toString();
@@ -22,21 +22,17 @@ class UserTokenProvider {
     };
   }
 
-  async create(userId: number, refreshToken: string): Promise<userTokenTypes.UserToken> {
-    const storedToken: userTokenTypes.UserToken | null = await db.UserToken.getToken(
-      userId
-    );
+  async create(userId: number, refreshToken: string): Promise<UserTokenData> {
+    const storedToken: UserTokenData | null = await db.UserToken.getToken(userId);
     if (storedToken) {
-      const updatedToken: userTokenTypes.UserToken = await db.UserToken.updatedToken(
+      const updatedToken: UserTokenData = await db.UserToken.updatedToken(
         userId,
         refreshToken
       );
       return updatedToken;
     }
 
-    const createdToken: userTokenTypes.UserToken = await db.UserToken.saveToken(
-      refreshToken
-    );
+    const createdToken: UserTokenData = await db.UserToken.saveToken(refreshToken);
     return createdToken;
   }
 }

@@ -2,21 +2,19 @@
 
 import { Model } from 'sequelize';
 
-import { eyepieceEnums } from '../../shared/enums';
-import { eyepieceTypes } from '../../shared/types';
+import { EyepieceSchemas, EyepieceDiameters } from '../../shared/enums';
+import { EyepieceData } from '../../shared/types';
 import { containsChar } from '../../utils';
 
-type EyepieceAttributes = eyepieceTypes.EyepieceData;
-
 const eyepieceModel = (sequelize: any, DataTypes: any) => {
-  class Eyepiece extends Model<EyepieceAttributes> implements EyepieceAttributes {
+  class Eyepiece extends Model<EyepieceData> implements EyepieceData {
     id?: number;
     eyepieceManufacturer!: string;
     eyepieceModel!: string;
-    eyepieceSizeSchema!: eyepieceEnums.EyepieceDiameters;
+    eyepieceSizeSchema!: EyepieceDiameters;
     eyepieceFocus!: string;
     eyepieceFieldRange!: string;
-    eyepieceOpticalSchema!: eyepieceEnums.EyepieceSchemas;
+    eyepieceOpticalSchema!: EyepieceSchemas;
     eyepiecePupilScrew!: string;
 
     /**
@@ -40,7 +38,7 @@ const eyepieceModel = (sequelize: any, DataTypes: any) => {
       id: {
         primaryKey: true,
         autoIncrement: true,
-        type: DataTypes.INTEGER,
+        type: DataTypes.BIGINT(11),
       },
       eyepieceManufacturer: {
         type: DataTypes.STRING(50),
@@ -55,9 +53,9 @@ const eyepieceModel = (sequelize: any, DataTypes: any) => {
         allowNull: false,
         validate: {
           isIn: {
-            args: [Object.values(eyepieceEnums.EyepieceSchemas)],
+            args: [Object.values(EyepieceSchemas)],
             msg: `eyepieceSizeSchema field's value must be one of the following: ${Object.values(
-              eyepieceEnums.EyepieceSchemas
+              EyepieceSchemas
             ).join(', ')}`,
           },
         },
@@ -81,9 +79,9 @@ const eyepieceModel = (sequelize: any, DataTypes: any) => {
         allowNull: false,
         validate: {
           isIn: {
-            args: [Object.values(eyepieceEnums.EyepieceSchemas)],
+            args: [Object.values(EyepieceSchemas)],
             msg: `eyepieceOpticalSchema field's value must be one of the following: ${Object.values(
-              eyepieceEnums.EyepieceSchemas
+              EyepieceSchemas
             ).join(', ')}`,
           },
         },

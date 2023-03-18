@@ -2,12 +2,10 @@
 
 import { Model } from 'sequelize';
 
-import { userTokenTypes } from '../../shared/types';
-
-type UserTokenAttributes = userTokenTypes.UserToken;
+import { UserTokenData, UserTokenTuple } from '../../shared/types';
 
 const userTokenModel = (sequelize: any, DataTypes: any) => {
-  class UserToken extends Model<UserTokenAttributes> implements UserTokenAttributes {
+  class UserToken extends Model<UserTokenData> implements UserTokenData {
     id?: number;
     userId?: number;
     refreshToken!: string;
@@ -27,8 +25,8 @@ const userTokenModel = (sequelize: any, DataTypes: any) => {
       });
     }
 
-    static async getToken(userId: string): Promise<userTokenTypes.UserToken | null> {
-      const storedToken: userTokenTypes.UserToken | null = await UserToken.findOne({
+    static async getToken(userId: string): Promise<UserTokenData | null> {
+      const storedToken: UserTokenData | null = await UserToken.findOne({
         where: { userId },
         attributes: ['id'],
       });
@@ -38,8 +36,8 @@ const userTokenModel = (sequelize: any, DataTypes: any) => {
     static async saveToken(
       userId: number,
       refreshToken: string
-    ): Promise<userTokenTypes.UserToken> {
-      const createdToken: userTokenTypes.UserToken = await UserToken.create({
+    ): Promise<UserTokenData> {
+      const createdToken: UserTokenData = await UserToken.create({
         userId,
         refreshToken,
       });
@@ -49,8 +47,8 @@ const userTokenModel = (sequelize: any, DataTypes: any) => {
     static async updateToken(
       userId: number,
       refreshToken: string
-    ): Promise<userTokenTypes.UserToken> {
-      const [affectedCount, affectedRows]: userTokenTypes.UserTokenTuple =
+    ): Promise<UserTokenData> {
+      const [affectedCount, affectedRows]: UserTokenTuple =
         await UserToken.update(
           { refreshToken },
           {
@@ -67,7 +65,7 @@ const userTokenModel = (sequelize: any, DataTypes: any) => {
       id: {
         primaryKey: true,
         autoIncrement: true,
-        type: DataTypes.INTEGER,
+        type: DataTypes.BIGINT(11),
       },
       refreshToken: {
         type: DataTypes.TEXT,

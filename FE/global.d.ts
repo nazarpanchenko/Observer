@@ -1,23 +1,10 @@
-declare module '*.woff';
-declare module '*.woff2';
-declare module '*.eot';
-declare module '*.otf';
-declare module '*.ttf';
 declare module '*.jpg';
 declare module '*.jpeg';
 declare module '*.png';
-declare module '*.gif';
-
-declare module '*.svg' {
-  import React from 'react';
-
-  const SVG: React.FC<React.SVGProps<SVGSVGElement>>;
-  export default SVG;
-}
 
 declare module '@mui/material/styles' {
   interface Theme {
-    flexOptions: {
+    flex: {
       display: {
         flex: string;
         inlineFlex: string;
@@ -35,13 +22,13 @@ declare module '@mui/material/styles' {
         center: string;
       };
     };
-    bgOptions: {
+    bg: {
       info: string;
       success: string;
       warning: string;
       danger: string;
     };
-    textOptions: {
+    text: {
       color: {
         info: string;
         success: string;
@@ -51,7 +38,7 @@ declare module '@mui/material/styles' {
     };
   }
   interface ThemeOptions {
-    flexOptions?: {
+    flex?: {
       display: {
         flex: string;
         inlineFlex: string;
@@ -69,13 +56,13 @@ declare module '@mui/material/styles' {
         center: string;
       };
     };
-    bgOptions?: {
+    bg?: {
       info?: string;
       success?: string;
       warning?: string;
       danger?: string;
     };
-    textOptions?: {
+    text?: {
       info?: string;
       success?: string;
       warning?: string;

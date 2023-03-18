@@ -1,10 +1,10 @@
 import { Model } from 'sequelize';
 
-import { sessionEnums } from '../enums';
+import { SessionCategories } from '../enums';
 
 type SessionData = {
   id?: number;
-  category: sessionEnums.SessionCategories;
+  category: SessionCategories;
   reportsCount: number;
   sessionRealDurationMin: number;
   sessionVirtualDurationMin: number;

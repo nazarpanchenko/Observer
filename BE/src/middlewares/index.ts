@@ -1,3 +1,4 @@
 import handleBadRequest from './handleBadRequest';
+import logError from './errorLogger';
 
-export { handleBadRequest };
+export { handleBadRequest, logError };

@@ -2,16 +2,14 @@
 
 import { Model } from 'sequelize';
 
-import { barlowLensEnums } from '../../shared/enums';
-import { barlowLensTypes } from '../../shared/types';
-
-type BarlowLensAttributes = barlowLensTypes.BarlowLensData;
+import { BarlowLensSchemas } from '../../shared/enums';
+import { BarlowLensSchema, BarlowLensData } from '../../shared/types';
 
 const barlowLensModel = (sequelize: any, DataTypes: any) => {
-  class BarlowLens extends Model<BarlowLensAttributes> implements BarlowLensAttributes {
+  class BarlowLens extends Model<BarlowLensData> implements BarlowLensData {
     id?: number;
     barlowLensManufacturer?: string;
-    barlowLensSchema?: barlowLensTypes.BarlowLensSchema;
+    barlowLensSchema?: BarlowLensSchema;
 
     /**
      * Helper method for defining associations.
@@ -34,15 +32,15 @@ const barlowLensModel = (sequelize: any, DataTypes: any) => {
       id: {
         primaryKey: true,
         autoIncrement: true,
-        type: DataTypes.INTEGER,
+        type: DataTypes.BIGINT(11),
       },
       barlowLensSchema: {
         type: DataTypes.STRING,
         validate: {
           isIn: {
-            args: [Object.values(barlowLensEnums.BarlowLensSchemas)],
+            args: [Object.values(BarlowLensSchemas)],
             msg: `barlowLensSchema field's value must be one of the following: ${Object.values(
-              barlowLensEnums.BarlowLensSchemas
+              BarlowLensSchemas
             ).join(', ')}`,
           },
         },

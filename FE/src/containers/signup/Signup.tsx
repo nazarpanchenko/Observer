@@ -11,11 +11,11 @@ import {
 } from '@mui/material';
 
 import { authService } from '../../services';
-import { userTypes } from '../../shared/types';
+import { UserData } from '../../shared/types';
 import './index.scss';
 
 const Signup: React.FC = (): ReactElement => {
-  const [formData, setFormData] = useState<userTypes.UserData>({
+  const [formData, setFormData] = useState<UserData>({
     firstName: '',
     lastName: '',
     email: '',
@@ -32,7 +32,7 @@ const Signup: React.FC = (): ReactElement => {
     if (name === 'repeatedPassword') {
       setRepeatedPassword(value);
     } else {
-      setFormData((prev: any) => ({
+      setFormData(prev => ({
         ...prev,
         [name]: value,
       }));

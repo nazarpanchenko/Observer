@@ -14,7 +14,7 @@ import {
   Paper,
 } from '@mui/material';
 
-import { reportTypes } from '../../shared/types';
+import { ReportsList, ReportData } from '../../shared/types';
 import './index.scss';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -38,7 +38,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 }));
 
 const Reports: React.FC = (): ReactElement => {
-  const reports = useLoaderData() as reportTypes.ReportsList;
+  const reports = useLoaderData() as ReportsList;
 
   return (
     <>
@@ -68,7 +68,7 @@ const Reports: React.FC = (): ReactElement => {
           </TableHead>
 
           <TableBody>
-            {reports.data.map((report: reportTypes.ReportData) => (
+            {reports.data.map((report: ReportData) => (
               <StyledTableRow key={report.id}>
                 <StyledTableCell component="th" scope="row" align="center">
                   {report.id}

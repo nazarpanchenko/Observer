@@ -1,13 +1,13 @@
-import { eyepieceEnums } from '../enums';
+import { EyepieceDiameters, EyepieceSchemas } from '../enums';
 
 type EyepieceData = {
   id?: number;
   eyepieceManufacturer: string;
-  eyepieceSizeSchema: eyepieceEnums.EyepieceDiameters;
+  eyepieceSizeSchema: EyepieceDiameters;
   eyepieceModel: string;
   eyepieceFocus: string;
   eyepieceFieldRange: string;
-  eyepieceOpticalSchema: eyepieceEnums.EyepieceSchemas;
+  eyepieceOpticalSchema: EyepieceSchemas;
   eyepiecePupilScrew: string;
 };
 

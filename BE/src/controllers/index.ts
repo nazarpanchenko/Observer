@@ -1,5 +1,5 @@
-import authControler from './auth.controllers';
-import userTokenControler from './userToken.controllers';
-import reportControler from './report.controllers';
+import authController from './auth.controller';
+import userTokenController from './userToken.controller';
+import reportController from './report.controller';
 
-export { authControler, userTokenControler, reportControler };
+export { authController, userTokenController, reportController };

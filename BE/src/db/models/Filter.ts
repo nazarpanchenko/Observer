@@ -2,16 +2,14 @@
 
 import { Model } from 'sequelize';
 
-import { filterEnums } from '../../shared/enums';
-import { filterTypes } from '../../shared/types';
-
-type FilterAttributes = filterTypes.FilterData
+import { FilterTypes } from '../../shared/enums';
+import { FilterData } from '../../shared/types';
 
 const filterModel = (sequelize: any, DataTypes: any) => {
-  class Filter extends Model<FilterAttributes> implements FilterAttributes {
+  class Filter extends Model<FilterData> implements FilterData {
     id?: number;
     filter?: string;
-    filterType?: filterEnums.FilterTypes;
+    filterType?: FilterTypes;
 
     /**
      * Helper method for defining associations.
@@ -34,15 +32,15 @@ const filterModel = (sequelize: any, DataTypes: any) => {
       id: {
         primaryKey: true,
         autoIncrement: true,
-        type: DataTypes.INTEGER,
+        type: DataTypes.BIGINT(11),
       },
       filterType: {
         type: DataTypes.STRING,
         validate: {
           isIn: {
-            args: [Object.values(filterEnums.FilterTypes)],
+            args: [Object.values(FilterTypes)],
             msg: `filterType field's value must be one of the following: ${Object.values(
-              filterEnums.FilterTypes
+              FilterTypes
             ).join(', ')}`,
           },
         },

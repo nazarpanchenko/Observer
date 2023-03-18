@@ -1,8 +1,8 @@
-import { filterEnums } from '../enums';
+import { FilterTypes } from '../enums';
 
 type FilterData = {
   id?: number;
-  filterType?: filterEnums.FilterTypes;
+  filterType?: FilterTypes;
   filter?: string;
 };
 

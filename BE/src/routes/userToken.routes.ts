@@ -1,6 +1,6 @@
 import express from 'express';
 
-import { userTokenControler } from '../controllers';
+import { userTokenController } from '../controllers';
 import { handleBadRequest } from '../middlewares';
 import { userTokenValidator } from '../validators';
 
@@ -10,7 +10,7 @@ userTokenRouter.post(
   '/refresh',
   userTokenValidator.create,
   handleBadRequest(),
-  userTokenControler.create
+  userTokenController.create
 );
 
 export default userTokenRouter;

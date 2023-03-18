@@ -1,6 +1,6 @@
-import * as sessionEnums from './session.enums';
-import * as telescopeEnums from './telescope.enums';
-import * as eyepieceEnums from './eyepiece.enums';
-import * as filterEnums from './filter.enums';
+import { SessionCategories } from './session.enums';
+import { TelescopeTypes } from './telescope.enums';
+import { EyepieceSchemas } from './eyepiece.enums';
+import { FilterTypes } from './filter.enums';
 
-export { sessionEnums, telescopeEnums, eyepieceEnums, filterEnums };
+export { SessionCategories, TelescopeTypes, EyepieceSchemas, FilterTypes };

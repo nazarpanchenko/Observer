@@ -1,25 +1,46 @@
-import * as globalTypes from './global.types';
-import * as dbTypes from './db.types';
-import * as userTypes from './user.types';
-import * as userTokenTypes from './userToken.types';
-import * as sessionTypes from './session.types';
-import * as subjectTypes from './subject.types';
-import * as reportTypes from './report.types';
-import * as telescopeTypes from './telescope.types';
-import * as eyepieceTypes from './eyepiece.types';
-import * as barlowLensTypes from './barlowLens.types';
-import * as filterTypes from './filter.types';
+import { PaginationConfig, SequelizeDeleteResponse } from './global.types';
+import { DbConf } from './db.types';
+import { UserData, CreateUser, UserDtoData } from './user.types';
+import { UserTokenData, UserTokenTuple, JwtToken } from './userToken.types';
+import { SessionData, SessionModel, SessionsList } from './session.types';
+import { SubjectData } from './subject.types';
+import {
+  ReportData,
+  ReportsList,
+  ReportsListTuple,
+  ModifyReportParams,
+  ModifiedReportData,
+  SequelizeUpdateReportResponse,
+} from './report.types';
+
+import { TelescopeData } from './telescope.types';
+import { EyepieceData } from './eyepiece.types';
+import { BarlowLensSchema, BarlowLensData } from './barlowLens.types';
+import { FilterData } from './filter.types';
 
 export {
-  globalTypes,
-  dbTypes,
-  userTypes,
-  userTokenTypes,
-  sessionTypes,
-  subjectTypes,
-  reportTypes,
-  telescopeTypes,
-  eyepieceTypes,
-  barlowLensTypes,
-  filterTypes,
+  PaginationConfig,
+  SequelizeDeleteResponse,
+  DbConf,
+  UserData,
+  CreateUser,
+  UserDtoData,
+  UserTokenData,
+  UserTokenTuple,
+  JwtToken,
+  SessionData,
+  SessionModel,
+  SessionsList,
+  SubjectData,
+  ReportData,
+  ReportsList,
+  ReportsListTuple,
+  ModifyReportParams,
+  ModifiedReportData,
+  SequelizeUpdateReportResponse,
+  TelescopeData,
+  EyepieceData,
+  BarlowLensSchema,
+  BarlowLensData,
+  FilterData,
 };

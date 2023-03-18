@@ -2,15 +2,20 @@
 
 import { Model } from 'sequelize';
 
-import { subjectEnums } from '../../shared/enums';
-import { subjectTypes } from '../../shared/types';
-
-type SubjectAttributes = subjectTypes.SubjectData;
+import { SubjectTypes } from '../../shared/enums';
+import { SubjectData } from '../../shared/types';
 
 const subjectModel = (sequelize: any, DataTypes: any) => {
-  class Subject extends Model<SubjectAttributes> implements SubjectAttributes {
+  class Subject extends Model<SubjectData> implements SubjectData {
     id?: number;
-    category!: subjectEnums.SubjectTypes;
+    category!: SubjectTypes;
+    apparentSize?: number;
+    magnitude!: number;
+    semiMajorAxis?: number;
+    axialTilt?: number;
+    ecccentricity?: number;
+    inclination?: number;
+    rotation?: number;
 
     /**
      * Helper method for defining associations.
@@ -33,19 +38,47 @@ const subjectModel = (sequelize: any, DataTypes: any) => {
       id: {
         primaryKey: true,
         autoIncrement: true,
-        type: DataTypes.INTEGER,
+        type: DataTypes.BIGINT(11),
       },
       category: {
         type: DataTypes.STRING,
         allowNull: false,
         validate: {
           isIn: {
-            args: [Object.values(subjectEnums.SubjectTypes)],
+            args: [Object.values(SubjectTypes)],
             msg: `category field's value must be one of the following: ${Object.values(
-              subjectEnums.SubjectTypes
+              SubjectTypes
             ).join(', ')}`,
           },
         },
+      },
+      magnitude: {
+        type: DataTypes.FLOAT(3, 2),
+        allowNull: false,
+      },
+      apparentSize: {
+        type: DataTypes.FLOAT(3, 2),
+        defaultValue: 0.0,
+      },
+      semiMajorAxis: {
+        type: DataTypes.FLOAT(3, 2),
+        defaultValue: 0.0,
+      },
+      axialTilt: {
+        type: DataTypes.FLOAT(3, 2),
+        defaultValue: 0.0,
+      },
+      ecccentricity: {
+        type: DataTypes.FLOAT(3, 2),
+        defaultValue: 0.0,
+      },
+      inclination: {
+        type: DataTypes.FLOAT(3, 2),
+        defaultValue: 0.0,
+      },
+      rotation: {
+        type: DataTypes.FLOAT(3, 2),
+        defaultValue: 0.0,
       },
     },
     {

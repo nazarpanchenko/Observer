@@ -1,4 +1,4 @@
-import { userTokenTypes } from '.';
+import { JwtToken } from '.';
 
 type UserData = {
   id: number;
@@ -19,11 +19,11 @@ type CreateUser = {
   verificationLink: string;
 };
 
-type UserDTO = userTokenTypes.JwtToken & {
+type UserDtoData = JwtToken & {
   id: number;
   firstName: string;
   lastName: string;
   isVerified: 1 | 0;
 };
 
-export { UserData, CreateUser, UserDTO };
+export { UserData, CreateUser, UserDtoData };

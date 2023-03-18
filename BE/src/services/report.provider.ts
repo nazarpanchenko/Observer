@@ -1,34 +1,34 @@
 import db from '../db';
-import { globalTypes, reportTypes } from '../shared/types';
+import {
+  PaginationConfig,
+  ReportData,
+  ReportsList,
+  ModifiedReportData,
+} from '../shared/types';
 
 class ReportProvider {
-  async getReports(
-    query: globalTypes.PaginationConfig | object
-  ): Promise<reportTypes.ReportsList> {
-    const list: reportTypes.ReportsList = await db.Report.getReports(query);
+  async getReports(query: PaginationConfig | object): Promise<ReportsList> {
+    const list: ReportsList = await db.Report.getReports(query);
     return list;
   }
 
-  async getOne(id: number): Promise<reportTypes.ReportData> {
-    const data: reportTypes.ReportData = await db.Report.getOne(id);
+  async getOne(id: number): Promise<ReportData> {
+    const data: ReportData = await db.Report.getOne(id);
     return data;
   }
 
-  async create(reportData: reportTypes.ReportData): Promise<reportTypes.ReportData> {
-    const createdRecord: reportTypes.ReportData = await db.Report.save(reportData);
+  async create(reportData: ReportData): Promise<ReportData> {
+    const createdRecord: ReportData = await db.Report.save(reportData);
     return createdRecord;
   }
 
-  async update(
-    id: number,
-    data: reportTypes.ModifiedReportData
-  ): Promise<reportTypes.ReportData> {
-    const updatedRecord: reportTypes.ReportData = await db.Report.modify(id, data);
+  async update(id: number, data: ModifiedReportData): Promise<ReportData> {
+    const updatedRecord: ReportData = await db.Report.modify(id, data);
     return updatedRecord;
   }
 
-  async delete(id: number): Promise<reportTypes.ReportData> {
-    const deletedRecord: reportTypes.ReportData = await db.Report.delete(id);
+  async delete(id: number): Promise<ReportData> {
+    const deletedRecord: ReportData = await db.Report.delete(id);
     return deletedRecord;
   }
 }

@@ -1,15 +1,16 @@
-import * as sessionEnums from './session.enums';
-import * as subjectEnums from './subject.enums';
-import * as telescopeEnums from './telescope.enums';
-import * as eyepieceEnums from './eyepiece.enums';
-import * as barlowLensEnums from './barlowLens.enums';
-import * as filterEnums from './filter.enums';
+import { SessionCategories } from './session.enums';
+import { SubjectTypes } from './subject.enums';
+import { TelescopeTypes } from './telescope.enums';
+import { EyepieceSchemas, EyepieceDiameters } from './eyepiece.enums';
+import { BarlowLensSchemas } from './barlowLens.enums';
+import { FilterTypes } from './filter.enums';
 
 export {
-  sessionEnums,
-  subjectEnums,
-  telescopeEnums,
-  eyepieceEnums,
-  barlowLensEnums,
-  filterEnums,
+  SessionCategories,
+  SubjectTypes,
+  TelescopeTypes,
+  EyepieceSchemas,
+  EyepieceDiameters,
+  BarlowLensSchemas,
+  FilterTypes,
 };

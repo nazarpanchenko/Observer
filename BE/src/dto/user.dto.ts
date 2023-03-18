@@ -1,4 +1,4 @@
-import { userTypes } from '../shared/types';
+import { UserDtoData } from '../shared/types';
 
 class UserDTO {
   id!: number;
@@ -8,7 +8,7 @@ class UserDTO {
   accessToken!: string;
   refreshToken!: string;
 
-  constructor(userModel: userTypes.UserDTO) {
+  constructor(userModel: UserDtoData) {
     this.id = userModel.id;
     this.firstName = userModel.firstName;
     this.lastName = userModel.lastName;
