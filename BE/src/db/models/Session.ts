@@ -28,17 +28,11 @@ const sessionModel = (sequelize: any, DataTypes: any) => {
      */
     static associate(models: any) {
       this.belongsTo(models.User, {
-        foreignKey: {
-          field: 'userId',
-          allowNull: false,
-        },
+        foreignKey: 'userId',
         onDelete: 'CASCADE',
       });
       this.hasMany(models.Report, {
-        foreignKey: {
-          field: 'sessionId',
-          allowNull: false,
-        },
+        foreignKey: 'sessionId',
         onDelete: 'CASCADE',
       });
     }

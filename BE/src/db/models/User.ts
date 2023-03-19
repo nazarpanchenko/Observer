@@ -21,18 +21,12 @@ const userModel = (sequelize: any, DataTypes: any) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models: any) {
-      this.hasMany(models.UserToken, {
-        foreignKey: {
-          field: 'userId',
-          allowNull: false,
-        },
+      this.hasOne(models.UserToken, {
+        foreignKey: 'userId',
         onDelete: 'CASCADE',
       });
       this.hasMany(models.Session, {
-        foreignKey: {
-          field: 'sessionId',
-          allowNull: false,
-        },
+        foreignKey: 'sessionId',
         onDelete: 'CASCADE',
       });
     }

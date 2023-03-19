@@ -23,7 +23,7 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
     color: theme.palette.common.white,
   },
   [`&.${tableCellClasses.body}`]: {
-    fontSize: '1rem',
+    fontSize: 15,
     fontWeight: 500,
   },
 }));
@@ -41,60 +41,63 @@ const Reports: React.FC = (): ReactElement => {
   const reports = useLoaderData() as ReportsList;
 
   return (
-    <>
-      <Grid item xs={12}>
-        <Typography variant="h4" sx={{ mb: 4 }} align="center">
-          Reports
-        </Typography>
+    <Grid container>
+      <Grid item xs={12} sx={{ mb: 4 }}>
+        <Typography variant="h4">Reports</Typography>
       </Grid>
 
-      <Grid item xs={6}></Grid>
-      <TableContainer component={Paper}>
-        <Table size="small" aria-label="reports table">
-          <TableHead>
-            <TableRow>
-              <StyledTableCell align="center">ID</StyledTableCell>
-              <StyledTableCell align="center">Subject</StyledTableCell>
-              <StyledTableCell align="center">Magnification</StyledTableCell>
-              <StyledTableCell align="center">Observation Real Duration</StyledTableCell>
-              <StyledTableCell align="center">
-                Observation Virtual Duration
-              </StyledTableCell>
-              <StyledTableCell align="center">
-                Observation Start Date (min)
-              </StyledTableCell>
-              <StyledTableCell align="center">Observation End Date (min)</StyledTableCell>
-            </TableRow>
-          </TableHead>
+      <Grid item xs={6}>
+        <TableContainer component={Paper}>
+          <Table size="small" aria-label="reports table">
+            <TableHead>
+              <TableRow>
+                <StyledTableCell align="center">ID</StyledTableCell>
+                <StyledTableCell align="center">Subject</StyledTableCell>
+                <StyledTableCell align="center">Magnification</StyledTableCell>
+                <StyledTableCell align="center">
+                  Observation Real Duration
+                </StyledTableCell>
+                <StyledTableCell align="center">
+                  Observation Virtual Duration
+                </StyledTableCell>
+                <StyledTableCell align="center">
+                  Observation Start Date (min)
+                </StyledTableCell>
+                <StyledTableCell align="center">
+                  Observation End Date (min)
+                </StyledTableCell>
+              </TableRow>
+            </TableHead>
 
-          <TableBody>
-            {reports.data.map((report: ReportData) => (
-              <StyledTableRow key={report.id}>
-                <StyledTableCell component="th" scope="row" align="center">
-                  {report.id}
-                </StyledTableCell>
-                <StyledTableCell align="center">{report.subject}</StyledTableCell>
-                <StyledTableCell component="th" scope="row" align="center">
-                  {report.magnification}
-                </StyledTableCell>
-                <StyledTableCell component="th" scope="row" align="center">
-                  {report.observationRealDurationMin}
-                </StyledTableCell>
-                <StyledTableCell component="th" scope="row" align="center">
-                  {report.observationVirtualDurationMin}
-                </StyledTableCell>
-                <StyledTableCell component="th" scope="row" align="center">
-                  {`${report.observationStartDate}`}
-                </StyledTableCell>
-                <StyledTableCell component="th" scope="row" align="center">
-                  {`${report.observationEndDate}`}
-                </StyledTableCell>
-              </StyledTableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
-    </>
+            <TableBody>
+              {reports.data.map((report: ReportData) => (
+                <StyledTableRow key={report.id}>
+                  <StyledTableCell component="th" scope="row" align="center">
+                    {report.id}
+                  </StyledTableCell>
+                  <StyledTableCell align="center">{report.subject}</StyledTableCell>
+                  <StyledTableCell component="th" scope="row" align="center">
+                    {report.magnification}
+                  </StyledTableCell>
+                  <StyledTableCell component="th" scope="row" align="center">
+                    {report.observationRealDurationMin}
+                  </StyledTableCell>
+                  <StyledTableCell component="th" scope="row" align="center">
+                    {report.observationVirtualDurationMin}
+                  </StyledTableCell>
+                  <StyledTableCell component="th" scope="row" align="center">
+                    {`${report.observationStartDate}`}
+                  </StyledTableCell>
+                  <StyledTableCell component="th" scope="row" align="center">
+                    {`${report.observationEndDate}`}
+                  </StyledTableCell>
+                </StyledTableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      </Grid>
+    </Grid>
   );
 };
 

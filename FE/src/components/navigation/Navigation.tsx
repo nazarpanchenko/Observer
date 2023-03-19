@@ -61,43 +61,47 @@ const Navigation: React.FC = (): ReactElement => {
 
   return (
     <AppBar position="sticky" sx={{ backgroundColor: 'text.primary' }}>
-      <Grid container justifyContent="space-between" alignContent="center" sx={{ p: 2 }}>
-        <Grid item>
-          <Button sx={{ color: '#fff' }} onClick={toggleDrawer(true)}>
-            <MenuOpen sx={{ mr: 2 }} />
-            <Typography fontWeight={900}>OBSERVER</Typography>
-          </Button>
-        </Grid>
-        <Grid item>
-          <Button color="inherit">
-            <Logout onClick={handleLogout}>Logout</Logout>
-          </Button>
-        </Grid>
-      </Grid>
+      <Box
+        sx={{
+          p: 2,
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignContent: 'center',
+        }}>
+        <Button onClick={toggleDrawer(true)}>
+          <MenuOpen sx={{ mr: 2, color: theme.text.color.success }} />
+          <Typography
+            variant="caption"
+            sx={{ color: theme.text.color.success }}
+            fontWeight={theme.text.font.weight.extra_bold}
+            fontStyle={theme.text.font.style.oblique}>
+            OBSERVER
+          </Typography>
+        </Button>
+
+        <Button>
+          <Logout sx={{ color: theme.text.color.success }} onClick={handleLogout}>
+            Logout
+          </Logout>
+        </Button>
+      </Box>
 
       <Drawer anchor="left" open={isOpen} onClose={toggleDrawer(false)}>
         <Box
           sx={{
-            width: 250,
-            flexGrow: 1,
             p: 2,
-            backgroundColor: theme.bg.info,
-            color: theme.text.color.danger,
-          }}>
-        <Box
-          sx={{
-            width: 250,
-            flexGrow: 1,
-            p: 2,
-            backgroundColor: '#000',
-            color: '#fff',
+            backgroundColor: theme.bg.secondary,
           }}
+          flexGrow={1}
+          width={250}
+          color={theme.text.color.success}
+          fontWeight={theme.text.font.weight.extra_bold}
           role="presentation">
           <Close onClick={toggleDrawer(false)} />
           <List>
             {navList.map((el: NavItem) => (
               <ListItem key={el.name} disablePadding>
-                <ListItemButton>
+                <ListItemButton sx={{ color: theme.text.color.info }}>
                   <Link className="sidebar-link" to={`${el.path}`}>
                     {el.icon}
                     <ListItemText primary={el.name} />

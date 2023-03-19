@@ -1,3 +1,14 @@
+import { ThemeOptions } from '@mui/material';
+
+const pallette = {
+  main: '#88DEFF',
+  secondary: '#3398E8',
+  info: '#3639CB',
+  success: '#36CB39',
+  warning: '#eb9943',
+  error: '#ad1414',
+};
+
 export const BASE_URI =
   process.env.REACT_APP_BASE_URI + '/api/v1' || 'http://localhost:9000/api/v1';
 
@@ -12,37 +23,67 @@ export const PAGINATION_CONFIG = Object.freeze({
   },
 });
 
-export const theme = {
-  flex: {
-    display: {
-      flex: 'flex',
-      inlineFlex: 'inline-flex',
+export const theme: ThemeOptions = {
+  components: {
+    MuiGrid: {
+      styleOverrides: {
+        container: {
+          justifyContent: 'center',
+          padding: '30px 0',
+        },
+      },
     },
-    flexDirection: {
-      row: 'row',
-      column: 'column',
+    MuiTypography: {
+      styleOverrides: {
+        h4: {
+          marginBottom: 30,
+          textAlign: 'center',
+        },
+      },
     },
-    justifyContent: {
-      spaceBetween: 'space-between',
-      spaceAround: 'space-around',
-      center: 'center',
+    MuiFormControl: {
+      styleOverrides: {
+        root: {
+          display: 'block',
+          marginBottom: 10,
+        },
+      },
     },
-    alignItems: {
-      center: 'center',
+    MuiSvgIcon: {
+      styleOverrides: {
+        root: {
+          color: pallette.info,
+        },
+      },
+    },
+    MuiButton: {
+      styleOverrides: {
+        contained: {
+          width: 100,
+          marginBottom: 20,
+        },
+        outlined: {
+          width: 100,
+          marginBottom: 20,
+        },
+      },
     },
   },
-  bg: {
-    info: '#107baf',
-    success: '#addfa2',
-    warning: '#eb9943',
-    danger: '#ad1414',
-  },
+  bg: pallette,
   text: {
-    color: {
-      info: '#107baf',
-      success: '#addfa2',
-      warning: '#eb9943',
-      danger: '#ad1414',
+    color: pallette,
+    font: {
+      weight: {
+        extra_light: 100,
+        light: 300,
+        normal: 400,
+        bold: 700,
+        extra_bold: 900,
+      },
+      style: {
+        italic: 'italic',
+        oblique: 'oblique 40deg',
+      },
     },
   },
 };

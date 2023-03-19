@@ -4,11 +4,14 @@ import {
   Grid,
   Typography,
   FormControl,
-  InputLabel,
-  Input,
   Button,
   Box,
+  useTheme,
+  InputAdornment,
+  TextField,
 } from '@mui/material';
+
+import { Email, Password, Person } from '@mui/icons-material';
 
 import { authService } from '../../services';
 import { UserData } from '../../shared/types';
@@ -21,6 +24,8 @@ const Signup: React.FC = (): ReactElement => {
     email: '',
     password: '',
   });
+  const theme = useTheme();
+
   const [repeatedPassword, setRepeatedPassword] = useState<string>('');
   const [isAuthorized, setIsAuthorized] = useState<boolean>(false);
   const [error, setError] = useState<string>('');
@@ -51,55 +56,110 @@ const Signup: React.FC = (): ReactElement => {
   };
 
   return (
-    <>
+    <Grid container alignItems="center">
       {isAuthorized ? (
-        <Typography variant="h6">
-          <Link to="/auth/signin">
-            Email with verification link has been sent to your email. Please, complete the
-            registration process by clicking on that link.
-          </Link>
-        </Typography>
+        <Grid item xs={12}>
+          <Typography variant="h6" align="center">
+            <Link to="/auth/signin">
+              Email with verification link has been sent to your email. Please, complete
+              the registration process by clicking on that link.
+            </Link>
+          </Typography>
+        </Grid>
       ) : (
         <>
           <Grid item xs={12}>
-            <Typography variant="h4" sx={{ mb: 4 }}>
-              Registration
-            </Typography>
+            <Typography variant="h4">Registration</Typography>
           </Grid>
 
-          <Grid item xs={6}>
+          <Grid item xs={3}>
             <form className="signup-form" onSubmit={handleSignup}>
-              <FormControl fullWidth sx={{ mb: 2 }} required onChange={handleInputChange}>
-                <InputLabel htmlFor="firstName">First Name</InputLabel>
-                <Input id="firstName" name="firstName" />
+              <FormControl required onChange={handleInputChange}>
+                <TextField
+                  name="firstName"
+                  placeholder="First Name"
+                  fullWidth
+                  InputProps={{
+                    endAdornment: (
+                      <InputAdornment disableTypography position="end">
+                        <Person />
+                      </InputAdornment>
+                    ),
+                  }}
+                />
               </FormControl>
-              <FormControl fullWidth sx={{ mb: 2 }} required onChange={handleInputChange}>
-                <InputLabel htmlFor="lastName">Last Name</InputLabel>
-                <Input id="lastName" name="lastName" />
+              <FormControl required onChange={handleInputChange}>
+                <TextField
+                  name="lastName"
+                  placeholder="Last Name"
+                  fullWidth
+                  InputProps={{
+                    endAdornment: (
+                      <InputAdornment disableTypography position="end">
+                        <Person />
+                      </InputAdornment>
+                    ),
+                  }}
+                />
               </FormControl>
-              <FormControl fullWidth sx={{ mb: 2 }} required onChange={handleInputChange}>
-                <InputLabel htmlFor="email">Email</InputLabel>
-                <Input id="email" type="email" name="email" />
+              <FormControl required onChange={handleInputChange}>
+                <TextField
+                  type="email"
+                  name="email"
+                  fullWidth
+                  placeholder="Email"
+                  InputProps={{
+                    endAdornment: (
+                      <InputAdornment disableTypography position="end">
+                        <Email />
+                      </InputAdornment>
+                    ),
+                  }}
+                />
               </FormControl>
-              <FormControl fullWidth sx={{ mb: 2 }} required onChange={handleInputChange}>
-                <InputLabel htmlFor="password">Password</InputLabel>
-                <Input id="password" type="password" name="password" />
+              <FormControl required onChange={handleInputChange}>
+                <TextField
+                  type="password"
+                  name="password"
+                  fullWidth
+                  placeholder="Password"
+                  InputProps={{
+                    endAdornment: (
+                      <InputAdornment disableTypography position="end">
+                        <Password />
+                      </InputAdornment>
+                    ),
+                  }}
+                />
               </FormControl>
-              <FormControl fullWidth sx={{ mb: 2 }} required onChange={handleInputChange}>
-                <InputLabel htmlFor="repeatedPassword">Repeat Password</InputLabel>
-                <Input id="repeatedPassword" type="password" name="repeatedPassword" />
+              <FormControl required onChange={handleInputChange}>
+                <TextField
+                  name="repeatedPassword"
+                  type="password"
+                  fullWidth
+                  placeholder="Repeat Password"
+                  InputProps={{
+                    endAdornment: (
+                      <InputAdornment disableTypography position="end">
+                        <Password />
+                      </InputAdornment>
+                    ),
+                  }}
+                />
               </FormControl>
 
-              <Button type="submit" variant="contained" sx={{ mb: 2 }}>
-                Sign Up
-              </Button>
+              <FormControl sx={{ display: 'flex', justifyContent: 'flex-end' }}>
+                <Button type="submit" variant="contained">
+                  Sign Up
+                </Button>
+              </FormControl>
             </form>
 
-            <Box color="#ad1414">{error}</Box>
+            <Box color={theme.text.color.error}>{error}</Box>
           </Grid>
         </>
       )}
-    </>
+    </Grid>
   );
 };
 

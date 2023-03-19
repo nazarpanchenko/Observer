@@ -30,7 +30,7 @@ class MailProvider {
       });
     } catch (err: any) {
       logger.error(`nodemailer error. ${err.message}`);
-      throw new ApiError('nodemailer error.', err.code, err.message);
+      throw new ApiError('nodemailer error.', err.message, err.code);
     }
   }
 }

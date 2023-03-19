@@ -1,6 +1,15 @@
 import React, { ReactElement, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Grid, Typography, FormControl, InputLabel, Input, Button } from '@mui/material';
+import {
+  Grid,
+  Typography,
+  FormControl,
+  InputAdornment,
+  TextField,
+  Button,
+} from '@mui/material';
+
+import { Email, Password } from '@mui/icons-material';
 
 import { authService } from '../../services';
 import { UserCredentials } from '../../shared/types';
@@ -26,32 +35,54 @@ const Signin: React.FC = (): ReactElement => {
   };
 
   return (
-    <>
+    <Grid container alignItems="center">
       <Grid item xs={12}>
-        <Typography variant="h4" sx={{ mb: 4 }}>
-          Enter Your Workspace
-        </Typography>
+        <Typography variant="h4">Enter Your Workspace</Typography>
       </Grid>
 
       <Grid item xs={6}>
         <form className="signin-form" onSubmit={handleSignin}>
-          <FormControl fullWidth sx={{ mb: 2 }} required onChange={handleInputChange}>
-            <InputLabel htmlFor="email">Email</InputLabel>
-            <Input id="email" type="email" />
+          <FormControl required onChange={handleInputChange}>
+            <TextField
+              type="email"
+              placeholder="Email"
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment disableTypography position="end">
+                    <Email />
+                  </InputAdornment>
+                ),
+              }}
+            />
           </FormControl>
-          <FormControl fullWidth sx={{ mb: 4 }} required onChange={handleInputChange}>
-            <InputLabel htmlFor="password">Password</InputLabel>
-            <Input id="password" type="password" />
+          <FormControl required onChange={handleInputChange}>
+            <TextField
+              type="password"
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment disableTypography position="start">
+                    Password
+                  </InputAdornment>
+                ),
+                endAdornment: (
+                  <InputAdornment disableTypography position="end">
+                    <Password />
+                  </InputAdornment>
+                ),
+              }}
+            />
           </FormControl>
 
-          <Button type="submit" variant="contained" sx={{ mb: 2 }}>
-            Sign In
-          </Button>
+          <FormControl sx={{ display: 'flex', justifyContent: 'flex-end' }}>
+            <Button type="submit" variant="contained">
+              Sign In
+            </Button>
+          </FormControl>
         </form>
 
         <Link to="/forgot-password">Forgot password?</Link>
       </Grid>
-    </>
+    </Grid>
   );
 };
 

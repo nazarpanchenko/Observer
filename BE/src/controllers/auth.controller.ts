@@ -17,8 +17,8 @@ const authController = {
         next(
           new ApiError(
             'Duplicate email',
-            String(StatusCodes.CONFLICT),
-            `User with email ${email} already exists`
+            `User with email ${email} already exists`,
+            String(StatusCodes.CONFLICT)
           )
         );
       }

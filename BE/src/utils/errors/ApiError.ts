@@ -5,8 +5,8 @@ class BaseError extends Error {
 
   constructor(
     name: string,
-    statusCode: string,
-    description: string
+    description: string,
+    statusCode: string
   ) {
     super(description);
 
@@ -20,10 +20,10 @@ class BaseError extends Error {
 class ApiError extends BaseError {
   constructor(
     name: string,
-    statusCode = String(StatusCodes.INTERNAL_SERVER_ERROR),
-    description = getReasonPhrase(StatusCodes.INTERNAL_SERVER_ERROR)
+    description = getReasonPhrase(StatusCodes.INTERNAL_SERVER_ERROR),
+    statusCode = String(StatusCodes.INTERNAL_SERVER_ERROR)
   ) {
-    super(name, statusCode, description);
+    super(name, description, statusCode);
   }
 }
 

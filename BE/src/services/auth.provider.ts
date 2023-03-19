@@ -20,13 +20,11 @@ class AuthProvider {
       ...storedUser,
     });
 
-    const userDTO: UserDTO = new UserDTO({
+    const userDTO: UserDtoData = new UserDTO({
       id: storedUser.id,
-      firstName: storedUser.firstName,
-      lastName: storedUser.lastName,
       isVerified: storedUser.isVerified || 0,
       ...tokens,
-    });
+    });    
 
     await userTokenProvider.create(userDTO.id, tokens.refreshToken);
     await mailProvider.sendVerification(params.email, verificationLink);

@@ -19,10 +19,7 @@ const telescopeModel = (sequelize: any, DataTypes: any) => {
      */
     static associate(models: any) {
       this.belongsTo(models.Report, {
-        foreignKey: {
-          field: 'reportId',
-          allowNull: false,
-        },
+        foreignKey: 'reportId',
         onDelete: 'CASCADE',
       });
     }

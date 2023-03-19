@@ -17,10 +17,7 @@ const userTokenModel = (sequelize: any, DataTypes: any) => {
      */
     static associate(models: any) {
       this.belongsTo(models.User, {
-        foreignKey: {
-          field: 'userId',
-          allowNull: false,
-        },
+        foreignKey: 'userId',
         onDelete: 'CASCADE',
       });
     }
@@ -36,7 +33,7 @@ const userTokenModel = (sequelize: any, DataTypes: any) => {
     static async saveToken(
       userId: number,
       refreshToken: string
-    ): Promise<UserTokenData> {
+    ): Promise<UserTokenData> {      
       const createdToken: UserTokenData = await UserToken.create({
         userId,
         refreshToken,

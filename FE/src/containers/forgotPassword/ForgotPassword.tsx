@@ -1,5 +1,14 @@
 import React, { ReactElement, useState } from 'react';
-import { Grid, Typography, FormControl, InputLabel, Input, Button } from '@mui/material';
+import {
+  Grid,
+  Typography,
+  FormControl,
+  Button,
+  InputAdornment,
+  TextField,
+} from '@mui/material';
+
+import { Email } from '@mui/icons-material';
 
 import { authService } from '../../services';
 import './index.scss';
@@ -17,22 +26,35 @@ const ForgotPassword: React.FC = (): ReactElement => {
   };
 
   return (
-    <>
+    <Grid container alignItems="center">
       <Grid item xs={12}>
         <Typography variant="h4">Password Recovery</Typography>
       </Grid>
 
       <Grid item xs={6}>
         <form className="password-recovery-form" onSubmit={handlePasswordRecovery}>
-          <FormControl fullWidth sx={{ mb: 2 }} required onChange={handleInputChange}>
-            <InputLabel htmlFor="email">Email</InputLabel>
-            <Input id="email" type="email" />
+          <FormControl required onChange={handleInputChange}>
+            <TextField
+              type="email"
+              placeholder="Email"
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment disableTypography position="end">
+                    <Email />
+                  </InputAdornment>
+                ),
+              }}
+            />
           </FormControl>
 
-          <Button type="submit">Reset Password</Button>
+          <FormControl sx={{ display: 'flex', justifyContent: 'flex-end' }}>
+            <Button type="submit" variant="contained">
+              Reset Password
+            </Button>
+          </FormControl>
         </form>
       </Grid>
-    </>
+    </Grid>
   );
 };
 
