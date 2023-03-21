@@ -2,8 +2,11 @@
 
 import { eyepieceOpticalSchemas, eyepieceSizeSchemas } from '../consts';
 
-const containsChar = (field, char) =>
-  `${field} field's value must include the character "${char}"`;
+const containsChar = (fieldName, fieldValue, char) => {
+  if (!fieldValue.includes(char)) {
+    throw new Error(`${fieldName} field's value must include the character "${char}"`);
+  }
+};
 
 export async function up(queryInterface, Sequelize) {
   await queryInterface.createTable(
@@ -47,14 +50,14 @@ export async function up(queryInterface, Sequelize) {
         type: Sequelize.STRING(5),
         allowNull: false,
         validate: {
-          containsChar: containsChar('eyepieceFocus', 'mm'),
+          containsChar: (char) => containsChar('eyepieceFocus', char, 'mm'),
         },
       },
       eyepieceFieldRange: {
         type: Sequelize.STRING(6),
         allowNull: false,
         validate: {
-          containsChar: containsChar('eyepieceFieldRange', `'`),
+          containsChar: (char) => containsChar('eyepieceFieldRange', char, `'`),
         },
       },
       eyepieceOpticalSchema: {
@@ -73,7 +76,7 @@ export async function up(queryInterface, Sequelize) {
         type: Sequelize.STRING(6),
         allowNull: false,
         validate: {
-          containsChar: containsChar('eyepiecePupilScrew', 'mm'),
+          containsChar: (char) => containsChar('eyepiecePupilScrew', char, 'mm'),
         },
       },
     },

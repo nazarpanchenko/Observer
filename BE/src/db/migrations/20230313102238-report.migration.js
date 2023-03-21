@@ -2,8 +2,11 @@
 
 import { telescopeTypes } from '../consts';
 
-const containsChar = (field, char) =>
-  `${field} field's value must include the character "${char}"`;
+const containsChar = (fieldName, fieldValue, char) => {
+  if (!fieldValue.includes(char)) {
+    throw new Error(`${fieldName} field's value must include the character "${char}"`);
+  }
+};
 
 export async function up(queryInterface, Sequelize) {
   await queryInterface.createTable(
@@ -43,7 +46,7 @@ export async function up(queryInterface, Sequelize) {
         type: Sequelize.STRING(5),
         allowNull: false,
         validate: {
-          containsChar: containsChar('magnification', 'X'),
+          containsChar: (char) => containsChar('magnification', char, 'X'),
         },
       },
       observationRealDurationMin: {

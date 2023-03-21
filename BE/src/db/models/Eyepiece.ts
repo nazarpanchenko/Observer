@@ -61,14 +61,14 @@ const eyepieceModel = (sequelize: any, DataTypes: any) => {
         type: DataTypes.STRING(5),
         allowNull: false,
         validate: {
-          containsChar: containsChar('eyepieceFocus', 'mm'),
+          containsChar: (char: string) => containsChar('eyepieceFocus', char, 'mm'),
         },
       },
       eyepieceFieldRange: {
         type: DataTypes.STRING(6),
         allowNull: false,
         validate: {
-          containsChar: containsChar('eyepieceFieldRange', `'`),
+          containsChar: (char: string) => containsChar('eyepieceFieldRange', char, `'`),
         },
       },
       eyepieceOpticalSchema: {
@@ -87,7 +87,7 @@ const eyepieceModel = (sequelize: any, DataTypes: any) => {
         type: DataTypes.STRING(6),
         allowNull: false,
         validate: {
-          containsChar: containsChar('eyepiecePupilScrew', 'mm'),
+          containsChar: (char: string) => containsChar('eyepiecePupilScrew', char, 'mm'),
         },
       },
     },

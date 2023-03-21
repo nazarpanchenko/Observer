@@ -21,8 +21,7 @@ const reportValidator = {
       .isString()
       .contains('X')
       .isLength({ min: 2, max: 5 })
-      .withMessage(getErrMsg('eyepieceFocus', 'mm')),
-
+      .withMessage(getErrMsg('magnification', 'X')),
     body('observationRealDurationMin').isInt(),
     body('observationVirtualDurationMin').isInt(),
     body('observationStartDate').isISO8601(),
@@ -35,7 +34,7 @@ const reportValidator = {
     body('magnification')
       .isString()
       .contains('X')
-      .withMessage(getErrMsg('eyepieceFocus', 'mm'))
+      .withMessage(getErrMsg('magnification', 'X'))
       .optional(),
   ],
 
