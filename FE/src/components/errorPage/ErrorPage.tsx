@@ -1,12 +1,10 @@
 import React from 'react';
-import { useTheme, Grid, Typography } from '@mui/material';
+import { Grid, Typography } from '@mui/material';
 
 const ErrorPage = () => {
-  const theme = useTheme();
-
   return (
     <Grid container height="100vh" alignItems="center">
-      <Typography variant="h4" color={theme.text.color.error}>
+      <Typography variant="h4" color='#BB5045'>
         Something Went Wrong.
       </Typography>
     </Grid>

@@ -13,18 +13,20 @@ const App = () => {
   return (
     <>
       <CssBaseline />
-      <ErrorBoundary fallback={<ErrorPage />}>
-        <ThemeProvider theme={_theme}>
-          <Navigation />
-          <Box
-            minHeight="100vh"
-            sx={{
-              backgroundColor: _theme?.bg?.main || 'transparent',
-            }}>
-            <Outlet />
-          </Box>
-        </ThemeProvider>
-      </ErrorBoundary>
+      <ThemeProvider theme={_theme}>
+        <ErrorBoundary fallback={<ErrorPage />}>
+          <>
+            <Navigation />
+            <Box
+              minHeight="100vh"
+              sx={{
+                backgroundColor: _theme?.bg?.main || 'transparent',
+              }}>
+              <Outlet />
+            </Box>
+          </>
+        </ErrorBoundary>
+      </ThemeProvider>
     </>
   );
 };

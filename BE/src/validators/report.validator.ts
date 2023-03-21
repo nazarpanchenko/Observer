@@ -1,12 +1,6 @@
 import { param, query, body } from 'express-validator';
 
-import {
-  TelescopeTypes,
-  EyepieceSchemas,
-  EyepieceDiameters,
-  BarlowLensSchemas,
-  FilterTypes,
-} from '../shared/enums';
+import { TelescopeTypes } from '../shared/enums';
 import { PAGINATION_CONFIG } from '../consts';
 import { getErrMsg } from '../utils/helpers';
 
@@ -22,44 +16,13 @@ const reportValidator = {
   // POST
   create: [
     body('subject').isString().trim().notEmpty(),
-    body('telescopeModel').isString().trim().notEmpty(),
     body('telescopeType').isIn(Object.values(TelescopeTypes)),
-    body('telescopeDiameter').isInt().isLength({ min: 2 }),
-    body('eyepieceManufacturer').isString().trim().notEmpty(),
-    body('eyepieceOpticalSchema').isIn(Object.values(EyepieceSchemas)),
-
-    body('eyepieceModel').isString().trim().notEmpty(),
-    body('eyepieceFocus')
-      .isString()
-      .isLength({ min: 4, max: 5 })
-      .contains('mm')
-      .withMessage(getErrMsg('eyepieceFocus', 'mm')),
     body('magnification')
       .isString()
       .contains('X')
       .isLength({ min: 2, max: 5 })
       .withMessage(getErrMsg('eyepieceFocus', 'mm')),
 
-    body('eyepieceFieldRange')
-      .isString()
-      .isLength({ min: 4, max: 5 })
-      .contains("'")
-      .withMessage(getErrMsg('eyepieceFocus', "'")),
-    body('eyepieceSizeSchema').isIn(Object.values(EyepieceDiameters)),
-
-    body('eyepiecePupilScrew')
-      .isString()
-      .isLength({ min: 4, max: 6 })
-      .contains('mm')
-      .withMessage(getErrMsg('eyepieceFocus', 'mm')),
-    body('barlowLensManufacturer').isString().trim().notEmpty().optional(),
-
-    body('barlowLensSchema')
-      .isIn(Object.values(BarlowLensSchemas))
-      .optional(),
-    body('filterType').isString().isIn(Object.values(FilterTypes)).optional(),
-
-    body('filter').isString().optional(),
     body('observationRealDurationMin').isInt(),
     body('observationVirtualDurationMin').isInt(),
     body('observationStartDate').isISO8601(),
@@ -69,7 +32,6 @@ const reportValidator = {
   // PUT
   update: [
     param('id').isInt(),
-    body('eyepieceManufacturer').trim().notEmpty(),
     body('magnification')
       .isString()
       .contains('X')
