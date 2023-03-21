@@ -46,7 +46,6 @@ export async function up(queryInterface, Sequelize) {
     }
   );
 }
-
 export async function down(queryInterface) {
   await queryInterface.dropTable('telescopes', { cascade: true });
 }

@@ -13,7 +13,6 @@ import { Email, Password } from '@mui/icons-material';
 
 import { authService } from '../../services';
 import { UserCredentials } from '../../shared/types';
-import './index.scss';
 
 const Signin: React.FC = (): ReactElement => {
   const [formData, setFormData] = useState<UserCredentials>({
@@ -45,10 +44,11 @@ const Signin: React.FC = (): ReactElement => {
           <FormControl required onChange={handleInputChange}>
             <TextField
               type="email"
+              fullWidth
               placeholder="Email"
               InputProps={{
                 endAdornment: (
-                  <InputAdornment disableTypography position="end">
+                  <InputAdornment position="start">
                     <Email />
                   </InputAdornment>
                 ),
@@ -58,14 +58,16 @@ const Signin: React.FC = (): ReactElement => {
           <FormControl required onChange={handleInputChange}>
             <TextField
               type="password"
+              fullWidth
+              placeholder="Password"
               InputProps={{
                 startAdornment: (
-                  <InputAdornment disableTypography position="start">
+                  <InputAdornment position="start">
                     Password
                   </InputAdornment>
                 ),
                 endAdornment: (
-                  <InputAdornment disableTypography position="end">
+                  <InputAdornment position="start">
                     <Password />
                   </InputAdornment>
                 ),

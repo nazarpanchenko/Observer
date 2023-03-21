@@ -2,7 +2,6 @@ import React, { ReactElement, useState } from 'react';
 import { Link } from 'react-router-dom';
 import {
   useTheme,
-  Grid,
   AppBar,
   Drawer,
   Button,
@@ -15,8 +14,8 @@ import {
 } from '@mui/material';
 
 import {
-  MenuOpen,
-  Close,
+  ArrowRight,
+  ArrowLeft,
   StickyNote2Outlined,
   LocalActivityOutlined,
   ArchitectureOutlined,
@@ -60,7 +59,7 @@ const Navigation: React.FC = (): ReactElement => {
   };
 
   return (
-    <AppBar position="sticky" sx={{ backgroundColor: 'text.primary' }}>
+    <AppBar position="sticky" sx={{ backgroundColor: theme.bg.secondary }}>
       <Box
         sx={{
           p: 2,
@@ -69,7 +68,7 @@ const Navigation: React.FC = (): ReactElement => {
           alignContent: 'center',
         }}>
         <Button onClick={toggleDrawer(true)}>
-          <MenuOpen sx={{ mr: 2, color: theme.text.color.success }} />
+          <ArrowRight sx={{ mr: 2, color: theme.text.color.success }} />
           <Typography
             variant="caption"
             sx={{ color: theme.text.color.success }}
@@ -92,17 +91,17 @@ const Navigation: React.FC = (): ReactElement => {
             p: 2,
             backgroundColor: theme.bg.secondary,
           }}
-          flexGrow={1}
           width={250}
+          flexGrow={1}
           color={theme.text.color.success}
           fontWeight={theme.text.font.weight.extra_bold}
           role="presentation">
-          <Close onClick={toggleDrawer(false)} />
+          <ArrowLeft onClick={toggleDrawer(false)} />
           <List>
             {navList.map((el: NavItem) => (
               <ListItem key={el.name} disablePadding>
                 <ListItemButton sx={{ color: theme.text.color.info }}>
-                  <Link className="sidebar-link" to={`${el.path}`}>
+                  <Link className="navbar-link" to={`${el.path}`}>
                     {el.icon}
                     <ListItemText primary={el.name} />
                   </Link>

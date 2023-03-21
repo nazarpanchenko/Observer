@@ -2,9 +2,9 @@ import { Request, Response, NextFunction } from 'express';
 import { StatusCodes } from 'http-status-codes';
 
 import conf from '../conf.json';
-import { ApiError } from '../utils';
 import { UserData, UserDtoData } from '../shared/types';
 import db from '../db';
+import { ApiError } from '../utils';
 import { authProvider } from '../services';
 
 const authController = {
@@ -16,7 +16,7 @@ const authController = {
       if (storedUser) {
         next(
           new ApiError(
-            'Duplicate email',
+            'Signup failed',
             `User with email ${email} already exists`,
             String(StatusCodes.CONFLICT)
           )

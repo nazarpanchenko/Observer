@@ -22,6 +22,8 @@ class AuthProvider {
 
     const userDTO: UserDtoData = new UserDTO({
       id: storedUser.id,
+      firstName: storedUser.firstName,
+      lastName: storedUser.lastName,
       isVerified: storedUser.isVerified || 0,
       ...tokens,
     });    

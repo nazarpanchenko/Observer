@@ -21,6 +21,8 @@ type CreateUser = {
 
 type UserDtoData = JwtToken & {
   id: number;
+  firstName: string;
+  lastName: string;
   isVerified: 1 | 0;
 };
 

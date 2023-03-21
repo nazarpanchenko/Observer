@@ -1,10 +1,33 @@
 import React, { lazy, ReactElement, Suspense } from 'react';
 
-import { useLoader } from '../hooks';
+import { Loader } from '../components';
+
+class ErrorBoundary extends React.Component<
+  { fallback: React.ReactElement; children: React.ReactElement },
+  { hasError: boolean; error: any; componentStack: any }
+> {
+  constructor(props: any) {
+    super(props);
+    this.state = {
+      hasError: false,
+      error: {},
+      componentStack: {},
+    };
+  }
+
+  static getDerivedStateFromError(error: any) {
+    return { hasError: true, error };
+  }
+
+  render() {
+    if (this.state.hasError) {
+      return this.props.fallback;
+    }
+    return this.props.children;
+  }
+}
 
 const lazyLoadRoute = (componentName: string): ReactElement => {
-  const loader = useLoader();
-
   const Route = lazy(
     () =>
       import(
@@ -15,10 +38,10 @@ const lazyLoadRoute = (componentName: string): ReactElement => {
   );
 
   return (
-    <Suspense fallback={loader}>
+    <Suspense fallback={<Loader />}>
       <Route />
     </Suspense>
   );
 };
 
-export { lazyLoadRoute };
+export { ErrorBoundary, lazyLoadRoute };

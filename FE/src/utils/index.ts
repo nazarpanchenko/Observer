@@ -1,4 +1,4 @@
-import { lazyLoadRoute } from './helpers';
+import { ErrorBoundary, lazyLoadRoute } from './helpers';
 import { _axios } from './http.conf';
 
-export { lazyLoadRoute, _axios };
+export { ErrorBoundary, lazyLoadRoute, _axios };

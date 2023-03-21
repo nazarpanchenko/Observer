@@ -2,28 +2,14 @@ import { ThemeOptions } from '@mui/material';
 
 const pallette = {
   main: '#88DEFF',
-  secondary: '#3398E8',
+  secondary: '#519AA3',
   info: '#3639CB',
   success: '#36CB39',
   warning: '#eb9943',
   error: '#ad1414',
 };
 
-export const BASE_URI =
-  process.env.REACT_APP_BASE_URI + '/api/v1' || 'http://localhost:9000/api/v1';
-
-export const accessToken = localStorage.getItem('accessToken');
-
-export const PAGINATION_CONFIG = Object.freeze({
-  DEFAULT_OFFSET: 0,
-  LIMIT: {
-    min: 3,
-    avg: 4,
-    max: 5,
-  },
-});
-
-export const theme: ThemeOptions = {
+const themeOverrides: ThemeOptions = {
   components: {
     MuiGrid: {
       styleOverrides: {
@@ -38,6 +24,7 @@ export const theme: ThemeOptions = {
         h4: {
           marginBottom: 30,
           textAlign: 'center',
+          color: '#fff',
         },
       },
     },
@@ -46,6 +33,14 @@ export const theme: ThemeOptions = {
         root: {
           display: 'block',
           marginBottom: 10,
+        },
+      },
+    },
+    MuiInputAdornment: {
+      styleOverrides: {
+        root: {
+          position: 'absolute',
+          top: 0,
         },
       },
     },
@@ -69,6 +64,24 @@ export const theme: ThemeOptions = {
       },
     },
   },
+};
+
+export const BASE_URI =
+  process.env.REACT_APP_BASE_URI + '/api/v1' || 'http://localhost:9000/api/v1';
+
+export const accessToken = localStorage.getItem('accessToken');
+
+export const PAGINATION_CONFIG = Object.freeze({
+  DEFAULT_OFFSET: 0,
+  LIMIT: {
+    min: 3,
+    avg: 4,
+    max: 5,
+  },
+});
+
+export const theme: ThemeOptions = {
+  ...themeOverrides,
   bg: pallette,
   text: {
     color: pallette,
@@ -76,7 +89,7 @@ export const theme: ThemeOptions = {
       weight: {
         extra_light: 100,
         light: 300,
-        normal: 400,
+        normal: 500,
         bold: 700,
         extra_bold: 900,
       },

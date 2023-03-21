@@ -8,7 +8,7 @@
     "start:local": "cross-env NODE_ENV=local nodemon --watch 'src/**/*.*' --exec ts-node -r dotenv/config src/index.ts dotenv_config_path=.env.local",
     "migrate": "sequelize db:migrate --config src/db/conf.json --migrations-path src/db/migrations --env='local'",
     "migrate:reset": "sequelize db:migrate:undo --config src/db/conf.json --migrations-path src/db/migrations --env='local'",
-    "seed": "sequelize db:seed:all --config src/db/conf.json --seeders-path src/db/seeders",
+    "seed": "sequelize db:seed:all --config src/db/conf.json --seeders-path src/db/seeders --env='local'",
     "lint": "eslint .",
     "lint:fix": "eslint --fix",
     "format": "prettier --write \"./**/*.{js,ts,tsx,scss,md,json}\" --config .prettierrc"

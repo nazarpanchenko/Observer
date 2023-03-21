@@ -11,7 +11,6 @@ import {
 import { Email } from '@mui/icons-material';
 
 import { authService } from '../../services';
-import './index.scss';
 
 const ForgotPassword: React.FC = (): ReactElement => {
   const [email, setEmail] = useState<string>('');
@@ -36,10 +35,11 @@ const ForgotPassword: React.FC = (): ReactElement => {
           <FormControl required onChange={handleInputChange}>
             <TextField
               type="email"
+              fullWidth
               placeholder="Email"
               InputProps={{
                 endAdornment: (
-                  <InputAdornment disableTypography position="end">
+                  <InputAdornment position="start">
                     <Email />
                   </InputAdornment>
                 ),

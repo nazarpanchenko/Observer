@@ -6,7 +6,7 @@ import { lazyLoadRoute } from './utils';
 import * as services from './services';
 
 import App from './App';
-import { ErrorPage } from './components/index';
+import { ErrorPage } from './components';
 
 import '@fontsource/roboto/300.css';
 import '@fontsource/roboto/400.css';
@@ -49,8 +49,8 @@ const router = createBrowserRouter([
   },
 ]);
 
-const rootNode = document.getElementById('root');
-createRoot(rootNode as HTMLElement).render(
+const rootNode = document.getElementById('root') as HTMLElement;
+createRoot(rootNode).render(
   <React.StrictMode>
     <RouterProvider router={router} />
   </React.StrictMode>

@@ -1,11 +1,11 @@
 import { _axios } from '../utils';
-import { globalTypes, reportTypes } from '../types';
+import { PaginationConfig, ReportsList } from '../shared/types';
 
 const getReports = async (
-  req: globalTypes.PaginationConfig = { params: {} }
-): Promise<reportTypes.ReportsList | undefined> => {
+  req: PaginationConfig = { params: {} }
+): Promise<ReportsList | undefined> => {
   try {
-    const data: reportTypes.ReportsList = await _axios.get('/reports', {
+    const data: ReportsList = await _axios.get('/reports', {
       params: { ...req.params },
     });
     return data;
