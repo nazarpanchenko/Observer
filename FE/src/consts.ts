@@ -1,11 +1,11 @@
 import { ThemeOptions } from '@mui/material';
 
 const pallette = {
-  main: '#88DEFF',
-  secondary: '#519AA3',
+  main: '#60DEFF',
+  secondary: '#4888A3',
   info: '#3639CB',
-  success: '#36CB39',
-  warning: '#eb9943',
+  success: '#36F639',
+  warning: '#FF8D60',
   error: '#ad1414',
 };
 
@@ -32,15 +32,14 @@ const themeOverrides: ThemeOptions = {
       styleOverrides: {
         root: {
           display: 'block',
-          marginBottom: 10,
+          marginBottom: 25,
         },
       },
     },
-    MuiInputAdornment: {
+    MuiTextField: {
       styleOverrides: {
         root: {
-          position: 'absolute',
-          top: 0,
+          borderColor: pallette.warning,
         },
       },
     },
@@ -66,6 +65,25 @@ const themeOverrides: ThemeOptions = {
   },
 };
 
+export const theme: ThemeOptions = {
+  ...themeOverrides,
+  bg: pallette,
+  text: {
+    color: pallette,
+    fontWeight: {
+      extra_light: 100,
+      light: 300,
+      normal: 500,
+      bold: 700,
+      extra_bold: 900,
+    },
+    fontStyle: {
+      italic: 'italic',
+      oblique: 'oblique 40deg',
+    },
+  },
+};
+
 export const BASE_URI =
   process.env.REACT_APP_BASE_URI + '/api/v1' || 'http://localhost:9000/api/v1';
 
@@ -79,24 +97,3 @@ export const PAGINATION_CONFIG = Object.freeze({
     max: 5,
   },
 });
-
-export const theme: ThemeOptions = {
-  ...themeOverrides,
-  bg: pallette,
-  text: {
-    color: pallette,
-    font: {
-      weight: {
-        extra_light: 100,
-        light: 300,
-        normal: 500,
-        bold: 700,
-        extra_bold: 900,
-      },
-      style: {
-        italic: 'italic',
-        oblique: 'oblique 40deg',
-      },
-    },
-  },
-};

@@ -18,7 +18,10 @@ const barlowLensModel = (sequelize: any, DataTypes: any) => {
      */
     static associate(models: any) {
       this.belongsTo(models.Report, {
-        foreignKey:'reportId',
+        foreignKey: {
+          name: 'reportId',
+          allowNull: false,
+        },
         onDelete: 'CASCADE',
       });
     }

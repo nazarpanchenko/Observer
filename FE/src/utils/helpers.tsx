@@ -1,9 +1,9 @@
-import React, { lazy, ReactElement, Suspense } from 'react';
+import React, { Component, ReactElement, lazy, Suspense } from 'react';
 
 import { Loader } from '../components';
 
-class ErrorBoundary extends React.Component<
-  { fallback: React.ReactElement; children: React.ReactElement },
+class ErrorBoundary extends Component<
+  { fallback: ReactElement; children: ReactElement },
   { hasError: boolean; error: any; componentStack: any }
 > {
   constructor(props: any) {
@@ -20,10 +20,7 @@ class ErrorBoundary extends React.Component<
   }
 
   render() {
-    if (this.state.hasError) {
-      return this.props.fallback;
-    }
-    return this.props.children;
+    return this.state.hasError ? this.props.fallback : this.props.children;
   }
 }
 

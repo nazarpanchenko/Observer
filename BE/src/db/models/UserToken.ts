@@ -17,7 +17,10 @@ const userTokenModel = (sequelize: any, DataTypes: any) => {
      */
     static associate(models: any) {
       this.belongsTo(models.User, {
-        foreignKey: 'userId',
+        foreignKey: {
+          name: 'userId',
+          allowNull: false,
+        },
         onDelete: 'CASCADE',
       });
     }

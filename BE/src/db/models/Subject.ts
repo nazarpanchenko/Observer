@@ -24,7 +24,10 @@ const subjectModel = (sequelize: any, DataTypes: any) => {
      */
     static associate(models: any) {
       this.belongsTo(models.Report, {
-        foreignKey: 'reportId',
+        foreignKey: {
+          name: 'reportId',
+          allowNull: false,
+        },
         onDelete: 'CASCADE',
       });
     }
@@ -50,32 +53,32 @@ const subjectModel = (sequelize: any, DataTypes: any) => {
         },
       },
       magnitude: {
-        type: DataTypes.FLOAT(3, 2),
+        type: DataTypes.FLOAT(4, 2),
         allowNull: false,
       },
       apparentSize: {
-        type: DataTypes.FLOAT(3, 2),
-        defaultValue: 0.0,
+        type: DataTypes.FLOAT(4, 2),
+        defaultValue: 0.00,
       },
       semiMajorAxis: {
         type: DataTypes.FLOAT(3, 2),
-        defaultValue: 0.0,
+        defaultValue: 0.00,
       },
       axialTilt: {
         type: DataTypes.FLOAT(3, 2),
-        defaultValue: 0.0,
+        defaultValue: 0.00,
       },
       ecccentricity: {
         type: DataTypes.FLOAT(3, 2),
-        defaultValue: 0.0,
+        defaultValue: 0.00,
       },
       inclination: {
         type: DataTypes.FLOAT(3, 2),
-        defaultValue: 0.0,
+        defaultValue: 0.00,
       },
       rotation: {
         type: DataTypes.FLOAT(3, 2),
-        defaultValue: 0.0,
+        defaultValue: 0.00,
       },
     },
     {

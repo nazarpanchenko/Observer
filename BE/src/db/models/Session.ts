@@ -28,11 +28,17 @@ const sessionModel = (sequelize: any, DataTypes: any) => {
      */
     static associate(models: any) {
       this.belongsTo(models.User, {
-        foreignKey: 'userId',
+        foreignKey: {
+          name: 'userId',
+          allowNull: false,
+        },
         onDelete: 'CASCADE',
       });
       this.hasMany(models.Report, {
-        foreignKey: 'sessionId',
+        foreignKey: {
+          name: 'sessionId',
+          allowNull: false,
+        },
         onDelete: 'CASCADE',
       });
     }
@@ -94,7 +100,7 @@ const sessionModel = (sequelize: any, DataTypes: any) => {
       },
       reportsCount: {
         type: DataTypes.INTEGER,
-        allowNull: false,
+        defaultValue: 0,
       },
       sessionRealDurationMin: {
         type: DataTypes.INTEGER,

@@ -1,7 +1,9 @@
 import { Request, Response, NextFunction } from 'express';
+import { StatusCodes } from 'http-status-codes';
 
 import { reportProvider } from '../services';
 import { ReportData, ReportsList } from '../shared/types';
+import { ApiError } from '../utils';
 
 const reportController = {
   list: async (req: Request, res: Response, next: NextFunction): Promise<void> => {
@@ -14,10 +16,20 @@ const reportController = {
   },
 
   getOne: async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+    const { id } = req.params;
+
     try {
-      const data: ReportData = await reportProvider.getOne(
-        Number(req.params.id)
-      );
+      const data: ReportData = await reportProvider.getOne(Number(id));
+      if (data) {
+        next(
+          new ApiError(
+            'getReportByID failed',
+            `Report with id ${id} already exists`,
+            String(StatusCodes.CONFLICT)
+          )
+        );
+      }
+
       res.send(data);
     } catch (err: any) {
       next(err);

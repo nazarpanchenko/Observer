@@ -35,27 +35,45 @@ const reportModel = (sequelize: any, DataTypes: any) => {
      */
     static associate(models: any) {
       this.belongsTo(models.Session, {
-        foreignKey: 'sessionId',
+        foreignKey: {
+          name: 'sessionId',
+          allowNull: false,
+        },
         onDelete: 'CASCADE',
       });
-      this.hasOne(models.Subject, {
-        foreignKey: 'reportId',
+      this.hasMany(models.Subject, {
+        foreignKey: {
+          name: 'reportId',
+          allowNull: false,
+        },
         onDelete: 'CASCADE',
       });
       this.hasMany(models.Telescope, {
-        foreignKey: 'reportId',
+        foreignKey: {
+          name: 'reportId',
+          allowNull: false,
+        },
         onDelete: 'CASCADE',
       });
       this.hasMany(models.Eyepiece, {
-        foreignKey: 'reportId',
+        foreignKey: {
+          name: 'reportId',
+          allowNull: false,
+        },
         onDelete: 'CASCADE',
       });
       this.hasMany(models.BarlowLens, {
-        foreignKey: 'reportId',
+        foreignKey: {
+          name: 'reportId',
+          allowNull: false,
+        },
         onDelete: 'CASCADE',
       });
       this.hasMany(models.Filter, {
-        foreignKey: 'reportId',
+        foreignKey: {
+          name: 'reportId',
+          allowNull: false,
+        },
         onDelete: 'CASCADE',
       });
     }

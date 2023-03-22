@@ -3,17 +3,17 @@ import { getReasonPhrase } from 'http-status-codes';
 
 import { logger } from '../utils';
 
-const logError =
+const errorLogger =
   (err: any) =>
-  async (req: Request, res: Response): Promise<void> => {
-    logger.error(err.name);
+  async (req: Request, res: Response): Promise<void> => {    
+    logger.error(err.description);
     res
       .status(err.code)
       .send({
         errCode: err.code,
         errStatus: getReasonPhrase(err.code),
-        errMsg: err.name,
+        errMsg: err.description,
       });
   };
 
-export default logError;
+export default errorLogger;

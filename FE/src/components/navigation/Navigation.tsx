@@ -1,4 +1,4 @@
-import React, { ReactElement, useState } from 'react';
+import React, { FC, ReactElement, KeyboardEvent, MouseEvent, useState } from 'react';
 import { Link } from 'react-router-dom';
 import {
   useTheme,
@@ -14,8 +14,8 @@ import {
 } from '@mui/material';
 
 import {
-  ArrowRight,
-  ArrowLeft,
+  MenuOpenOutlined,
+  ArrowCircleLeftRounded,
   StickyNote2Outlined,
   LocalActivityOutlined,
   ArchitectureOutlined,
@@ -32,27 +32,38 @@ type NavItem = {
 };
 type NavList = NavItem[];
 
-const navList: NavList = [
-  { name: 'Equipment', path: '/equipment', icon: <StickyNote2Outlined /> },
-  { name: 'Reports', path: '/reports', icon: <LocalActivityOutlined /> },
-  { name: 'Sessions', path: '/sessions', icon: <ArchitectureOutlined /> },
-];
-
-const Navigation: React.FC = (): ReactElement => {
+const Navigation: FC = (): ReactElement => {
   const theme = useTheme();
+
+  const navList: NavList = [
+    {
+      name: 'Sessions',
+      path: '/sessions',
+      icon: <ArchitectureOutlined sx={{ color: theme.text.color.success }} />,
+    },
+    {
+      name: 'Reports',
+      path: '/reports',
+      icon: <LocalActivityOutlined sx={{ color: theme.text.color.success }} />,
+    },
+    {
+      name: 'Equipment',
+      path: '/equipment',
+      icon: <StickyNote2Outlined sx={{ color: theme.text.color.success }} />,
+    },
+  ];
+
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
-  const toggleDrawer =
-    (open: boolean) => (event: React.KeyboardEvent | React.MouseEvent) => {
-      if (
-        event.type === 'keydown' &&
-        ((event as React.KeyboardEvent).key === 'Tab' ||
-          (event as React.KeyboardEvent).key === 'Shift')
-      ) {
-        return;
-      }
-      setIsOpen(open);
-    };
+  const toggleDrawer = (open: boolean) => (event: KeyboardEvent | MouseEvent) => {
+    if (
+      event.type === 'keydown' &&
+      ((event as KeyboardEvent).key === 'Tab' || (event as KeyboardEvent).key === 'Shift')
+    ) {
+      return;
+    }
+    setIsOpen(open);
+  };
 
   const handleLogout = async (): Promise<void> => {
     await authService.logout();
@@ -67,16 +78,18 @@ const Navigation: React.FC = (): ReactElement => {
           justifyContent: 'space-between',
           alignContent: 'center',
         }}>
-        <Button onClick={toggleDrawer(true)}>
-          <ArrowRight sx={{ mr: 2, color: theme.text.color.success }} />
+        <Box sx={{ display: 'flex', alignItems: 'center' }}>
+          <Button onClick={toggleDrawer(true)}>
+            <MenuOpenOutlined sx={{ mr: 1, color: theme.text.color.success }} />
+          </Button>
           <Typography
-            variant="caption"
+            variant="subtitle1"
             sx={{ color: theme.text.color.success }}
-            fontWeight={theme.text.font.weight.extra_bold}
-            fontStyle={theme.text.font.style.oblique}>
+            fontWeight={theme.text.fontWeight.extra_bold}
+            fontStyle={theme.text.fontStyle.oblique}>
             OBSERVER
           </Typography>
-        </Button>
+        </Box>
 
         <Button>
           <Logout sx={{ color: theme.text.color.success }} onClick={handleLogout}>
@@ -94,13 +107,16 @@ const Navigation: React.FC = (): ReactElement => {
           width={250}
           flexGrow={1}
           color={theme.text.color.success}
-          fontWeight={theme.text.font.weight.extra_bold}
+          fontWeight={theme.text.fontWeight.extra_bold}
           role="presentation">
-          <ArrowLeft onClick={toggleDrawer(false)} />
+          <ArrowCircleLeftRounded
+            sx={{ color: theme.text.color.success }}
+            onClick={toggleDrawer(false)}
+          />
           <List>
             {navList.map((el: NavItem) => (
               <ListItem key={el.name} disablePadding>
-                <ListItemButton sx={{ color: theme.text.color.info }}>
+                <ListItemButton sx={{ color: theme.text.color.success }}>
                   <Link className="navbar-link" to={`${el.path}`}>
                     {el.icon}
                     <ListItemText primary={el.name} />

@@ -1,7 +1,8 @@
-import React, { ReactElement, useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { FC, ReactElement, ChangeEvent, useState } from 'react';
+import { useNavigate, Link } from 'react-router-dom';
 import {
   Grid,
+  Box,
   Typography,
   FormControl,
   InputAdornment,
@@ -9,18 +10,20 @@ import {
   Button,
 } from '@mui/material';
 
-import { Email, Password } from '@mui/icons-material';
+import { Email, SecurityOutlined } from '@mui/icons-material';
 
 import { authService } from '../../services';
 import { UserCredentials } from '../../shared/types';
 
-const Signin: React.FC = (): ReactElement => {
+const Signin: FC = (): ReactElement => {
+  const navigate = useNavigate();
+
   const [formData, setFormData] = useState<UserCredentials>({
     email: '',
     password: '',
   });
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
+  const handleInputChange = (e: ChangeEvent<HTMLInputElement>): void => {
     e.preventDefault();
     const { name, value } = e.target;
     setFormData(prev => ({
@@ -31,23 +34,25 @@ const Signin: React.FC = (): ReactElement => {
 
   const handleSignin = async (): Promise<void> => {
     await authService.signin(formData);
+    navigate('/sessions', { replace: true });
   };
 
   return (
     <Grid container alignItems="center">
       <Grid item xs={12}>
-        <Typography variant="h4">Enter Your Workspace</Typography>
+        <Typography variant="h4">Enter Your Credentials</Typography>
       </Grid>
 
-      <Grid item xs={6}>
-        <form className="signin-form" onSubmit={handleSignin}>
+      <Grid item xs={3}>
+        <Box component="form" onSubmit={handleSignin}>
           <FormControl required onChange={handleInputChange}>
             <TextField
               type="email"
+              label="Email"
+              placeholder="example@domain.com"
               fullWidth
-              placeholder="Email"
               InputProps={{
-                endAdornment: (
+                startAdornment: (
                   <InputAdornment position="start">
                     <Email />
                   </InputAdornment>
@@ -58,31 +63,31 @@ const Signin: React.FC = (): ReactElement => {
           <FormControl required onChange={handleInputChange}>
             <TextField
               type="password"
+              label="Password"
+              placeholder="**********"
               fullWidth
-              placeholder="Password"
               InputProps={{
                 startAdornment: (
                   <InputAdornment position="start">
-                    Password
-                  </InputAdornment>
-                ),
-                endAdornment: (
-                  <InputAdornment position="start">
-                    <Password />
+                    <SecurityOutlined />
                   </InputAdornment>
                 ),
               }}
             />
           </FormControl>
 
-          <FormControl sx={{ display: 'flex', justifyContent: 'flex-end' }}>
-            <Button type="submit" variant="contained">
-              Sign In
-            </Button>
+          <FormControl>
+            <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
+              <Button type="submit" variant="contained">
+                Sign In
+              </Button>
+            </Box>
           </FormControl>
-        </form>
+        </Box>
 
-        <Link to="/forgot-password">Forgot password?</Link>
+        <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
+          <Link to="/forgot-password">Forgot password?</Link>
+        </Box>
       </Grid>
     </Grid>
   );

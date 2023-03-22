@@ -15,18 +15,16 @@ declare module '@mui/material/styles' {
     bg: ThemeColors;
     text: {
       color: ThemeColors;
-      font: {
-        weight: {
-          extra_light: number;
-          light: number;
-          normal: number;
-          bold: number;
-          extra_bold: number;
-        };
-        style: {
-          italic: string;
-          oblique: string;
-        };
+      fontWeight: {
+        extra_light: number;
+        light: number;
+        normal: number;
+        bold: number;
+        extra_bold: number;
+      };
+      fontStyle: {
+        italic: string;
+        oblique: string;
       };
     };
   }
@@ -34,18 +32,16 @@ declare module '@mui/material/styles' {
     bg?: ThemeColors;
     text?: {
       color?: ThemeColors;
-      font?: {
-        weight?: {
-          extra_light?: number;
-          light?: number;
-          normal?: number;
-          bold?: number;
-          extra_bold?: number;
-        };
-        style?: {
-          italic?: string;
-          oblique?: string;
-        };
+      fontWeight?: {
+        extra_light?: number;
+        light?: number;
+        normal?: number;
+        bold?: number;
+        extra_bold?: number;
+      };
+      fontStyle?: {
+        italic?: string;
+        oblique?: string;
       };
     };
   }

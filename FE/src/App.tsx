@@ -18,7 +18,8 @@ const App = () => {
           <>
             <Navigation />
             <Box
-              minHeight="100vh"
+              minHeight="95vh"
+              padding="2.5vh"
               sx={{
                 backgroundColor: _theme?.bg?.main || 'transparent',
               }}>

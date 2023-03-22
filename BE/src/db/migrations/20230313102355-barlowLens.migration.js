@@ -1,48 +1,42 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 'use strict';
 
-import { barlowLensSchemas } from '../consts';
+const { barlowLensSchemas } = require('../consts');
 
-export async function up(queryInterface, Sequelize) {
-  await queryInterface.createTable(
-    'barlow_lenses',
-    {
-      id: {
-        primaryKey: true,
-        autoIncrement: true,
-        type: Sequelize.BIGINT(11),
-      },
-      reportId: {
-        type: Sequelize.BIGINT(11),
-        allowNull: false,
-        references: {
-          model: 'Report',
-          key: 'id',
+module.exports = {
+  up: async function (queryInterface, Sequelize) {
+    await queryInterface.createTable(
+      'barlow_lenses',
+      {
+        id: {
+          primaryKey: true,
+          autoIncrement: true,
+          type: Sequelize.BIGINT(11),
         },
-        onDelete: 'CASCADE',
-      },
-      barlowLensSchema: {
-        type: Sequelize.STRING,
-        validate: {
-          isIn: {
-            args: [Object.values(barlowLensSchemas)],
-            msg: `barlowLensSchema field's value must be one of the following: ${Object.values(
-              barlowLensSchemas
-            ).join(', ')}`,
+        barlowLensSchema: {
+          type: Sequelize.STRING,
+          validate: {
+            isIn: {
+              args: [Object.values(barlowLensSchemas)],
+              msg: `barlowLensSchema field's value must be one of the following: ${Object.values(
+                barlowLensSchemas
+              ).join(', ')}`,
+            },
           },
+          defaultValue: '',
         },
-        defaultValue: '',
+        barlowLensManufacturer: {
+          type: Sequelize.STRING(50),
+          defaultValue: '',
+        },
       },
-      barlowLensManufacturer: {
-        type: Sequelize.STRING(50),
-        defaultValue: '',
-      },
-    },
-    {
-      timestamps: true,
-    }
-  );
-}
+      {
+        timestamps: true,
+      }
+    );
+  },
 
-export async function down(queryInterface) {
-  await queryInterface.dropTable('barlow_lenses', { cascade: true });
-}
+  down: async function (queryInterface) {
+    await queryInterface.dropTable('barlow_lenses', { cascade: true });
+  },
+};

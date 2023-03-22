@@ -22,11 +22,17 @@ const userModel = (sequelize: any, DataTypes: any) => {
      */
     static associate(models: any) {
       this.hasOne(models.UserToken, {
-        foreignKey: 'userId',
+        foreignKey: {
+          name: 'userId',
+          allowNull: false,
+        },
         onDelete: 'CASCADE',
       });
       this.hasMany(models.Session, {
-        foreignKey: 'sessionId',
+        foreignKey: {
+          name: 'userId',
+          allowNull: false,
+        },
         onDelete: 'CASCADE',
       });
     }

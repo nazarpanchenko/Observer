@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react';
+import React, { FC, ReactElement } from 'react';
 import { useLoaderData } from 'react-router-dom';
 import {
   Grid,
@@ -24,7 +24,7 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
   },
   [`&.${tableCellClasses.body}`]: {
     fontSize: 15,
-    fontWeight: 500,
+    fontWeight: theme.text.fontWeight.light,
   },
 }));
 
@@ -37,7 +37,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 
-const Reports: React.FC = (): ReactElement => {
+const Reports: FC = (): ReactElement => {
   const reports = useLoaderData() as ReportsList;
 
   return (
@@ -47,7 +47,7 @@ const Reports: React.FC = (): ReactElement => {
           <Typography variant="h4">Reports</Typography>
         </Grid>
 
-        <Grid item xs={6}>
+        <Grid item xs={10}>
           <TableContainer component={Paper}>
             <Table size="small" aria-label="reports table">
               <TableHead>
@@ -97,16 +97,14 @@ const Reports: React.FC = (): ReactElement => {
               </TableBody>
             </Table>
           </TableContainer>
+
+          {!reports.data.length && (
+            <Typography variant="h6" align="center">
+              No Data
+            </Typography>
+          )}
         </Grid>
       </Grid>
-
-      {!reports.data.length && (
-        <Grid container justifyContent="center">
-          <Grid item xs={6}>
-            <Typography variant="h6" align="center">No Data</Typography>
-          </Grid>
-        </Grid>
-      )}
     </>
   );
 };

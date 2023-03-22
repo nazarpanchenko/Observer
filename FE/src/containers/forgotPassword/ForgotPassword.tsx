@@ -1,6 +1,7 @@
-import React, { ReactElement, useState } from 'react';
+import React, { FC, ReactElement, ChangeEvent, useState } from 'react';
 import {
   Grid,
+  Box,
   Typography,
   FormControl,
   Button,
@@ -12,10 +13,10 @@ import { Email } from '@mui/icons-material';
 
 import { authService } from '../../services';
 
-const ForgotPassword: React.FC = (): ReactElement => {
+const ForgotPassword: FC = (): ReactElement => {
   const [email, setEmail] = useState<string>('');
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
+  const handleInputChange = (e: ChangeEvent<HTMLInputElement>): void => {
     e.preventDefault();
     setEmail(e.target.value);
   };
@@ -30,15 +31,16 @@ const ForgotPassword: React.FC = (): ReactElement => {
         <Typography variant="h4">Password Recovery</Typography>
       </Grid>
 
-      <Grid item xs={6}>
-        <form className="password-recovery-form" onSubmit={handlePasswordRecovery}>
+      <Grid item xs={3}>
+        <Box component="form" onSubmit={handlePasswordRecovery}>
           <FormControl required onChange={handleInputChange}>
             <TextField
               type="email"
+              label="Email"
+              placeholder="example@domain.com"
               fullWidth
-              placeholder="Email"
               InputProps={{
-                endAdornment: (
+                startAdornment: (
                   <InputAdornment position="start">
                     <Email />
                   </InputAdornment>
@@ -48,11 +50,13 @@ const ForgotPassword: React.FC = (): ReactElement => {
           </FormControl>
 
           <FormControl sx={{ display: 'flex', justifyContent: 'flex-end' }}>
-            <Button type="submit" variant="contained">
-              Reset Password
-            </Button>
+            <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
+              <Button type="submit" variant="contained">
+                Reset
+              </Button>
+            </Box>
           </FormControl>
-        </form>
+        </Box>
       </Grid>
     </Grid>
   );

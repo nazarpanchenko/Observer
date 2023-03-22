@@ -1,48 +1,42 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 'use strict';
 
-import { filterTypes } from '../consts';
+const { filterTypes } = require('../consts');
 
-export async function up(queryInterface, Sequelize) {
-  await queryInterface.createTable(
-    'filters',
-    {
-      id: {
-        primaryKey: true,
-        autoIncrement: true,
-        type: Sequelize.BIGINT(11),
-      },
-      reportId: {
-        type: Sequelize.BIGINT(11),
-        allowNull: false,
-        references: {
-          model: 'Report',
-          key: 'id',
+module.exports = {
+  up: async function (queryInterface, Sequelize) {
+    await queryInterface.createTable(
+      'filters',
+      {
+        id: {
+          primaryKey: true,
+          autoIncrement: true,
+          type: Sequelize.BIGINT(11),
         },
-        onDelete: 'CASCADE',
-      },
-      filterType: {
-        type: Sequelize.STRING,
-        validate: {
-          isIn: {
-            args: [Object.values(filterTypes)],
-            msg: `filterType field's value must be one of the following: ${Object.values(
-              filterTypes
-            ).join(', ')}`,
+        filterType: {
+          type: Sequelize.STRING,
+          validate: {
+            isIn: {
+              args: [Object.values(filterTypes)],
+              msg: `filterType field's value must be one of the following: ${Object.values(
+                filterTypes
+              ).join(', ')}`,
+            },
           },
+          defaultValue: '',
         },
-        defaultValue: '',
+        filter: {
+          type: Sequelize.STRING(50),
+          defaultValue: '',
+        },
       },
-      filter: {
-        type: Sequelize.STRING(50),
-        defaultValue: '',
-      },
-    },
-    {
-      timestamps: true,
-    }
-  );
-}
+      {
+        timestamps: true,
+      }
+    );
+  },
 
-export async function down(queryInterface) {
-  await queryInterface.dropTable('filters', { cascade: true });
-}
+  down: async function (queryInterface) {
+    await queryInterface.dropTable('filters', { cascade: true });
+  },
+};
