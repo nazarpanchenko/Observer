@@ -92,8 +92,8 @@ export const accessToken = localStorage.getItem('accessToken');
 export const PAGINATION_CONFIG = Object.freeze({
   DEFAULT_OFFSET: 0,
   LIMIT: {
-    min: 3,
-    avg: 4,
-    max: 5,
+    min: 5,
+    avg: 10,
+    max: 15,
   },
 });
