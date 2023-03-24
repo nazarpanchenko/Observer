@@ -7,6 +7,7 @@ import {
   PaginationConfig,
   SequelizeDeleteResponse,
   SessionData,
+  SessionParams,
 } from '../../shared/types';
 import { PAGINATION_CONFIG } from '../../consts';
 import db from '..';
@@ -28,18 +29,10 @@ const sessionModel = (sequelize: any, DataTypes: any) => {
      */
     static associate(models: any) {
       this.belongsTo(models.User, {
-        foreignKey: {
-          name: 'userId',
-          allowNull: false,
-        },
-        onDelete: 'CASCADE',
+        foreignKey: 'userId',
       });
       this.hasMany(models.Report, {
-        foreignKey: {
-          name: 'sessionId',
-          allowNull: false,
-        },
-        onDelete: 'CASCADE',
+        foreignKey: 'sessionId',
       });
     }
 
@@ -64,7 +57,7 @@ const sessionModel = (sequelize: any, DataTypes: any) => {
       return data;
     }
 
-    static async save(data: SessionData): Promise<SessionData> {
+    static async save(data: SessionParams): Promise<SessionData> {
       const reportsCount: number = await db.Report.count();
       const _data: SessionData = await this.create({
         ...data,

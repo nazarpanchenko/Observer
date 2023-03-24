@@ -2,9 +2,9 @@
 
 import { Model } from 'sequelize';
 
-import { TelescopeTypes } from '../../shared/enums';
 import {
   PaginationConfig,
+  ReportParams,
   ReportData,
   ReportsList,
   ReportsListTuple,
@@ -21,7 +21,7 @@ const reportModel = (sequelize: any, DataTypes: any) => {
   class Report extends Model<ReportData> implements ReportData {
     id?: number;
     subject!: string;
-    telescopeType!: TelescopeTypes;
+    telescopeModel!: string;
     magnification!: string;
     observationRealDurationMin!: number;
     observationVirtualDurationMin!: number;
@@ -39,20 +39,15 @@ const reportModel = (sequelize: any, DataTypes: any) => {
           name: 'sessionId',
           allowNull: false,
         },
-        onDelete: 'CASCADE',
       });
       this.hasMany(models.Subject, {
         foreignKey: {
           name: 'reportId',
           allowNull: false,
         },
-        onDelete: 'CASCADE',
       });
       this.hasMany(models.Telescope, {
-        foreignKey: {
-          name: 'reportId',
-          allowNull: false,
-        },
+        foreignKey: 'reportId',
         onDelete: 'CASCADE',
       });
       this.hasMany(models.Eyepiece, {
@@ -60,21 +55,18 @@ const reportModel = (sequelize: any, DataTypes: any) => {
           name: 'reportId',
           allowNull: false,
         },
-        onDelete: 'CASCADE',
       });
       this.hasMany(models.BarlowLens, {
         foreignKey: {
           name: 'reportId',
           allowNull: false,
         },
-        onDelete: 'CASCADE',
       });
       this.hasMany(models.Filter, {
         foreignKey: {
           name: 'reportId',
           allowNull: false,
         },
-        onDelete: 'CASCADE',
       });
     }
 
@@ -96,12 +88,12 @@ const reportModel = (sequelize: any, DataTypes: any) => {
     }
 
     static async getOne(id: number): Promise<ReportData | null> {
-      const data = await this.findOne({ where: { id } });
+      const data: ReportData | null = await this.findOne({ where: { id } });
       return data;
     }
 
-    static async save(data: ReportData): Promise<ReportData> {
-      const _data = await this.create(data);
+    static async save(data: ReportParams): Promise<ReportData> {
+      const _data: ReportData = await this.create(data);
       return _data;
     }
 
@@ -139,17 +131,9 @@ const reportModel = (sequelize: any, DataTypes: any) => {
         type: DataTypes.STRING(50),
         allowNull: false,
       },
-      telescopeType: {
-        type: DataTypes.STRING,
+      telescopeModel: {
+        type: DataTypes.STRING(50),
         allowNull: false,
-        validate: {
-          isIn: {
-            args: [Object.values(TelescopeTypes)],
-            msg: `telescopeType field's value must be one of the following: ${Object.values(
-              TelescopeTypes
-            ).join(', ')}`,
-          },
-        },
       },
       magnification: {
         type: DataTypes.STRING(5),

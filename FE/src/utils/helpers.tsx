@@ -2,6 +2,9 @@ import React, { Component, ReactElement, lazy, Suspense } from 'react';
 
 import { Loader } from '../components';
 
+const getAccessToken = (): string | null =>
+  `Bearer ${localStorage.getItem('accessToken')}`;
+
 class ErrorBoundary extends Component<
   { fallback: ReactElement; children: ReactElement },
   { hasError: boolean; error: any; componentStack: any }
@@ -41,4 +44,4 @@ const lazyLoadRoute = (componentName: string): ReactElement => {
   );
 };
 
-export { ErrorBoundary, lazyLoadRoute };
+export { ErrorBoundary, lazyLoadRoute, getAccessToken };

@@ -7,7 +7,7 @@ import { FilterData } from '../../shared/types';
 
 const filterModel = (sequelize: any, DataTypes: any) => {
   class Filter extends Model<FilterData> implements FilterData {
-    id?: number;
+    id!: number;
     filter?: string;
     filterType?: FilterTypes;
 
@@ -22,7 +22,6 @@ const filterModel = (sequelize: any, DataTypes: any) => {
           name: 'reportId',
           allowNull: false,
         },
-        onDelete: 'CASCADE',
       });
     }
   }

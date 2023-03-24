@@ -1,7 +1,7 @@
 import { SubjectTypes } from '../enums';
 
 type SubjectData = {
-  id?: number;
+  id: number;
   category: SubjectTypes;
   apparentSize?: number;
   magnitude: number;

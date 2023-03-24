@@ -7,7 +7,7 @@ import { SubjectData } from '../../shared/types';
 
 const subjectModel = (sequelize: any, DataTypes: any) => {
   class Subject extends Model<SubjectData> implements SubjectData {
-    id?: number;
+    id!: number;
     category!: SubjectTypes;
     apparentSize?: number;
     magnitude!: number;
@@ -28,7 +28,6 @@ const subjectModel = (sequelize: any, DataTypes: any) => {
           name: 'reportId',
           allowNull: false,
         },
-        onDelete: 'CASCADE',
       });
     }
   }

@@ -2,6 +2,7 @@
 'use strict';
 
 const { telescopeTypes } = require('../consts');
+const { containsChar } = require('../validators');
 
 module.exports = {
   up: async function (queryInterface, Sequelize) {
@@ -13,7 +14,7 @@ module.exports = {
           autoIncrement: true,
           type: Sequelize.BIGINT(11),
         },
-        telescopeType: {
+        type: {
           type: Sequelize.STRING,
           allowNull: false,
           validate: {
@@ -25,12 +26,23 @@ module.exports = {
             },
           },
         },
-        telescopeModel: {
+        model: {
           type: Sequelize.STRING(50),
           allowNull: false,
         },
-        telescopeDiameterMm: {
+        diameterMm: {
           type: Sequelize.INTEGER,
+          allowNull: false,
+        },
+        lightForce: {
+          type: Sequelize.STRING(3),
+          allowNull: false,
+          validate: {
+            containsChar: (char) => containsChar('lightForce', char, 'F'),
+          },
+        },
+        resolution: {
+          type: Sequelize.FLOAT(3, 2),
           allowNull: false,
         },
       },

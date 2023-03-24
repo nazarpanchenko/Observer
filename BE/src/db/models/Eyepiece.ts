@@ -8,7 +8,7 @@ import { containsChar } from '../../utils';
 
 const eyepieceModel = (sequelize: any, DataTypes: any) => {
   class Eyepiece extends Model<EyepieceData> implements EyepieceData {
-    id?: number;
+    id!: number;
     eyepieceManufacturer!: string;
     eyepieceModel!: string;
     eyepieceSizeSchema!: EyepieceDiameters;
@@ -28,7 +28,6 @@ const eyepieceModel = (sequelize: any, DataTypes: any) => {
           name: 'reportId',
           allowNull: false,
         },
-        onDelete: 'CASCADE',
       });
     }
   }
@@ -71,7 +70,7 @@ const eyepieceModel = (sequelize: any, DataTypes: any) => {
         type: DataTypes.STRING(6),
         allowNull: false,
         validate: {
-          containsChar: (char: string) => containsChar('eyepieceFieldRange', char, `'`),
+          containsChar: (char: string) => containsChar('eyepieceFieldRange', char, "'"),
         },
       },
       eyepieceOpticalSchema: {

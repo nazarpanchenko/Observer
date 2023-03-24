@@ -3,7 +3,7 @@
 import { Model } from 'sequelize';
 
 import db from '..';
-import { UserData, CreateUser } from '../../shared/types';
+import { isUserVerified, UserData, CreateUser } from '../../shared/types';
 
 const userModel = (sequelize: any, DataTypes: any) => {
   class User extends Model<UserData> implements UserData {
@@ -12,7 +12,7 @@ const userModel = (sequelize: any, DataTypes: any) => {
     lastName!: string;
     email!: string;
     password!: string;
-    isVerified?: 1 | 0;
+    isVerified?: isUserVerified;
     verificationLink?: string;
 
     /**
@@ -26,14 +26,12 @@ const userModel = (sequelize: any, DataTypes: any) => {
           name: 'userId',
           allowNull: false,
         },
-        onDelete: 'CASCADE',
       });
       this.hasMany(models.Session, {
         foreignKey: {
-          name: 'userId',
+          name: 'sessionId',
           allowNull: false,
         },
-        onDelete: 'CASCADE',
       });
     }
 

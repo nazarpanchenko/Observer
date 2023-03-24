@@ -2,14 +2,17 @@ import { Model } from 'sequelize';
 
 import { SessionCategories } from '../enums';
 
-type SessionData = {
-  id?: number;
+type SessionParams = {
   category: SessionCategories;
-  reportsCount: number;
   sessionRealDurationMin: number;
   sessionVirtualDurationMin: number;
   sessionStartDate: Date;
   sessionEndDate: Date;
+};
+
+type SessionData = SessionParams & {
+  id?: number;
+  reportsCount: number;
 };
 
 type SessionModel = Model<SessionData>;
@@ -19,4 +22,4 @@ type SessionsList = {
   count: number;
 };
 
-export { SessionData, SessionModel, SessionsList };
+export { SessionParams, SessionData, SessionModel, SessionsList };

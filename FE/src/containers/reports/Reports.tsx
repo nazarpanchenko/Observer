@@ -54,6 +54,7 @@ const Reports: FC = (): ReactElement => {
                 <TableRow>
                   <StyledTableCell align="center">ID</StyledTableCell>
                   <StyledTableCell align="center">Subject</StyledTableCell>
+                  <StyledTableCell align="center">Telescope Model</StyledTableCell>
                   <StyledTableCell align="center">Magnification</StyledTableCell>
                   <StyledTableCell align="center">
                     Observation Real Duration
@@ -79,6 +80,9 @@ const Reports: FC = (): ReactElement => {
                     <StyledTableCell align="center">{report.subject}</StyledTableCell>
                     <StyledTableCell component="th" scope="row" align="center">
                       {report.magnification}
+                    </StyledTableCell>
+                    <StyledTableCell component="th" scope="row" align="center">
+                      {report.telescopeModel}
                     </StyledTableCell>
                     <StyledTableCell component="th" scope="row" align="center">
                       {report.observationRealDurationMin}

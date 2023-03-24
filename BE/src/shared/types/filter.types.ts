@@ -1,7 +1,7 @@
 import { FilterTypes } from '../enums';
 
 type FilterData = {
-  id?: number;
+  id: number;
   filterType?: FilterTypes;
   filter?: string;
 };

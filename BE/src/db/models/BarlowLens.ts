@@ -7,7 +7,7 @@ import { BarlowLensSchema, BarlowLensData } from '../../shared/types';
 
 const barlowLensModel = (sequelize: any, DataTypes: any) => {
   class BarlowLens extends Model<BarlowLensData> implements BarlowLensData {
-    id?: number;
+    id!: number;
     barlowLensManufacturer?: string;
     barlowLensSchema?: BarlowLensSchema;
 
@@ -22,7 +22,6 @@ const barlowLensModel = (sequelize: any, DataTypes: any) => {
           name: 'reportId',
           allowNull: false,
         },
-        onDelete: 'CASCADE',
       });
     }
   }

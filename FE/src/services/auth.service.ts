@@ -1,5 +1,4 @@
-import { accessToken } from '../consts';
-import { _axios } from '../utils';
+import { _axios, getAccessToken } from '../utils';
 import { UserData, RegisteredUser, UserCredentials } from '../shared/types';
 
 const signup = async (formData: UserData): Promise<void> => {
@@ -10,8 +9,8 @@ const signup = async (formData: UserData): Promise<void> => {
     localStorage.setItem('userData', JSON.stringify({ id, firstName, lastName }));
     localStorage.setItem('accessToken', accessToken);
     localStorage.setItem('refreshToken', refreshToken);
-  } catch (err) {
-    console.log(`signup error: ${err}`);
+  } catch (err: any) {
+    console.log(`signup error: ${err.message}`);
   }
 };
 
@@ -19,11 +18,11 @@ const signin = async (formData: UserCredentials): Promise<void> => {
   try {
     await _axios.post('/auth/signin', formData, {
       headers: {
-        Authorization: `Bearer ${accessToken}`,
+        Authorization: getAccessToken(),
       },
     });
-  } catch (err) {
-    console.log(`signin error: ${err}`);
+  } catch (err: any) {
+    console.log(`signin error: ${err.message}`);
   }
 };
 
@@ -31,13 +30,14 @@ const logout = async (): Promise<void> => {
   try {
     await _axios.post('/auth/logout', null, {
       headers: {
-        Authorization: `Bearer ${accessToken}`,
+        Authorization: getAccessToken(),
       },
     });
-  } catch (err) {
-    console.log(`logout error: ${err}`);
+  } catch (err: any) {
+    console.log(`logout error: ${err.message}`);
   } finally {
-    localStorage.removeItem('accessToken');
+    localStorage.removeItem('userData');
+    localStorage.removeItem('refreshToken');
     localStorage.removeItem('refreshToken');
   }
 };
@@ -49,13 +49,25 @@ const forgotPassword = async (email: string): Promise<void> => {
       { email },
       {
         headers: {
-          Authorization: `Bearer ${accessToken}`,
+          Authorization: getAccessToken(),
         },
       }
     );
-  } catch (err) {
-    console.log(`forgotPassword error: ${err}`);
+  } catch (err: any) {
+    console.log(`forgotPassword error: ${err.message}`);
   }
 };
 
-export { signup, signin, logout, forgotPassword };
+const tokenRefresh = async (): Promise<void> => {
+  try {
+    await _axios.get('/auth/token-refresh', {
+      headers: {
+        Authorization: getAccessToken(),
+      },
+    });
+  } catch (err: any) {
+    console.log(`tokenRefresh error: ${err.message}`);
+  }
+};
+
+export { signup, signin, logout, forgotPassword, tokenRefresh };

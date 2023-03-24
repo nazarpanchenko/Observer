@@ -2,6 +2,7 @@ type ReportData = {
   id: number;
   subject: string;
   magnification: string;
+  telescopeModel: string;
   observationRealDurationMin: number;
   observationVirtualDurationMin: number;
   observationStartDate: Date;

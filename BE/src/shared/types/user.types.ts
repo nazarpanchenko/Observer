@@ -1,12 +1,14 @@
 import { JwtToken } from '.';
 
+type isUserVerified = 1 | 0;
+
 type UserData = {
   id: number;
   firstName: string;
   lastName: string;
   email: string;
   password: string;
-  isVerified?: 1 | 0;
+  isVerified?: isUserVerified;
   verificationLink?: string;
 };
 
@@ -23,7 +25,7 @@ type UserDtoData = JwtToken & {
   id: number;
   firstName: string;
   lastName: string;
-  isVerified: 1 | 0;
+  isVerified: isUserVerified;
 };
 
-export { UserData, CreateUser, UserDtoData };
+export { isUserVerified, UserData, CreateUser, UserDtoData };

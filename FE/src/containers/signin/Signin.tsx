@@ -85,7 +85,10 @@ const Signin: FC = (): ReactElement => {
           </FormControl>
         </Box>
 
-        <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
+        <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
+          <Box component="span">
+            Do not have an account yet? Click <Link to="/signup">Here</Link> to create one
+          </Box>
           <Link to="/forgot-password">Forgot password?</Link>
         </Box>
       </Grid>

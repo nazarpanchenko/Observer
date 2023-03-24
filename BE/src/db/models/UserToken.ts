@@ -2,12 +2,11 @@
 
 import { Model } from 'sequelize';
 
-import { UserTokenData, UserTokenTuple } from '../../shared/types';
+import { UserTokenData, ModifiedUserToken } from '../../shared/types';
 
 const userTokenModel = (sequelize: any, DataTypes: any) => {
   class UserToken extends Model<UserTokenData> implements UserTokenData {
-    id?: number;
-    userId?: number;
+    id!: number;
     refreshToken!: string;
 
     /**
@@ -21,42 +20,41 @@ const userTokenModel = (sequelize: any, DataTypes: any) => {
           name: 'userId',
           allowNull: false,
         },
-        onDelete: 'CASCADE',
       });
     }
 
-    static async getToken(userId: string): Promise<UserTokenData | null> {
+    static async getToken(id: string): Promise<UserTokenData | null> {
       const storedToken: UserTokenData | null = await UserToken.findOne({
-        where: { userId },
+        where: { id },
         attributes: ['id'],
       });
       return storedToken;
     }
 
     static async saveToken(
-      userId: number,
+      id: number,
       refreshToken: string
     ): Promise<UserTokenData> {      
       const createdToken: UserTokenData = await UserToken.create({
-        userId,
+        id,
         refreshToken,
       });
       return createdToken;
     }
 
     static async updateToken(
-      userId: number,
+      id: number,
       refreshToken: string
     ): Promise<UserTokenData> {
-      const [affectedCount, affectedRows]: UserTokenTuple =
+      const updatedData: ModifiedUserToken =
         await UserToken.update(
           { refreshToken },
           {
-            where: { userId },
+            where: { id },
             returning: true,
           }
         );
-      return { ...affectedRows[0] };
+      return { ...updatedData[1][0] };
     }
   }
 

@@ -1,10 +1,12 @@
 import { TelescopeTypes } from '../enums';
 
 type TelescopeData = {
-  id?: number;
-  telescopeType: TelescopeTypes;
-  telescopeModel: string;
-  telescopeDiameterMm: number;
+  id: number;
+  type: TelescopeTypes;
+  model: string;
+  diameterMm: number;
+  lightForce: string;
+  resolution: number;
 };
 
 export { TelescopeData };

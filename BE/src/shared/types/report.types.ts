@@ -1,14 +1,15 @@
-import { TelescopeTypes } from '../enums';
-
-type ReportData = {
-  id?: number;
-  telescopeType: TelescopeTypes;
+type ReportParams = {
   subject: string;
+  telescopeModel: string;
   magnification: string;
   observationRealDurationMin: number;
   observationVirtualDurationMin: number;
   observationStartDate: Date;
   observationEndDate: Date;
+};
+
+type ReportData = ReportParams & {
+  id?: number;
 };
 
 type ReportsList = {
@@ -32,6 +33,7 @@ type ModifiedReportData = {
 };
 
 export {
+  ReportParams,
   ReportData,
   ReportsList,
   ReportsListTuple,

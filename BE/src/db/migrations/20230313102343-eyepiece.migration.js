@@ -48,7 +48,7 @@ module.exports = {
           type: Sequelize.STRING(6),
           allowNull: false,
           validate: {
-            containsChar: char => containsChar('eyepieceFieldRange', char, `'`),
+            containsChar: char => containsChar('eyepieceFieldRange', char, "'"),
           },
         },
         eyepieceOpticalSchema: {

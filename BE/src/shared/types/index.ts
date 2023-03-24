@@ -1,10 +1,11 @@
 import { PaginationConfig, SequelizeDeleteResponse } from './global.types';
 import { DbConf } from './db.types';
-import { UserData, CreateUser, UserDtoData } from './user.types';
-import { UserTokenData, UserTokenTuple, JwtToken } from './userToken.types';
-import { SessionData, SessionModel, SessionsList } from './session.types';
+import { isUserVerified, UserData, CreateUser, UserDtoData } from './user.types';
+import { UserTokenData, ModifiedUserToken, JwtToken } from './userToken.types';
+import { SessionData, SessionParams, SessionModel, SessionsList } from './session.types';
 import { SubjectData } from './subject.types';
 import {
+  ReportParams,
   ReportData,
   ReportsList,
   ReportsListTuple,
@@ -22,16 +23,19 @@ export {
   PaginationConfig,
   SequelizeDeleteResponse,
   DbConf,
+  isUserVerified,
   UserData,
   CreateUser,
   UserDtoData,
   UserTokenData,
-  UserTokenTuple,
+  ModifiedUserToken,
   JwtToken,
   SessionData,
+  SessionParams,
   SessionModel,
   SessionsList,
   SubjectData,
+  ReportParams,
   ReportData,
   ReportsList,
   ReportsListTuple,

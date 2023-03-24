@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 'use strict';
 
-const { telescopeTypes } = require('../consts');
 const { containsChar } = require('../validators');
 
 module.exports = {
@@ -18,17 +17,9 @@ module.exports = {
           type: Sequelize.STRING(50),
           allowNull: false,
         },
-        telescopeType: {
-          type: Sequelize.STRING,
+        telescopeModel: {
+          type: Sequelize.STRING(50),
           allowNull: false,
-          validate: {
-            isIn: {
-              args: [Object.values(telescopeTypes)],
-              msg: `telescopeType field's value must be one of the following: ${Object.values(
-                telescopeTypes
-              ).join(', ')}`,
-            },
-          },
         },
         magnification: {
           type: Sequelize.STRING(5),

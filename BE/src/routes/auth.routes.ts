@@ -35,10 +35,24 @@ authRouter.post(
 );
 
 authRouter.post(
+  '/forgot-password',
+  authValidator.forgotPassword,
+  handleBadRequest(),
+  authController.forgotPassword
+);
+
+authRouter.post(
   '/reset-password',
   authValidator.resetPassword,
   handleBadRequest(),
   authController.resetPassword
+);
+
+authRouter.get(
+  '/token-refresh',
+  authValidator.tokenRefresh,
+  handleBadRequest(),
+  authController.tokenRefresh
 );
 
 export default authRouter;

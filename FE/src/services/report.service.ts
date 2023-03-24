@@ -9,8 +9,8 @@ const getReports = async (
       params: { ...req.params },
     });
     return data;
-  } catch (err) {
-    console.log(`getReports error: ${err}`);
+  } catch (err: any) {
+    console.log(`getReports error: ${err.message}`);
   }
 };
 

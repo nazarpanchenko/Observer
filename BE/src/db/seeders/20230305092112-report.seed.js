@@ -1,8 +1,5 @@
 'use strict';
 
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const { telescopeTypes } = require('../consts');
-
 module.exports = {
   up: async function (queryInterface) {
     await queryInterface.bulkInsert(
@@ -11,7 +8,7 @@ module.exports = {
         {
           sessionId: 1,
           subject: 'Moon',
-          telescopeType: telescopeTypes.REFLECTOR,
+          telescopeModel: 'Arsenal GSO DOB 10',
           magnification: '83X',
           observationRealDurationMin: 25,
           observationVirtualDurationMin: 25,
@@ -23,7 +20,7 @@ module.exports = {
         {
           sessionId: 8,
           subject: 'Jupiter',
-          telescopeType: telescopeTypes.REFLECTOR,
+          telescopeModel: 'Arsenal GSO DOB 10',
           magnification: '139X',
           observationRealDurationMin: 74,
           observationVirtualDurationMin: 74,
@@ -35,7 +32,7 @@ module.exports = {
         {
           sessionId: 8,
           subject: 'Saturn',
-          telescopeType: telescopeTypes.REFLECTOR,
+          telescopeModel: 'Arsenal GSO DOB 10',
           magnification: '198',
           observationRealDurationMin: 48,
           observationVirtualDurationMin: 48,
@@ -47,7 +44,7 @@ module.exports = {
         {
           sessionId: 1,
           subject: 'Moon',
-          telescopeType: telescopeTypes.REFLECTOR,
+          telescopeModel: 'Arsenal GSO DOB 10',
           magnification: '250X',
           observationRealDurationMin: 77,
           observationVirtualDurationMin: 73,
@@ -59,7 +56,7 @@ module.exports = {
         {
           sessionId: 1,
           subject: 'M44',
-          telescopeType: telescopeTypes.REFLECTOR,
+          telescopeModel: 'Arsenal GSO DOB 10',
           magnification: '41X',
           observationRealDurationMin: 51,
           observationVirtualDurationMin: 51,
@@ -71,7 +68,7 @@ module.exports = {
         {
           sessionId: 5,
           subject: 'Saturn',
-          telescopeType: telescopeTypes.CASSEGRAIN,
+          telescopeModel: 'Celestron CPC 1100 StarBright',
           magnification: '220X',
           observationRealDurationMin: 27,
           observationVirtualDurationMin: 27,
@@ -83,7 +80,7 @@ module.exports = {
         {
           sessionId: 8,
           subject: 'M44',
-          telescopeType: telescopeTypes.REFLECTOR,
+          telescopeModel: 'Arsenal GSO DOB 10',
           magnification: '139X',
           observationRealDurationMin: 33,
           observationVirtualDurationMin: 31,
@@ -95,7 +92,7 @@ module.exports = {
         {
           sessionId: 9,
           subject: 'Moon',
-          telescopeType: telescopeTypes.REFLECTOR,
+          telescopeModel: 'Arsenal GSO DOB 10',
           magnification: '312X',
           observationRealDurationMin: 120,
           observationVirtualDurationMin: 120,
@@ -107,7 +104,7 @@ module.exports = {
         {
           sessionId: 8,
           subject: 'M44',
-          telescopeType: telescopeTypes.REFLECTOR,
+          telescopeModel: 'Arsenal GSO DOB 10',
           magnification: '41X',
           observationRealDurationMin: 31,
           observationVirtualDurationMin: 31,
@@ -119,7 +116,7 @@ module.exports = {
         {
           sessionId: 5,
           subject: 'Saturn',
-          telescopeType: telescopeTypes.CASSEGRAIN,
+          telescopeModel: 'Celestron CPC 1100 StarBright',
           magnification: '160X',
           observationRealDurationMin: 47,
           observationVirtualDurationMin: 39,
@@ -131,7 +128,7 @@ module.exports = {
         {
           sessionId: 3,
           subject: 'M42',
-          telescopeType: telescopeTypes.REFLECTOR,
+          telescopeModel: '',
           magnification: '225X',
           observationRealDurationMin: 80,
           observationVirtualDurationMin: 69,
@@ -143,7 +140,7 @@ module.exports = {
         {
           sessionId: 9,
           subject: 'M44',
-          telescopeType: telescopeTypes.CASSEGRAIN,
+          telescopeModel: 'Arsenal GSO DOB 10',
           magnification: '41X',
           observationRealDurationMin: 45,
           observationVirtualDurationMin: 43,
@@ -155,8 +152,8 @@ module.exports = {
         {
           sessionId: 9,
           subject: 'Saturn',
-          telescopeType: telescopeTypes.CASSEGRAIN,
-          magnification: '280X',
+          telescopeModel: 'Arsenal GSO DOB 10',
+          magnification: '250X',
           observationRealDurationMin: 90,
           observationVirtualDurationMin: 90,
           observationStartDate: new Date('2022-03-12T22:00:00Z'),
@@ -167,8 +164,8 @@ module.exports = {
         {
           sessionId: 9,
           subject: 'M51',
-          telescopeType: telescopeTypes.CASSEGRAIN,
-          magnification: '143X',
+          telescopeModel: 'Arsenal GSO DOB 10',
+          magnification: '139X',
           observationRealDurationMin: 120,
           observationVirtualDurationMin: 120,
           observationStartDate: new Date('2022-03-12T01:00:00Z'),
@@ -179,7 +176,7 @@ module.exports = {
         {
           sessionId: 9,
           subject: 'NGC 457',
-          telescopeType: telescopeTypes.REFLECTOR,
+          telescopeModel: 'Arsenal GSO DOB 10',
           magnification: '41X',
           observationRealDurationMin: 13,
           observationVirtualDurationMin: 13,
@@ -191,8 +188,8 @@ module.exports = {
         {
           sessionId: 2,
           subject: 'Giades Open Cluster',
-          telescopeType: telescopeTypes.REFLECTOR,
-          magnification: '41X',
+          telescopeModel: 'Levenhuk Skyline Base 100S',
+          magnification: '36X',
           observationRealDurationMin: 37,
           observationVirtualDurationMin: 37,
           observationStartDate: new Date('2022-02-15T04:02:00Z'),
@@ -203,8 +200,8 @@ module.exports = {
         {
           sessionId: 2,
           subject: 'M42',
-          telescopeType: telescopeTypes.REFLECTOR,
-          magnification: '83X',
+          telescopeModel: 'Levenhuk Skyline Base 100S',
+          magnification: '72X',
           observationRealDurationMin: 32,
           observationVirtualDurationMin: 32,
           observationStartDate: new Date('2022-02-15T00:09:00Z'),
@@ -215,7 +212,7 @@ module.exports = {
         {
           sessionId: 4,
           subject: 'Caldwell 14',
-          telescopeType: telescopeTypes.REFLECTOR,
+          telescopeModel: 'Arsenal GSO DOB 10',
           magnification: '83X',
           observationRealDurationMin: 180,
           observationVirtualDurationMin: 180,
@@ -227,8 +224,8 @@ module.exports = {
         {
           sessionId: 2,
           subject: 'Giades Open Cluster',
-          telescopeType: telescopeTypes.REFLECTOR,
-          magnification: '83X',
+          telescopeModel: 'Levenhuk Skyline Base 100S',
+          magnification: '72X',
           observationRealDurationMin: 63,
           observationVirtualDurationMin: 54,
           observationStartDate: new Date('2022-02-18T01:58:00Z'),
@@ -239,7 +236,7 @@ module.exports = {
         {
           sessionId: 9,
           subject: 'Caldwell 14',
-          telescopeType: telescopeTypes.CASSEGRAIN,
+          telescopeModel: 'Arsenal GSO DOB 10',
           magnification: '41X',
           observationRealDurationMin: 28,
           observationVirtualDurationMin: 28,
@@ -251,8 +248,8 @@ module.exports = {
         {
           sessionId: 2,
           subject: 'Caldwell 14',
-          telescopeType: telescopeTypes.REFLECTOR,
-          magnification: '41X',
+          telescopeModel: 'Levenhuk Skyline Base 100S',
+          magnification: '36X',
           observationRealDurationMin: 34,
           observationVirtualDurationMin: 33,
           observationStartDate: new Date('2022-02-18T03:04:00Z'),
@@ -263,7 +260,7 @@ module.exports = {
         {
           sessionId: 6,
           subject: 'M33',
-          telescopeType: telescopeTypes.REFLECTOR,
+          telescopeModel: 'Arsenal GSO DOB 10',
           magnification: '83X',
           observationRealDurationMin: 41,
           observationVirtualDurationMin: 41,
@@ -275,7 +272,7 @@ module.exports = {
         {
           sessionId: 7,
           subject: 'Caldwell 14',
-          telescopeType: telescopeTypes.REFLECTOR,
+          telescopeModel: 'Arsenal GSO DOB 10',
           magnification: '41X',
           observationRealDurationMin: 34,
           observationVirtualDurationMin: 33,
@@ -287,7 +284,7 @@ module.exports = {
         {
           sessionId: 6,
           subject: 'M33',
-          telescopeType: telescopeTypes.REFLECTOR,
+          telescopeModel: 'Arsenal GSO DOB 10',
           magnification: '139X',
           observationRealDurationMin: 32,
           observationVirtualDurationMin: 32,

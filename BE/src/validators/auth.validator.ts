@@ -8,13 +8,20 @@ const authValidator = {
     body('password').isStrongPassword(),
   ],
 
-  signin: [],
+  signin: [
+    body('email').isEmail().isLength({ max: 50 }),
+    body('firstName').isString().isLength({ min: 2, max: 20 }),
+  ],
 
   logout: [],
 
   verifyUser: [],
 
+  forgotPassword: [],
+
   resetPassword: [],
+
+  tokenRefresh: [],
 };
 
 export default authValidator;

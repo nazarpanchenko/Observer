@@ -43,7 +43,23 @@ const authController = {
     res.send({});
   },
 
+  forgotPassword: async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ): Promise<void> => {
+    res.send({});
+  },
+
   resetPassword: async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ): Promise<void> => {
+    res.send({});
+  },
+
+  tokenRefresh: async (
     req: Request,
     res: Response,
     next: NextFunction
