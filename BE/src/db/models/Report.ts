@@ -139,7 +139,7 @@ const reportModel = (sequelize: any, DataTypes: any) => {
         type: DataTypes.STRING(5),
         allowNull: false,
         validate: {
-          containsChar: (char: string) => containsChar('magnification', char, 'X'),
+          containsChar: (char: string) => containsChar('magnification', char, ['X']),
         },
       },
       observationRealDurationMin: {

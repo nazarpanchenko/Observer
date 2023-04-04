@@ -39,7 +39,7 @@ const userModel = (sequelize: any, DataTypes: any) => {
       const userData: UserData | null = await User.findOne({
         where: { ...query },
         attributes: ['id'],
-        include: db.Session,
+        include: db.models.Session,
       });
       return userData;
     }

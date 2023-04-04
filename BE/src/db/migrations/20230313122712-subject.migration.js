@@ -45,7 +45,7 @@ module.exports = {
           type: Sequelize.FLOAT(3, 2),
           defaultValue: 0.00,
         },
-        inclination: {
+        orbitalInclination: {
           type: Sequelize.FLOAT(3, 2),
           defaultValue: 0.00,
         },

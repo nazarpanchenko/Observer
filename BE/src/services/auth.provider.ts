@@ -12,7 +12,7 @@ class AuthProvider {
     const passwordHash = await bcrypt.hash(params.password, conf.jwt.salt_rounds);
     const verificationLink = uuidv4();
 
-    const storedUser: UserData = await db.User.signup({
+    const storedUser: UserData = await db.models.User.signup({
       ...params,
       password: passwordHash,
     });
@@ -26,7 +26,7 @@ class AuthProvider {
       lastName: storedUser.lastName,
       isVerified: storedUser.isVerified || 0,
       ...tokens,
-    });    
+    });
 
     await userTokenProvider.create(userDTO.id, tokens.refreshToken);
     await mailProvider.sendVerification(params.email, verificationLink);

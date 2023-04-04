@@ -6,8 +6,8 @@ export const API_URI =
 export const PAGINATION_CONFIG = Object.freeze({
   DEFAULT_OFFSET: 0,
   LIMIT: {
-    min: 5,
-    avg: 10,
-    max: 15,
+    min: 10,
+    avg: 30,
+    max: 50,
   },
 });

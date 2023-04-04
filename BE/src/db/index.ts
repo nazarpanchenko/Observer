@@ -3,10 +3,10 @@
 import fs from 'fs';
 import path from 'path';
 import mysql from 'mysql2/promise';
-import { Sequelize, Dialect, DataTypes } from 'sequelize';
+import { Sequelize, Dialect, DataTypes, Model } from 'sequelize';
 
 import conf from '../conf.json';
-import { DbConf } from '../shared/types/db.types';
+import { DbConf, DbInstance } from '../shared/types';
 
 const {
   DB_NAME = '',
@@ -16,7 +16,6 @@ const {
   DB_PASS = '',
 } = process.env;
 
-const db: any = {};
 const sequelize = new Sequelize(DB_NAME, DB_USER, DB_PASS, {
   host: DB_HOST,
   port: Number(DB_PORT),
@@ -35,19 +34,25 @@ const sequelize = new Sequelize(DB_NAME, DB_USER, DB_PASS, {
   },
 });
 
+const db: DbInstance = {
+  sequelize,
+  Sequelize,
+  models: {},
+};
+
 fs.readdirSync(path.join(__dirname, 'models'))
   .filter((modelName: string) => modelName.slice(-3) === '.ts')
   .forEach((modelName: string) => {
     // eslint-disable-next-line @typescript-eslint/no-var-requires
     const _sequelize = require(`${__dirname}/models/${modelName}`);
-    const model = _sequelize.default(sequelize, DataTypes);
-    const _modelName = modelName.slice(0, modelName.length - 3);
-    db[_modelName] = model;
+    const model: Model = _sequelize.default(sequelize, DataTypes);
+    const _modelName: string = modelName.slice(0, modelName.length - 3);
+    db.models[_modelName] = model;
   });
 
-Object.keys(db).forEach(modelName => {
-  if (db[modelName].associate) {
-    db[modelName].associate(db);
+Object.keys(db.models).forEach((modelName: string) => {
+  if (db.models[modelName].associate) {
+    db.models[modelName].associate(db);
   }
 });
 db.sequelize = sequelize;

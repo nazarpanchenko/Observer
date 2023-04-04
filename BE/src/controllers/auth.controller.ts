@@ -12,7 +12,7 @@ const authController = {
     const email = req.body.email;
 
     try {
-      const storedUser: UserData | null = await db.User.getUser({ email });
+      const storedUser: UserData | null = await db.models.User.getUser({ email });
       if (storedUser) {
         next(
           new ApiError(

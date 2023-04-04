@@ -58,7 +58,7 @@ const sessionModel = (sequelize: any, DataTypes: any) => {
     }
 
     static async save(data: SessionParams): Promise<SessionData> {
-      const reportsCount: number = await db.Report.count();
+      const reportsCount: number = await db.models.Report.count();
       const _data: SessionData = await this.create({
         ...data,
         reportsCount,

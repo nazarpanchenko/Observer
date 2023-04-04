@@ -61,7 +61,7 @@ const telescopeModel = (sequelize: any, DataTypes: any) => {
         type: DataTypes.STRING(3),
         allowNull: false,
         validate: {
-          containsChar: (char: string) => containsChar('lightForce', char, 'F'),
+          containsChar: (char: string) => containsChar('lightForce', char, ['F']),
         },
       },
       resolution: {

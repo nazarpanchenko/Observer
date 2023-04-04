@@ -25,7 +25,7 @@ module.exports = {
           type: Sequelize.STRING(5),
           allowNull: false,
           validate: {
-            containsChar: char => containsChar('magnification', char, 'X'),
+            containsChar: char => containsChar('magnification', char, ['X']),
           },
         },
         observationRealDurationMin: {

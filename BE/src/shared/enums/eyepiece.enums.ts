@@ -1,8 +1,9 @@
 export enum EyepieceSchemas {
-  'Kepler',
+  'Kellner',
   'Plossl',
   'Erfle',
-  'Extra Wide Angle',
+  'Orthoscopic',
+  'Zoom',
 }
 
 export enum EyepieceDiameters {

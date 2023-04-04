@@ -22,17 +22,20 @@ class UserTokenProvider {
     };
   }
 
-  async create(userId: number, refreshToken: string): Promise<UserTokenData> {    
-    const storedToken: UserTokenData | null = await db.UserToken.getToken(userId);
+  async create(userId: number, refreshToken: string): Promise<UserTokenData> {
+    const storedToken: UserTokenData | null = await db.models.UserToken.getToken(userId);
     if (storedToken) {
-      const updatedToken: UserTokenData = await db.UserToken.updateToken(
+      const updatedToken: UserTokenData = await db.models.UserToken.updateToken(
         userId,
         refreshToken
       );
       return updatedToken;
     }
 
-    const createdToken: UserTokenData = await db.UserToken.saveToken(userId, refreshToken);    
+    const createdToken: UserTokenData = await db.models.UserToken.saveToken(
+      userId,
+      refreshToken
+    );
     return createdToken;
   }
 }

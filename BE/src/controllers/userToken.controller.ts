@@ -10,7 +10,7 @@ const userTokenController = {
     const { userId, refreshToken } = req.body;
 
     try {
-      const storedUser: UserData = await db.User.getUser({ id: userId });
+      const storedUser: UserData = await db.models.User.getUser({ id: userId });
       if (!storedUser) {
         throw new ApiError(
           `User (ID ${userId}) associated with the given token doesn't exist`

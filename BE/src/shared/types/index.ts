@@ -1,5 +1,5 @@
 import { PaginationConfig, SequelizeDeleteResponse } from './global.types';
-import { DbConf } from './db.types';
+import { DbConf, DbInstance } from './db.types';
 import { isUserVerified, UserData, CreateUser, UserDtoData } from './user.types';
 import { UserTokenData, ModifiedUserToken, JwtToken } from './userToken.types';
 import { SessionData, SessionParams, SessionModel, SessionsList } from './session.types';
@@ -23,6 +23,7 @@ export {
   PaginationConfig,
   SequelizeDeleteResponse,
   DbConf,
+  DbInstance,
   isUserVerified,
   UserData,
   CreateUser,

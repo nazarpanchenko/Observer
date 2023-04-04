@@ -1,9 +1,9 @@
-type BarlowLensSchema = '2X' | '3X';
+import { BarlowLensSchemas } from '../enums';
 
 type BarlowLensData = {
   id: number;
   barlowLensManufacturer?: string;
-  barlowLensSchema?: BarlowLensSchema;
+  barlowLensSchema?: BarlowLensSchemas;
 };
 
-export { BarlowLensSchema, BarlowLensData };
+export { BarlowLensSchemas, BarlowLensData };

@@ -44,4 +44,4 @@ const lazyLoadRoute = (componentName: string): ReactElement => {
   );
 };
 
-export { ErrorBoundary, lazyLoadRoute, getAccessToken };
+export { getAccessToken, ErrorBoundary, lazyLoadRoute };

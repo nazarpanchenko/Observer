@@ -4,17 +4,20 @@ import { Model } from 'sequelize';
 
 import { SubjectTypes } from '../../shared/enums';
 import { SubjectData } from '../../shared/types';
+import { containsChar } from '../validators';
 
 const subjectModel = (sequelize: any, DataTypes: any) => {
   class Subject extends Model<SubjectData> implements SubjectData {
     id!: number;
     category!: SubjectTypes;
-    apparentSize?: number;
     magnitude!: number;
+    rightAscendance!: string;
+    declination!: string;
+    apparentSize?: number;
     semiMajorAxis?: number;
     axialTilt?: number;
     ecccentricity?: number;
-    inclination?: number;
+    orbitalInclination?: number;
     rotation?: number;
 
     /**
@@ -55,29 +58,44 @@ const subjectModel = (sequelize: any, DataTypes: any) => {
         type: DataTypes.FLOAT(4, 2),
         allowNull: false,
       },
+      rightAscendance: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+          containsChar: (char: string) =>
+            containsChar('rightAscendance', char, ['h', 'm']),
+        },
+      },
+      declination: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+          containsChar: (char: string) => containsChar('declination', char, ['deg', "'"]),
+        },
+      },
       apparentSize: {
         type: DataTypes.FLOAT(4, 2),
-        defaultValue: 0.00,
+        defaultValue: 0.0,
       },
       semiMajorAxis: {
         type: DataTypes.FLOAT(3, 2),
-        defaultValue: 0.00,
+        defaultValue: 0.0,
       },
       axialTilt: {
         type: DataTypes.FLOAT(3, 2),
-        defaultValue: 0.00,
+        defaultValue: 0.0,
       },
       ecccentricity: {
         type: DataTypes.FLOAT(3, 2),
-        defaultValue: 0.00,
+        defaultValue: 0.0,
       },
-      inclination: {
+      orbitalInclination: {
         type: DataTypes.FLOAT(3, 2),
-        defaultValue: 0.00,
+        defaultValue: 0.0,
       },
       rotation: {
         type: DataTypes.FLOAT(3, 2),
-        defaultValue: 0.00,
+        defaultValue: 0.0,
       },
     },
     {
