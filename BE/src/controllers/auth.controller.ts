@@ -1,8 +1,8 @@
 import { Request, Response, NextFunction } from 'express';
-import { StatusCodes } from 'http-status-codes';
 
 import conf from '../conf.json';
 import { UserData, UserDtoData } from '../shared/types';
+import { UI_BASE_URI } from '../consts';
 import db from '../db';
 import { ApiError } from '../utils';
 import { authProvider } from '../services';
@@ -14,13 +14,7 @@ const authController = {
     try {
       const storedUser: UserData | null = await db.models.User.getUser({ email });
       if (storedUser) {
-        next(
-          new ApiError(
-            'Signup failed',
-            `User with email ${email} already exists`,
-            String(StatusCodes.CONFLICT)
-          )
-        );
+        next(ApiError.badRequest(`User with email ${email} already exists`));
       }
 
       const userData: UserDtoData = await authProvider.signup(req.body);
@@ -40,7 +34,17 @@ const authController = {
   },
 
   verifyUser: async (req: Request, res: Response, next: NextFunction): Promise<void> => {
-    res.send({});
+    const { link } = req.params;
+
+    const userData: UserData | null = await db.models.User.getUser({
+      verificationLink: link,
+    });
+    if (!userData) {
+      next(ApiError.badRequest('User verification failed. Verification link is invalid'));
+    }
+
+    await authProvider.verifyUser(link);
+    res.redirect(UI_BASE_URI);
   },
 
   forgotPassword: async (

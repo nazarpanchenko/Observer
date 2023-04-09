@@ -15,6 +15,7 @@ class AuthProvider {
     const storedUser: UserData = await db.models.User.signup({
       ...params,
       password: passwordHash,
+      verificationLink,
     });
     const tokens: JwtToken = userTokenProvider.generateToken({
       ...storedUser,
@@ -42,8 +43,8 @@ class AuthProvider {
     return {};
   }
 
-  async verifyUser() {
-    return {};
+  async verifyUser(link: string): Promise<void> {
+    await db.models.User.verifyUser(link);
   }
 
   async resetPassword() {

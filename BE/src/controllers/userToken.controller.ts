@@ -12,9 +12,9 @@ const userTokenController = {
     try {
       const storedUser: UserData = await db.models.User.getUser({ id: userId });
       if (!storedUser) {
-        throw new ApiError(
+        next(ApiError.badRequest(
           `User (ID ${userId}) associated with the given token doesn't exist`
-        );
+        ));
       }
 
       const storedToken: UserTokenData = await userTokenProvider.create(

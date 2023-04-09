@@ -52,7 +52,7 @@ fs.readdirSync(path.join(__dirname, 'models'))
 
 Object.keys(db.models).forEach((modelName: string) => {
   if (db.models[modelName].associate) {
-    db.models[modelName].associate(db);
+    db.models[modelName].associate(db.models);
   }
 });
 db.sequelize = sequelize;

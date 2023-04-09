@@ -1,4 +1,4 @@
-import handleBadRequest from './handleBadRequest';
-import errorLogger from './errorLogger';
+import handleRouteValidation from './handleRouteValidation';
+import handleErrors from './handleErrors';
 
-export { handleBadRequest, errorLogger };
+export { handleRouteValidation, handleErrors };

@@ -4,7 +4,7 @@ import cors from 'cors';
 import morgan from 'morgan';
 
 import * as routers from './routes';
-import { errorLogger } from './middlewares'
+import { handleErrors } from './middlewares';
 import db, { createDB } from './db';
 import { logger } from './utils';
 import { DbConf } from './shared/types';
@@ -22,7 +22,7 @@ app.use(`${API_PREFIX}/auth`, routers.authRouter);
 app.use(`${API_PREFIX}/token`, routers.userTokenRouter);
 app.use(API_PREFIX, routers.reportRouter);
 
-app.use(errorLogger);
+app.use(handleErrors);
 
 app.get('/health', (req: Request, res: Response): void => {
   res.send('Application server is operational');

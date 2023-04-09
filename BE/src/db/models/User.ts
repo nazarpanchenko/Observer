@@ -57,8 +57,12 @@ const userModel = (sequelize: any, DataTypes: any) => {
       return {};
     }
 
-    static async verifyUser() {
-      return {};
+    static async verifyUser(link: string): Promise<void> {
+      await this.update({
+        isVerified: 1,
+      }, {
+        where: { verificationLink: link },
+      });
     }
   }
 
@@ -92,6 +96,7 @@ const userModel = (sequelize: any, DataTypes: any) => {
       },
       verificationLink: {
         type: DataTypes.TEXT,
+        unique: true,
         defaultValue: '',
       },
     },

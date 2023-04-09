@@ -32,6 +32,7 @@ export async function up(queryInterface, Sequelize) {
       },
       verificationLink: {
         type: Sequelize.TEXT,
+        unique: true,
         defaultValue: '',
       },
     },

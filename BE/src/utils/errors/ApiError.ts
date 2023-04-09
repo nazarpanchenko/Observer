@@ -1,29 +1,29 @@
 import { StatusCodes, getReasonPhrase } from 'http-status-codes';
 
-class BaseError extends Error {
-  statusCode: string;
+class ApiError extends Error {
+  status!: number;
 
   constructor(
-    name: string,
-    description: string,
-    statusCode: string
+    status: number,
+    message = getReasonPhrase(StatusCodes.INTERNAL_SERVER_ERROR)
   ) {
-    super(description);
-
-    Object.setPrototypeOf(this, new.target.prototype);
-    this.name = name;
-    this.statusCode = statusCode;
-    Error.captureStackTrace(this);
+    super(message);
+    this.status = status;
   }
-}
 
-class ApiError extends BaseError {
-  constructor(
-    name: string,
-    description = getReasonPhrase(StatusCodes.INTERNAL_SERVER_ERROR),
-    statusCode = String(StatusCodes.INTERNAL_SERVER_ERROR)
-  ) {
-    super(name, description, statusCode);
+  static badRequest(message: string): ApiError {
+    return new ApiError(StatusCodes.BAD_REQUEST, message);
+  }
+
+  static unauthorized(): ApiError {
+    return new ApiError(
+      StatusCodes.UNAUTHORIZED,
+      getReasonPhrase(StatusCodes.UNAUTHORIZED)
+    );
+  }
+
+  static forbidden(): ApiError {
+    return new ApiError(StatusCodes.FORBIDDEN, getReasonPhrase(StatusCodes.FORBIDDEN));
   }
 }
 

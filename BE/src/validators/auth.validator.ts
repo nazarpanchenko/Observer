@@ -13,9 +13,13 @@ const authValidator = {
     body('firstName').isString().isLength({ min: 2, max: 20 }),
   ],
 
-  logout: [],
+  logout: [
+    body('token').isString(),
+  ],
 
-  verifyUser: [],
+  verifyUser: [
+    param('link').isString(),
+  ],
 
   forgotPassword: [],
 
