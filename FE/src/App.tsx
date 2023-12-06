@@ -3,9 +3,9 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { createTheme, ThemeProvider, Box } from '@mui/material';
 
 import { theme } from './consts';
-import { lazyLoadRoute, ErrorBoundary } from './utils';
-import { reportService } from './services';
-import { Navigation, ErrorPage, Auth } from './components';
+import { lazyLoadRoute, ErrorBoundary } from 'Shared';
+import { reportService } from 'Services';
+import { Navigation, ErrorPage, Auth } from 'Components';
 
 const _theme = createTheme(theme);
 

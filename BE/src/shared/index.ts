@@ -27,6 +27,7 @@ import { EyepieceSchemas, EyepieceDiameters } from './enums/eyepiece.enums';
 import { BarlowLensSchemas } from './enums/barlowLens.enums';
 import { FilterTypes } from './enums/filter.enums';
 import logger from './utils/logger';
+import ApiError from './utils/errors/ApiError';
 
 export {
   PaginationConfig,
@@ -60,4 +61,5 @@ export {
   BarlowLensSchemas,
   FilterTypes,
   logger,
+  ApiError,
 };

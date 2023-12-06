@@ -1,8 +1,8 @@
 import { Request, Response, NextFunction } from 'express';
 
 import { reportProvider } from '../services';
-import { ReportData, ReportsList } from '../shared/types';
-import { ApiError } from '../utils';
+import { ReportData, ReportsList } from '../shared';
+import { ApiError } from '../shared';
 
 const reportController = {
   list: async (req: Request, res: Response, next: NextFunction): Promise<void> => {

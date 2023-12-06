@@ -1,7 +1,7 @@
 import express from 'express';
 
 import { authController } from '../controllers';
-import { handleRouteValidation } from '../middlewares';
+import { handleBadRequest } from '../middlewares';
 import { authValidator } from '../validators';
 
 const authRouter = express.Router();
@@ -9,49 +9,49 @@ const authRouter = express.Router();
 authRouter.post(
   '/signup',
   authValidator.signup,
-  handleRouteValidation(),
+  handleBadRequest(),
   authController.signup
 );
 
 authRouter.post(
   '/signin',
   authValidator.signin,
-  handleRouteValidation(),
+  handleBadRequest(),
   authController.signin
 );
 
 authRouter.post(
   '/logout',
   authValidator.logout,
-  handleRouteValidation(),
+  handleBadRequest(),
   authController.logout
 );
 
 authRouter.get(
   '/verify-user/:link',
   authValidator.verifyUser,
-  handleRouteValidation(),
+  handleBadRequest(),
   authController.verifyUser
 );
 
 authRouter.post(
   '/forgot-password',
   authValidator.forgotPassword,
-  handleRouteValidation(),
+  handleBadRequest(),
   authController.forgotPassword
 );
 
 authRouter.post(
   '/reset-password',
   authValidator.resetPassword,
-  handleRouteValidation(),
+  handleBadRequest(),
   authController.resetPassword
 );
 
 authRouter.get(
   '/token-refresh',
   authValidator.tokenRefresh,
-  handleRouteValidation(),
+  handleBadRequest(),
   authController.tokenRefresh
 );
 

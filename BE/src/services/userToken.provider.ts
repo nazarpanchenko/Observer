@@ -3,7 +3,7 @@ import AES from 'crypto-js/aes';
 
 import conf from '../conf.json';
 import db from '../db';
-import { UserData, JwtToken, UserTokenData } from '../shared/types';
+import { UserData, JwtToken, UserTokenData } from '../shared';
 
 class UserTokenProvider {
   generateToken(payload: UserData): JwtToken {

@@ -6,7 +6,7 @@ import mysql from 'mysql2/promise';
 import { Sequelize, Dialect, DataTypes, Model } from 'sequelize';
 
 import conf from '../conf.json';
-import { DbConf, DbInstance } from '../shared/types';
+import { DbConf, DbInstance } from '../shared';
 
 const {
   DB_NAME = '',

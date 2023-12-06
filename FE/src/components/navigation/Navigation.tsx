@@ -22,7 +22,7 @@ import {
   Logout,
 } from '@mui/icons-material';
 
-import { authService } from '../../services/index';
+import { authService } from 'Services';
 import './index.scss';
 
 type NavItem = {

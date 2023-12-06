@@ -1,10 +1,10 @@
 import { Request, Response, NextFunction } from 'express';
 
 import conf from '../conf.json';
-import { UserData, UserDtoData } from '../shared/types';
+import { UserData, UserDtoData } from '../shared';
 import { UI_BASE_URI } from '../consts';
 import db from '../db';
-import { ApiError } from '../utils';
+import { ApiError } from '../shared';
 import { authProvider } from '../services';
 
 const authController = {

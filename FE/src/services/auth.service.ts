@@ -1,5 +1,10 @@
-import { _axios, getAccessToken } from '../utils';
-import { UserData, RegisteredUser, UserCredentials } from '../shared/types';
+import {
+  UserData,
+  RegisteredUser,
+  UserCredentials,
+  _axios,
+  getAccessToken,
+} from '@shared';
 
 const signup = async (formData: UserData): Promise<void> => {
   try {

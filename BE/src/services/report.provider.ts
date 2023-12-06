@@ -4,7 +4,7 @@ import {
   ReportData,
   ReportsList,
   ModifiedReportData,
-} from '../shared/types';
+} from '../shared';
 
 class ReportProvider {
   async getReports(query: PaginationConfig | object): Promise<ReportsList> {

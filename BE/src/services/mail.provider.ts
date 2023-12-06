@@ -3,7 +3,7 @@ import Mail from 'nodemailer/lib/mailer';
 
 import { API_URI } from '../consts';
 import conf from '../conf.json';
-import { ApiError, logger } from '../utils';
+import { ApiError, logger } from '../shared';
 
 class MailProvider {
   transporter!: Mail<SentMessageInfo>;
@@ -30,7 +30,7 @@ class MailProvider {
       });
     } catch (err: any) {
       logger.error(`nodemailer error. ${err.message}`);
-      throw new ApiError('nodemailer error.', err.message, err.code);
+      throw new ApiError(err.message, err.code);
     }
   }
 }

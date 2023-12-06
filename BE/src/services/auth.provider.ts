@@ -2,7 +2,7 @@ import bcrypt from 'bcrypt';
 import { v4 as uuidv4 } from 'uuid';
 
 import conf from '../conf.json';
-import { UserDtoData, UserData, JwtToken } from '../shared/types';
+import { UserDtoData, UserData, JwtToken } from '../shared';
 import db from '../db';
 import { mailProvider, userTokenProvider } from '.';
 import { UserDTO } from '../dto';

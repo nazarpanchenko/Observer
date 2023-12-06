@@ -1,5 +1,4 @@
-import { _axios } from '../utils';
-import { PaginationConfig, ReportsList } from '../shared/types';
+import { PaginationConfig, ReportsList, _axios } from '@shared';
 
 const getReports = async (
   req: PaginationConfig = { params: {} }

@@ -14,7 +14,7 @@ import {
   Paper,
 } from '@mui/material';
 
-import { ReportsList, ReportData } from '../../shared/types';
+import { ReportsList, ReportData } from 'Shared';
 import './index.scss';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({

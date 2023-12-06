@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from 'express';
 
-import { UserData, UserTokenData } from '../shared/types';
-import { ApiError } from '../utils';
+import { UserData, UserTokenData } from '../shared';
+import { ApiError } from '../shared';
 import db from '../db';
 import { userTokenProvider } from '../services';
 

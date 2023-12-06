@@ -12,8 +12,8 @@ import {
 
 import { Email, SecurityOutlined } from '@mui/icons-material';
 
-import { authService } from '../../services';
-import { UserCredentials } from '../../shared/types';
+import { authService } from 'Services';
+import { UserCredentials } from 'Shared';
 
 const Signin: FC = (): ReactElement => {
   const navigate = useNavigate();

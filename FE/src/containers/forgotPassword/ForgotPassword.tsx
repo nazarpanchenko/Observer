@@ -11,7 +11,7 @@ import {
 
 import { Email } from '@mui/icons-material';
 
-import { authService } from '../../services';
+import { authService } from 'Services';
 
 const ForgotPassword: FC = (): ReactElement => {
   const [email, setEmail] = useState<string>('');

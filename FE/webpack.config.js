@@ -76,6 +76,16 @@ module.exports = (env, argv) => {
     ],
     resolve: {
       extensions: ['.js', '.ts', '.tsx', '.json', '.wasm', '.mjs', '.cjs'],
+      resolve: {
+        alias: {
+          "Containers": path.resolve(__dirname, "src/containers"),
+          "Services": path.resolve(__dirname, "src/services"),
+          "Hooks": path.resolve(__dirname, "src/hooks"),
+          "Components": path.resolve(__dirname, "src/components"),
+          "Shared": path.resolve(__dirname, "src/shared"),
+          "Assets": path.resolve(__dirname, "src/assets"),
+       },
+     },
     },
     optimization: {
       minimizer: [
