@@ -1,5 +1,19 @@
 import { ThemeOptions } from '@mui/material';
 
+export const BASE_URI =
+  process.env.REACT_APP_BASE_URI + '/api/v1' || 'http://localhost:9000/api/v1';
+
+export const accessToken = localStorage.getItem('accessToken');
+
+export const PAGINATION_CONFIG = Object.freeze({
+  DEFAULT_OFFSET: 0,
+  LIMIT: {
+    min: 10,
+    avg: 25,
+    max: 50,
+  },
+});
+
 const pallette = {
   main: '#60DEFF',
   secondary: '#4888A3',
@@ -83,17 +97,3 @@ export const theme: ThemeOptions = {
     },
   },
 };
-
-export const BASE_URI =
-  process.env.REACT_APP_BASE_URI + '/api/v1' || 'http://localhost:9000/api/v1';
-
-export const accessToken = localStorage.getItem('accessToken');
-
-export const PAGINATION_CONFIG = Object.freeze({
-  DEFAULT_OFFSET: 0,
-  LIMIT: {
-    min: 10,
-    avg: 25,
-    max: 50,
-  },
-});

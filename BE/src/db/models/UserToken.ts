@@ -2,7 +2,7 @@
 
 import { Model } from 'sequelize';
 
-import { UserTokenData, ModifiedUserToken } from '../../shared/types';
+import { UserTokenData, ModifiedUserToken } from '../../shared';
 
 const userTokenModel = (sequelize: any, DataTypes: any) => {
   class UserToken extends Model<UserTokenData> implements UserTokenData {

@@ -1,4 +1,4 @@
-import { TelescopeTypes } from '../enums';
+import { TelescopeTypes } from '../enums/telescope.enums';
 
 type TelescopeData = {
   id: number;

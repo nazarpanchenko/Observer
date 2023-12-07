@@ -8,7 +8,7 @@ import { SessionData } from './types/session.types';
 import { ReportData, ReportsList } from './types/report.types';
 
 import { getAccessToken, ErrorBoundary, lazyLoadRoute } from './utils/helpers';
-import { _axios } from './utils/http.conf';
+import { _axios } from './utils/request';
 
 export {
   SessionCategories,

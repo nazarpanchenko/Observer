@@ -2,13 +2,13 @@
 
 import { Model } from 'sequelize';
 
-import { SessionCategories } from '../../shared/enums';
 import {
+  SessionCategories,
   PaginationConfig,
   SequelizeDeleteResponse,
   SessionData,
   SessionParams,
-} from '../../shared/types';
+} from '../../shared';
 import { PAGINATION_CONFIG } from '../../consts';
 import db from '..';
 

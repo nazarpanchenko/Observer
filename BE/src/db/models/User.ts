@@ -3,7 +3,7 @@
 import { Model } from 'sequelize';
 
 import db from '..';
-import { isUserVerified, UserData, CreateUser } from '../../shared/types';
+import { isUserVerified, UserData, CreateUser } from '../../shared';
 
 const userModel = (sequelize: any, DataTypes: any) => {
   class User extends Model<UserData> implements UserData {
@@ -57,7 +57,7 @@ const userModel = (sequelize: any, DataTypes: any) => {
       return {};
     }
 
-    static async verifyUser(link: string): Promise<void> {
+    static async verify(link: string): Promise<void> {
       await this.update({
         isVerified: 1,
       }, {

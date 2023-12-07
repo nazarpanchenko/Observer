@@ -1,4 +1,4 @@
-import { SubjectTypes } from '../enums';
+import { SubjectTypes } from '../enums/subject.enums';
 
 type SubjectData = {
   id: number;

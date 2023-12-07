@@ -1,4 +1,4 @@
-import { EyepieceDiameters, EyepieceSchemas } from '../enums';
+import { EyepieceDiameters, EyepieceSchemas } from '../enums/eyepiece.enums';
 
 type EyepieceData = {
   id: number;

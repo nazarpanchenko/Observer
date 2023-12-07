@@ -33,7 +33,7 @@ const authController = {
     res.send({});
   },
 
-  verifyUser: async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+  verify: async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     const { link } = req.params;
 
     const userData: UserData | null = await db.models.User.getUser({
@@ -43,7 +43,7 @@ const authController = {
       next(ApiError.badRequest('User verification failed. Verification link is invalid'));
     }
 
-    await authProvider.verifyUser(link);
+    await authProvider.verify(link);
     res.redirect(UI_BASE_URI);
   },
 

@@ -12,10 +12,10 @@ import {
   ModifiedReportData,
   SequelizeUpdateReportResponse,
   SequelizeDeleteResponse,
-} from '../../shared/types';
+  containsChar,
+} from '../../shared';
 
 import { PAGINATION_CONFIG } from '../../consts';
-import { containsChar } from '../../utils';
 
 const reportModel = (sequelize: any, DataTypes: any) => {
   class Report extends Model<ReportData> implements ReportData {

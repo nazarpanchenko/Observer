@@ -2,14 +2,13 @@
 
 import { Model } from 'sequelize';
 
-import { BarlowLensSchemas } from '../../shared/enums';
-import { BarlowLensSchema, BarlowLensData } from '../../shared/types';
+import { BarlowLensSchemas, BarlowLensData } from '../../shared';
 
 const barlowLensModel = (sequelize: any, DataTypes: any) => {
   class BarlowLens extends Model<BarlowLensData> implements BarlowLensData {
     id!: number;
     barlowLensManufacturer?: string;
-    barlowLensSchema?: BarlowLensSchema;
+    barlowLensSchema?: BarlowLensSchemas;
 
     /**
      * Helper method for defining associations.

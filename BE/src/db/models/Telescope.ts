@@ -2,8 +2,7 @@
 
 import { Model } from 'sequelize';
 
-import { TelescopeTypes } from '../../shared/enums';
-import { TelescopeData } from '../../shared/types';
+import { TelescopeTypes, TelescopeData } from '../../shared';
 import { containsChar } from '../validators';
 
 const telescopeModel = (sequelize: any, DataTypes: any) => {

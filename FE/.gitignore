@@ -3,7 +3,7 @@
 # Edit at https://www.toptal.com/developers/gitignore?templates=windows,visualstudiocode,dotenv,react
 
 ### dotenv ###
-.env.development
+.env.local
 .env.production
 
 ### react ###

@@ -2,8 +2,7 @@
 
 import { Model } from 'sequelize';
 
-import { SubjectTypes } from '../../shared/enums';
-import { SubjectData } from '../../shared/types';
+import { SubjectTypes, SubjectData } from '../../shared';
 import { containsChar } from '../validators';
 
 const subjectModel = (sequelize: any, DataTypes: any) => {

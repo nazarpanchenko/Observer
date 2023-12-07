@@ -2,8 +2,7 @@
 
 import { Model } from 'sequelize';
 
-import { FilterTypes } from '../../shared/enums';
-import { FilterData } from '../../shared/types';
+import { FilterTypes, FilterData } from '../../shared';
 
 const filterModel = (sequelize: any, DataTypes: any) => {
   class Filter extends Model<FilterData> implements FilterData {

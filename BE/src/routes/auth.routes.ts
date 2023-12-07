@@ -29,9 +29,9 @@ authRouter.post(
 
 authRouter.get(
   '/verify-user/:link',
-  authValidator.verifyUser,
+  authValidator.verify,
   handleBadRequest(),
-  authController.verifyUser
+  authController.verify
 );
 
 authRouter.post(

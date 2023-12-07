@@ -6,7 +6,7 @@ import db from '../db';
 import { UserData, JwtToken, UserTokenData } from '../shared';
 
 class UserTokenProvider {
-  generateToken(payload: UserData): JwtToken {
+  generate(payload: UserData): JwtToken {
     const { JWT_ACCESS_SECRET = '', JWT_REFRESH_SECRET = '' } = process.env;
 
     const accessSecret = AES.encrypt(JWT_ACCESS_SECRET, String(payload.id)).toString();

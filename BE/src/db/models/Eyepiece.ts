@@ -2,9 +2,7 @@
 
 import { Model } from 'sequelize';
 
-import { EyepieceSchemas, EyepieceDiameters } from '../../shared/enums';
-import { EyepieceData } from '../../shared/types';
-import { containsChar } from '../../utils';
+import { EyepieceSchemas, EyepieceDiameters, EyepieceData, containsChar } from '../../shared';
 
 const eyepieceModel = (sequelize: any, DataTypes: any) => {
   class Eyepiece extends Model<EyepieceData> implements EyepieceData {

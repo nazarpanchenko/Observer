@@ -4,7 +4,6 @@ import Mail from 'nodemailer/lib/mailer';
 import { API_URI } from '../consts';
 import conf from '../conf.json';
 import { ApiError, logger } from '../shared';
-
 class MailProvider {
   transporter!: Mail<SentMessageInfo>;
 

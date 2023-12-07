@@ -1,4 +1,4 @@
-import { FilterTypes } from '../enums';
+import { FilterTypes } from '../enums/filter.enums';
 
 type FilterData = {
   id: number;

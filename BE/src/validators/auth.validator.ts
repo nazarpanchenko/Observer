@@ -1,4 +1,4 @@
-import { param, query, body } from 'express-validator';
+import { param, body } from 'express-validator';
 
 const authValidator = {
   signup: [
@@ -17,7 +17,7 @@ const authValidator = {
     body('token').isString(),
   ],
 
-  verifyUser: [
+  verify: [
     param('link').isString(),
   ],
 

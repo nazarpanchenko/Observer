@@ -1,4 +1,4 @@
-import { JwtToken } from '.';
+import { JwtToken } from './userToken.types';
 
 type isUserVerified = 1 | 0;
 

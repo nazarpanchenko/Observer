@@ -1,6 +1,6 @@
 import { Model } from 'sequelize';
 
-import { SessionCategories } from '../enums';
+import { SessionCategories } from '../enums/session.enums';
 
 type SessionParams = {
   category: SessionCategories;
