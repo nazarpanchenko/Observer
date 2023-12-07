@@ -8,6 +8,7 @@ type UserData = {
   lastName: string;
   email: string;
   password: string;
+  refreshToken: string;
   isVerified?: isUserVerified;
   verificationLink?: string;
 };
@@ -18,6 +19,7 @@ type CreateUser = {
   lastName: string;
   email: string;
   password: string;
+  refreshToken: string;
   verificationLink: string;
 };
 

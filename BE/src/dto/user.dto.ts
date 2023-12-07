@@ -1,4 +1,4 @@
-import { UserDtoData } from '../shared/types';
+import { UserDtoData } from '../shared';
 
 class UserDTO {
   id!: number;

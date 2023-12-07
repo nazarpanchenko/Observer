@@ -15,7 +15,7 @@ import {
   containsChar,
 } from '../../shared';
 
-import { PAGINATION_CONFIG } from '../../consts';
+import { PAGINATION_CONFIG } from '../../shared/consts';
 
 const reportModel = (sequelize: any, DataTypes: any) => {
   class Report extends Model<ReportData> implements ReportData {

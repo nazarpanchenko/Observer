@@ -1,7 +1,7 @@
 import { param, query, body } from 'express-validator';
 
 import { TelescopeTypes } from '../shared/enums';
-import { PAGINATION_CONFIG } from '../consts';
+import { PAGINATION_CONFIG } from '../shared/consts';
 import { getErrMsg } from '../utils/helpers';
 
 const reportValidator = {

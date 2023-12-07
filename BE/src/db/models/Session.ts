@@ -9,7 +9,7 @@ import {
   SessionData,
   SessionParams,
 } from '../../shared';
-import { PAGINATION_CONFIG } from '../../consts';
+import { PAGINATION_CONFIG } from '../../shared/consts';
 import db from '..';
 
 const sessionModel = (sequelize: any, DataTypes: any) => {

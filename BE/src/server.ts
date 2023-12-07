@@ -6,9 +6,7 @@ import morgan from 'morgan';
 import * as routers from './routes';
 import { handleErrors } from './middlewares';
 import db, { createDB } from './db';
-import { logger } from './utils';
-import { DbConf } from './shared/types';
-import { API_PREFIX } from './consts';
+import { DbConf, API_PREFIX, logger } from './shared';
 
 const app = express();
 

@@ -2,7 +2,7 @@ import React from 'react';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { createTheme, ThemeProvider, Box } from '@mui/material';
 
-import { theme } from './consts';
+import { theme } from './shared/consts';
 import { lazyLoadRoute, ErrorBoundary } from 'Shared';
 import { reportService } from 'Services';
 import { Navigation, ErrorPage, Auth } from 'Components';

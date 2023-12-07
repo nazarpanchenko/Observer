@@ -34,6 +34,7 @@ import { BarlowLensSchemas } from './enums/barlowLens.enums';
 import logger from './utils/logger';
 import { containsChar } from './utils/helpers';
 import ApiError from './utils/errors/ApiError';
+import { API_URI, API_PREFIX } from './consts';
 
 export {
   PaginationConfig,
@@ -73,4 +74,6 @@ export {
   logger,
   containsChar,
   ApiError,
+  API_URI,
+  API_PREFIX,
 };

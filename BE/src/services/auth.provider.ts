@@ -2,7 +2,7 @@ import bcrypt from 'bcrypt';
 import { v4 as uuidv4 } from 'uuid';
 
 import conf from '../conf.json';
-import { UserDtoData, UserData, JwtToken } from '../shared';
+import { UserDtoData, UserData, JwtToken, ApiError } from '../shared';
 import db from '../db';
 import { mailProvider, userTokenProvider } from '.';
 import { UserDTO } from '../dto';
@@ -35,12 +35,28 @@ class AuthProvider {
     return userDTO;
   }
 
-  async signin() {
-    return {};
+  async signin(password: string, storedUser: UserData): Promise<UserDtoData> {
+    const isPasswordValid = await bcrypt.compare(password, storedUser.password);
+    if (!isPasswordValid) {
+      throw ApiError.badRequest(`The password you provided is invalid`);
+    }
+
+    const tokens: JwtToken = userTokenProvider.generate({
+      ...storedUser,
+    });
+    const userDTO: UserDtoData = new UserDTO({
+      id: storedUser.id,
+      firstName: storedUser.firstName,
+      lastName: storedUser.lastName,
+      isVerified: storedUser.isVerified || 0,
+      ...tokens,
+    });
+
+    return userDTO;
   }
 
-  async logout() {
-    return {};
+  async logout(id: number, refreshToken: string): Promise<void> {
+    await userTokenProvider.delete(refreshToken);
   }
 
   async verify(link: string): Promise<void> {

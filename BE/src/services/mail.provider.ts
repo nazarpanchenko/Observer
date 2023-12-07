@@ -1,9 +1,8 @@
 import nodemailer, { SentMessageInfo } from 'nodemailer';
 import Mail from 'nodemailer/lib/mailer';
 
-import { API_URI } from '../consts';
 import conf from '../conf.json';
-import { ApiError, logger } from '../shared';
+import { API_URI, ApiError, logger } from '../shared';
 class MailProvider {
   transporter!: Mail<SentMessageInfo>;
 
@@ -23,7 +22,7 @@ class MailProvider {
           <h1>Registration Confirmation Required</h1>
           <div>
             <p>Please, complete your registration process by clicking on the link below.</p>
-            <a href="${API_URI}/${link}">${API_URI}/${link}</a>
+            <p><a href="${API_URI}/${link}">${API_URI}/${link}</a></p>
           </div>
         `,
       });

@@ -23,7 +23,7 @@ const userTokenModel = (sequelize: any, DataTypes: any) => {
       });
     }
 
-    static async getToken(id: string): Promise<UserTokenData | null> {
+    static async getOne(id: number): Promise<UserTokenData | null> {
       const storedToken: UserTokenData | null = await UserToken.findOne({
         where: { id },
         attributes: ['id'],
@@ -31,10 +31,7 @@ const userTokenModel = (sequelize: any, DataTypes: any) => {
       return storedToken;
     }
 
-    static async saveToken(
-      id: number,
-      refreshToken: string
-    ): Promise<UserTokenData> {      
+    static async save(id: number, refreshToken: string): Promise<UserTokenData> {
       const createdToken: UserTokenData = await UserToken.create({
         id,
         refreshToken,
@@ -42,19 +39,22 @@ const userTokenModel = (sequelize: any, DataTypes: any) => {
       return createdToken;
     }
 
-    static async updateToken(
-      id: number,
-      refreshToken: string
-    ): Promise<UserTokenData> {
-      const updatedData: ModifiedUserToken =
-        await UserToken.update(
-          { refreshToken },
-          {
-            where: { id },
-            returning: true,
-          }
-        );
-      return { ...updatedData[1][0] };
+    static async updateToken(id: number, refreshToken: string): Promise<UserTokenData> {
+      const updatedToken: ModifiedUserToken = await UserToken.update(
+        { refreshToken },
+        {
+          where: { id },
+          returning: true,
+        }
+      );
+      return { ...updatedToken[1][0] } as UserTokenData;
+    }
+
+    // 'void' return type is used since destroy() method does not support 'returning: true' option
+    static async deleteToken(refreshToken: string): Promise<void> {
+      await UserToken.destroy({
+        where: { refreshToken },
+      });
     }
   }
 

@@ -12,6 +12,7 @@ const userModel = (sequelize: any, DataTypes: any) => {
     lastName!: string;
     email!: string;
     password!: string;
+    refreshToken!: string;
     isVerified?: isUserVerified;
     verificationLink?: string;
 
@@ -35,7 +36,7 @@ const userModel = (sequelize: any, DataTypes: any) => {
       });
     }
 
-    static async getUser(query: object): Promise<UserData | null> {
+    static async getOne(query: object): Promise<UserData | null> {
       const userData: UserData | null = await User.findOne({
         where: { ...query },
         attributes: ['id'],
@@ -87,6 +88,10 @@ const userModel = (sequelize: any, DataTypes: any) => {
         allowNull: false,
       },
       password: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      refreshToken: {
         type: DataTypes.STRING,
         allowNull: false,
       },

@@ -1,4 +1,4 @@
-import { param, body } from 'express-validator';
+import { param, body, cookie } from 'express-validator';
 
 const authValidator = {
   signup: [
@@ -14,7 +14,7 @@ const authValidator = {
   ],
 
   logout: [
-    body('token').isString(),
+    cookie('refreshToken').isString(),
   ],
 
   verify: [

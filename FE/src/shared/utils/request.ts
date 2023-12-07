@@ -1,6 +1,6 @@
 import axios, { AxiosInstance, AxiosResponse } from 'axios';
 
-import { BASE_URI } from '../../consts';
+import { BASE_URI } from '../consts';
 
 const _axios: AxiosInstance = axios.create({
   baseURL: BASE_URI,

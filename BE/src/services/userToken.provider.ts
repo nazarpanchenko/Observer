@@ -23,7 +23,7 @@ class UserTokenProvider {
   }
 
   async create(userId: number, refreshToken: string): Promise<UserTokenData> {
-    const storedToken: UserTokenData | null = await db.models.UserToken.getToken(userId);
+    const storedToken: UserTokenData | null = await db.models.UserToken.getOne(userId);
     if (storedToken) {
       const updatedToken: UserTokenData = await db.models.UserToken.updateToken(
         userId,
@@ -32,11 +32,15 @@ class UserTokenProvider {
       return updatedToken;
     }
 
-    const createdToken: UserTokenData = await db.models.UserToken.saveToken(
+    const createdToken: UserTokenData = await db.models.UserToken.save(
       userId,
       refreshToken
     );
     return createdToken;
+  }
+
+  async delete(refreshToken: string): Promise<void> {
+    await db.models.UserToken.deleteToken(refreshToken);
   }
 }
 
