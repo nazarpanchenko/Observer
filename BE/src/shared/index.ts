@@ -32,7 +32,7 @@ import { TelescopeData } from './types/telescope.types';
 import { EyepieceSchemas, EyepieceDiameters } from './enums/eyepiece.enums';
 import { BarlowLensSchemas } from './enums/barlowLens.enums';
 import logger from './utils/logger';
-import { containsChar } from './utils/helpers';
+import { containsChar, getErrMsg } from './utils/helpers';
 import ApiError from './utils/errors/ApiError';
 import { API_URI, API_PREFIX } from './consts';
 
@@ -73,6 +73,7 @@ export {
   FilterData,
   logger,
   containsChar,
+  getErrMsg,
   ApiError,
   API_URI,
   API_PREFIX,

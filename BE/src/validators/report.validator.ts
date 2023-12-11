@@ -1,8 +1,8 @@
 import { param, query, body } from 'express-validator';
 
-import { TelescopeTypes } from '../shared/enums';
+import { TelescopeTypes } from '../shared';
 import { PAGINATION_CONFIG } from '../shared/consts';
-import { getErrMsg } from '../utils/helpers';
+import { getErrMsg } from '../shared';
 
 const reportValidator = {
   // GET
